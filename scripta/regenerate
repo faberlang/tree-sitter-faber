@@ -5,6 +5,7 @@ ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 cd "$ROOT"
 
 python3 scripta/generate_grammar.py "$@"
+python3 scripta/generate_textmate.py "$@"
 npx --yes tree-sitter-cli@0.24.7 generate
 
-echo "regenerated grammar.js, highlight queries, and parser artifacts"
+echo "regenerated grammar.js, fab.tmLanguage.json, highlight queries, and parser artifacts"

@@ -1,4 +1,5 @@
 node_modules/
-grammars/
+# Zed dev extension clones the tree-sitter repo into grammars/faber/
+grammars/faber/
 *.wasm
 .DS_Store

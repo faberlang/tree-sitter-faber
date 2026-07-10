@@ -1,0 +1,176 @@
+{
+  "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+  "name": "Faber",
+  "scopeName": "source.faber",
+  "fileTypes": [
+    "fab"
+  ],
+  "uuid": "f8b2c4e1-6a3d-4f90-9b1e-2c7d8fab001",
+  "patterns": [
+    {
+      "include": "#frontmatter"
+    },
+    {
+      "include": "#comment"
+    },
+    {
+      "include": "#strings"
+    },
+    {
+      "include": "#annotation"
+    },
+    {
+      "include": "#numbers"
+    },
+    {
+      "include": "#keywords"
+    },
+    {
+      "include": "#operators"
+    },
+    {
+      "include": "#identifiers"
+    }
+  ],
+  "repository": {
+    "frontmatter": {
+      "begin": "\\A\\+\\+\\+",
+      "end": "^\\+\\+\\+$",
+      "name": "comment.block.frontmatter.faber"
+    },
+    "comment": {
+      "name": "comment.line.number-sign.faber",
+      "match": "^\\s*#.*$"
+    },
+    "annotation": {
+      "name": "meta.annotation.faber",
+      "match": "@[A-Za-z_][A-Za-z0-9_]*(?:\\s+[^\\n]*)?"
+    },
+    "strings": {
+      "patterns": [
+        {
+          "name": "string.quoted.double.faber",
+          "begin": "\"",
+          "end": "\"",
+          "patterns": [
+            {
+              "name": "constant.character.escape.faber",
+              "match": "\\\\."
+            }
+          ]
+        },
+        {
+          "name": "string.quoted.single.faber",
+          "begin": "'",
+          "end": "'",
+          "patterns": [
+            {
+              "name": "constant.character.escape.faber",
+              "match": "\\\\."
+            }
+          ]
+        },
+        {
+          "name": "string.quoted.backtick.faber",
+          "begin": "`",
+          "end": "`",
+          "patterns": [
+            {
+              "name": "constant.character.escape.faber",
+              "match": "\\\\."
+            }
+          ]
+        },
+        {
+          "name": "string.quoted.guillemet.faber",
+          "begin": "«",
+          "end": "»",
+          "patterns": [
+            {
+              "name": "constant.character.escape.faber",
+              "match": "\\\\."
+            }
+          ]
+        },
+        {
+          "name": "string.quoted.octeti.faber",
+          "begin": "\\|",
+          "end": "\\|",
+          "patterns": [
+            {
+              "name": "constant.character.escape.faber",
+              "match": "\\\\."
+            }
+          ]
+        }
+      ]
+    },
+    "numbers": {
+      "patterns": [
+        {
+          "name": "constant.numeric.hex.faber",
+          "match": "\\b0[xX][0-9A-Fa-f_]+\\b"
+        },
+        {
+          "name": "constant.numeric.binary.faber",
+          "match": "\\b0[bB][01_]+\\b"
+        },
+        {
+          "name": "constant.numeric.octal.faber",
+          "match": "\\b0[oO][0-7_]+\\b"
+        },
+        {
+          "name": "constant.numeric.decimal.faber",
+          "match": "\\b\\d[\\d_]*(?:\\.\\d[\\d_]*)?(?:[eE][+-]?\\d+)?\\b"
+        }
+      ]
+    },
+    "keywords": {
+      "patterns": [
+        {
+          "include": "#keyword-control"
+        },
+        {
+          "include": "#keyword-declaration"
+        },
+        {
+          "include": "#keyword-other"
+        },
+        {
+          "include": "#boolean-literal"
+        },
+        {
+          "include": "#builtin-type"
+        }
+      ]
+    },
+    "identifiers": {
+      "name": "variable.other.faber",
+      "match": "[A-Za-z_][A-Za-z0-9_]*"
+    },
+    "keyword-control": {
+      "match": "\\b(argumenta|discerne|incipiet|adfirma|ceterum|custodi|incipit|emitte|tempta|demum|elige|itera|perge|redde|rumpe|secus|tacet|cape|casu|cura|ergo|iace|mori|dum|fac|sic|sin|ad|si)\\b",
+      "name": "keyword.control.faber"
+    },
+    "keyword-declaration": {
+      "match": "\\b(abstractus|discretio|implendum|magnitudo|immutata|optiones|protecta|functio|generis|importa|privata|publica|ceteri|curata|errata|exitus|sponte|fixum|genus|iacit|nexum|typus|varia|ordo|prae|sit)\\b",
+      "name": "keyword.declaration.faber"
+    },
+    "keyword-other": {
+      "match": "\\b(postparabit|praeparabit|negativum|positivum|praefixum|probandum|clausura|fragilis|nonnihil|nonnulla|postpara|praepara|requirit|scriptum|solum_in|temporis|futurum|modulus|implet|lineam|metior|omitte|repete|scribe|sparge|finge|inter|intra|nulla|omnia|proba|solum|usque|ante|cede|lege|mone|nota|vide|aut|ego|est|non|per|pro|sub|tag|vel|de|et|ex|in|ut)\\b",
+      "name": "keyword.other.faber"
+    },
+    "boolean-literal": {
+      "match": "\\b(falsum|verum)\\b",
+      "name": "constant.language.boolean.faber"
+    },
+    "builtin-type": {
+      "match": "\\b(intervallum|promissum|bivalens|fractus|ignotum|instans|numerus|numquam|cursor|matrix|octeti|series|sparsa|tabula|tensor|textus|vacuum|vector|ascii|copia|lista|nihil|octet|regex|vacua|valor|json|lf16|lf32|lf64|li16|li32|li64|lu16|lu32|lu64|mf16|mf32|mf64|mi16|mi32|mi64|mu16|mu32|mu64|sf16|sf32|sf64|si16|si32|si64|su16|su32|su64|tf16|tf32|tf64|ti16|ti32|ti64|tu16|tu32|tu64|unio|vf16|vf32|vf64|vi16|vi32|vi64|vu16|vu32|vu64|f16|f32|f64|i16|i32|i64|li8|lu8|mi8|mu8|si8|su8|ti8|tu8|u16|u32|u64|vi8|vu8|i8|u8)\\b",
+      "name": "support.type.builtin.faber"
+    },
+    "operators": {
+      "match": "(!\\(|!\\.|!\\[|\\?\\(|\\?\\.|\\?\\[|!|%|\\*|\\+|\\-|\\.|/|<|=|>|\\?|@|¬|‥|…|←|→|↦|⇐|⇒|⇥|∧|∨|∪|∴|∷|≈|≉|≠|≡|≤|≥|⊕|⊖|⊜|⊻)",
+      "name": "keyword.operator.faber"
+    }
+  }
+}

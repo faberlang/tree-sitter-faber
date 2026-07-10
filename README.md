@@ -18,12 +18,19 @@ Regenerate after lexer changes:
 ./scripta/regenerate
 ```
 
+Public highlight artifacts (safe to consume without Radix access):
+
+- `grammars/faber.tmLanguage.json` — TextMate grammar for Shiki, VS Code, Linguist-style tooling
+- `grammar.js` — Tree-sitter token grammar for Zed and editors
+
 Override the Radix path with `RADIX_ROOT=/path/to/radix` when needed.
 
 ## Layout
 
 ```text
 tree-sitter-faber/
+  grammars/
+    fab.tmLanguage.json      # generated TextMate grammar
   grammar.js                 # generated token grammar
   queries/highlights.scm     # tree-sitter highlight queries
   languages/faber/
@@ -32,7 +39,8 @@ tree-sitter-faber/
   extension.toml             # Zed extension manifest
   src/scanner.c              # line-start `#` comment policy
   scripta/
-    generate_grammar.py      # Radix → grammar/queries
+    generate_grammar.py      # Radix → tree-sitter grammar/queries
+    generate_textmate.py     # Radix → TextMate JSON
     check_highlight_contract.py
 ```
 

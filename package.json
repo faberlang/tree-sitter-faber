@@ -4,7 +4,7 @@
   "description": "Tree-sitter grammar and editor packaging for the Faber programming language",
   "main": "bindings/node",
   "scripts": {
-    "generate": "python3 scripta/generate_grammar.py && npx --yes tree-sitter-cli@0.24.7 generate",
+    "generate": "python3 scripta/generate_grammar.py && python3 scripta/generate_textmate.py && npx --yes tree-sitter-cli@0.24.7 generate",
     "test": "python3 scripta/check_highlight_contract.py"
   },
   "keywords": [
