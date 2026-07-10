@@ -14,15 +14,14 @@
 (lbrace) @punctuation.bracket
 (rbrace) @punctuation.bracket
 
-(annotation_name
-  (known_annotation_name) @attribute
-  (identifier) @attribute)
+(annotation_name) @attribute
+(known_annotation_name) @attribute
 
 (annotation_modifier) @property
 
 (annotation_field
-  key: (_) @property
-  value: (_) @string)
+  (annotation_modifier) @property
+  (string) @string)
 
 (annotation_arguments
   (annotation_modifier) @property

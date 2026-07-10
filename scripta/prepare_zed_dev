@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+# Drop Zed's cached grammar clone/WASM so the next dev-extension install
+# reclones at extension.toml rev and recompiles against current highlights.scm.
+set -euo pipefail
+root="$(cd "$(dirname "$0")/.." && pwd)"
+rm -rf "$root/grammars/faber" "$root/grammars/faber.wasm"
+echo "removed grammars/faber clone and faber.wasm"
+echo "next: Zed Command Palette → zed: install dev extension → $root"
