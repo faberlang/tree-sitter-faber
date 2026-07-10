@@ -25,6 +25,8 @@ IGNORE_RADIX_KINDS = {
 
 BOOLEAN_KINDS = {"Verum", "Falsum"}
 
+VISIBILITY_ANNOTATION_NAMES = {"privata", "publica", "protecta"}
+
 DECL_KEYWORD_KINDS = {
     "Discretio",
     "Fixum",
@@ -247,7 +249,16 @@ def run_tree_sitter_leaves(repo_root: Path, source: str) -> list[Leaf]:
 
     root = ET.fromstring(xml_text[xml_text.index("<?xml") :])
     leaves: list[Leaf] = []
-    skip = {"faber_newline", "program", "frontmatter"}
+    skip = {
+        "faber_newline",
+        "program",
+        "frontmatter",
+        "annotation",
+        "braced_annotation",
+        "annotation_field",
+        "annotation_arguments",
+        "annotation_name",
+    }
 
     for element in root.iter():
         kind = element.tag
@@ -265,22 +276,35 @@ def run_tree_sitter_leaves(repo_root: Path, source: str) -> list[Leaf]:
     return leaves
 
 
-def normalize_compare_kind(kind: str) -> str:
+def normalize_compare_kind(kind: str, text: str | None = None) -> str:
     if kind.startswith("keyword_"):
         return "keyword"
     if kind in {"ascii_string", "backtick_string", "octeti_string", "guillemet_string"}:
         return "string"
-    if kind in {"identifier", "builtin_type"}:
+    if kind == "known_annotation_name" and text in VISIBILITY_ANNOTATION_NAMES:
+        return "keyword"
+    if kind in {
+        "identifier",
+        "builtin_type",
+        "annotation_value_type",
+        "known_annotation_name",
+        "annotation_modifier",
+    }:
         return "type_or_ident"
-    if kind == "hash":
+    if kind in {"hash", "at_sign", "eq_sign"}:
         return "operator"
+    if kind in {"lbrace", "rbrace"}:
+        return "punctuation"
     return kind
 
 
-def compare_leaves(path: Path, radix_leaves: list[Leaf], ts_leaves: list[Leaf]) -> list[str]:
+def compare_leaves(path: Path, source: str, radix_leaves: list[Leaf], ts_leaves: list[Leaf]) -> list[str]:
     issues: list[str] = []
     radix_kinds = [normalize_compare_kind(leaf.kind) for leaf in radix_leaves]
-    ts_kinds = [normalize_compare_kind(leaf.kind) for leaf in ts_leaves]
+    ts_kinds = [
+        normalize_compare_kind(leaf.kind, slice_bytes(source, leaf.start, leaf.end))
+        for leaf in ts_leaves
+    ]
 
     if radix_kinds != ts_kinds:
         mismatch_at = next(
@@ -332,7 +356,7 @@ def main() -> int:
         except (subprocess.CalledProcessError, RuntimeError) as err:
             issues.append(f"{path}: tree-sitter/radix invocation failed: {err}")
             continue
-        issues.extend(compare_leaves(path, radix_leaves, ts_leaves))
+        issues.extend(compare_leaves(path, body, radix_leaves, ts_leaves))
 
     if issues:
         print("highlight contract failures:")

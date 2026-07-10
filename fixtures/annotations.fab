@@ -1,0 +1,10 @@
+@ json
+@ privata
+genus Record {
+    @ json { nomen = "wire" }
+    textus id
+}
+
+@ cli "demo"
+@ versio "0.1.0"
+@ optio verbose longum "verbose" typus bivalens descriptio "Verbose output"

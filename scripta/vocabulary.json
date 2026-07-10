@@ -50,9 +50,6 @@
     "optiones",
     "ordo",
     "prae",
-    "privata",
-    "protecta",
-    "publica",
     "sit",
     "sponte",
     "typus",
@@ -256,5 +253,26 @@
     "=",
     ".",
     "@"
+  ],
+  "annotation_name": [
+    "cli",
+    "cursor",
+    "futura",
+    "imperia",
+    "imperium",
+    "json",
+    "operandus",
+    "optio",
+    "privata",
+    "protecta",
+    "publica",
+    "versio"
+  ],
+  "annotation_modifier": [
+    "brevis",
+    "descriptio",
+    "longum",
+    "nomen",
+    "ubique"
   ]
 }

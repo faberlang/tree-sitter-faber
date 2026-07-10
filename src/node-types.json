@@ -1,8 +1,225 @@
 [
   {
+    "type": "annotation",
+    "named": true,
+    "fields": {
+      "name": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "annotation_name",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "annotation_arguments",
+          "named": true
+        },
+        {
+          "type": "at_sign",
+          "named": true
+        },
+        {
+          "type": "braced_annotation",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "annotation_arguments",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "annotation_modifier",
+          "named": true
+        },
+        {
+          "type": "annotation_value_type",
+          "named": true
+        },
+        {
+          "type": "ascii_string",
+          "named": true
+        },
+        {
+          "type": "backtick_string",
+          "named": true
+        },
+        {
+          "type": "boolean",
+          "named": true
+        },
+        {
+          "type": "guillemet_string",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "keyword_declaration",
+          "named": true
+        },
+        {
+          "type": "keyword_other",
+          "named": true
+        },
+        {
+          "type": "number",
+          "named": true
+        },
+        {
+          "type": "octeti_string",
+          "named": true
+        },
+        {
+          "type": "string",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "annotation_field",
+    "named": true,
+    "fields": {
+      "key": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "annotation_modifier",
+            "named": true
+          },
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "value": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "annotation_value_type",
+            "named": true
+          },
+          {
+            "type": "ascii_string",
+            "named": true
+          },
+          {
+            "type": "backtick_string",
+            "named": true
+          },
+          {
+            "type": "boolean",
+            "named": true
+          },
+          {
+            "type": "guillemet_string",
+            "named": true
+          },
+          {
+            "type": "identifier",
+            "named": true
+          },
+          {
+            "type": "number",
+            "named": true
+          },
+          {
+            "type": "octeti_string",
+            "named": true
+          },
+          {
+            "type": "string",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "eq_sign",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "annotation_modifier",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "annotation_name",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "known_annotation_name",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "annotation_value_type",
+    "named": true,
+    "fields": {}
+  },
+  {
     "type": "boolean",
     "named": true,
     "fields": {}
+  },
+  {
+    "type": "braced_annotation",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "annotation_field",
+          "named": true
+        },
+        {
+          "type": "lbrace",
+          "named": true
+        },
+        {
+          "type": "rbrace",
+          "named": true
+        }
+      ]
+    }
   },
   {
     "type": "builtin_type",
@@ -25,6 +242,16 @@
     "fields": {}
   },
   {
+    "type": "known_annotation_name",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "lbrace",
+    "named": true,
+    "fields": {}
+  },
+  {
     "type": "program",
     "named": true,
     "root": true,
@@ -33,6 +260,10 @@
       "multiple": true,
       "required": false,
       "types": [
+        {
+          "type": "annotation",
+          "named": true
+        },
         {
           "type": "ascii_string",
           "named": true
@@ -114,6 +345,11 @@
     "fields": {}
   },
   {
+    "type": "rbrace",
+    "named": true,
+    "fields": {}
+  },
+  {
     "type": "(",
     "named": false
   },
@@ -170,6 +406,10 @@
     "named": true
   },
   {
+    "type": "at_sign",
+    "named": true
+  },
+  {
     "type": "aut",
     "named": false
   },
@@ -179,6 +419,10 @@
   },
   {
     "type": "bivalens",
+    "named": false
+  },
+  {
+    "type": "brevis",
     "named": false
   },
   {
@@ -203,6 +447,10 @@
   },
   {
     "type": "clausura",
+    "named": false
+  },
+  {
+    "type": "cli",
     "named": false
   },
   {
@@ -234,6 +482,10 @@
     "named": false
   },
   {
+    "type": "descriptio",
+    "named": false
+  },
+  {
     "type": "discerne",
     "named": false
   },
@@ -256,6 +508,10 @@
   {
     "type": "emitte",
     "named": false
+  },
+  {
+    "type": "eq_sign",
+    "named": true
   },
   {
     "type": "ergo",
@@ -330,6 +586,10 @@
     "named": false
   },
   {
+    "type": "futura",
+    "named": false
+  },
+  {
     "type": "futurum",
     "named": false
   },
@@ -383,6 +643,14 @@
   },
   {
     "type": "immutata",
+    "named": false
+  },
+  {
+    "type": "imperia",
+    "named": false
+  },
+  {
+    "type": "imperium",
     "named": false
   },
   {
@@ -475,6 +743,10 @@
   },
   {
     "type": "lista",
+    "named": false
+  },
+  {
+    "type": "longum",
     "named": false
   },
   {
@@ -574,6 +846,10 @@
     "named": false
   },
   {
+    "type": "nomen",
+    "named": false
+  },
+  {
     "type": "non",
     "named": false
   },
@@ -626,8 +902,16 @@
     "named": false
   },
   {
+    "type": "operandus",
+    "named": false
+  },
+  {
     "type": "operator",
     "named": true
+  },
+  {
+    "type": "optio",
+    "named": false
   },
   {
     "type": "optiones",
@@ -918,6 +1202,10 @@
     "named": false
   },
   {
+    "type": "ubique",
+    "named": false
+  },
+  {
     "type": "unio",
     "named": false
   },
@@ -951,6 +1239,10 @@
   },
   {
     "type": "vel",
+    "named": false
+  },
+  {
+    "type": "versio",
     "named": false
   },
   {

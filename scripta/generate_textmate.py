@@ -35,6 +35,8 @@ def build_textmate_grammar(vocab: dict[str, list[str]]) -> dict:
         ("keyword-other", vocab["keyword_other"], "keyword.other.faber"),
         ("boolean-literal", vocab["boolean"], "constant.language.boolean.faber"),
         ("builtin-type", vocab["builtin_type"], "support.type.builtin.faber"),
+        ("annotation-name", vocab["annotation_name"], "entity.other.attribute-name.faber"),
+        ("annotation-modifier", vocab["annotation_modifier"], "variable.parameter.faber"),
     ]
 
     keywords_patterns: list[dict] = []

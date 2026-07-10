@@ -141,6 +141,12 @@
         },
         {
           "include": "#builtin-type"
+        },
+        {
+          "include": "#annotation-name"
+        },
+        {
+          "include": "#annotation-modifier"
         }
       ]
     },
@@ -153,7 +159,7 @@
       "name": "keyword.control.faber"
     },
     "keyword-declaration": {
-      "match": "\\b(abstractus|discretio|implendum|magnitudo|immutata|optiones|protecta|functio|generis|importa|privata|publica|ceteri|curata|errata|exitus|sponte|fixum|genus|iacit|nexum|typus|varia|ordo|prae|sit)\\b",
+      "match": "\\b(abstractus|discretio|implendum|magnitudo|immutata|optiones|functio|generis|importa|ceteri|curata|errata|exitus|sponte|fixum|genus|iacit|nexum|typus|varia|ordo|prae|sit)\\b",
       "name": "keyword.declaration.faber"
     },
     "keyword-other": {
@@ -167,6 +173,14 @@
     "builtin-type": {
       "match": "\\b(intervallum|promissum|bivalens|fractus|ignotum|instans|numerus|numquam|cursor|matrix|octeti|series|sparsa|tabula|tensor|textus|vacuum|vector|ascii|copia|lista|nihil|octet|regex|vacua|valor|json|lf16|lf32|lf64|li16|li32|li64|lu16|lu32|lu64|mf16|mf32|mf64|mi16|mi32|mi64|mu16|mu32|mu64|sf16|sf32|sf64|si16|si32|si64|su16|su32|su64|tf16|tf32|tf64|ti16|ti32|ti64|tu16|tu32|tu64|unio|vf16|vf32|vf64|vi16|vi32|vi64|vu16|vu32|vu64|f16|f32|f64|i16|i32|i64|li8|lu8|mi8|mu8|si8|su8|ti8|tu8|u16|u32|u64|vi8|vu8|i8|u8)\\b",
       "name": "support.type.builtin.faber"
+    },
+    "annotation-name": {
+      "match": "\\b(operandus|imperium|protecta|imperia|privata|publica|cursor|futura|versio|optio|json|cli)\\b",
+      "name": "entity.other.attribute-name.faber"
+    },
+    "annotation-modifier": {
+      "match": "\\b(descriptio|brevis|longum|ubique|nomen)\\b",
+      "name": "variable.parameter.faber"
     },
     "operators": {
       "match": "(!\\(|!\\.|!\\[|\\?\\(|\\?\\.|\\?\\[|!|%|\\*|\\+|\\-|\\.|/|<|=|>|\\?|@|¬|‥|…|←|→|↦|⇐|⇒|⇥|∧|∨|∪|∴|∷|≈|≉|≠|≡|≤|≥|⊕|⊖|⊜|⊻)",

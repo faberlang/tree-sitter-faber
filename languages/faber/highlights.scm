@@ -3,6 +3,41 @@
 
 (frontmatter) @comment
 (line_comment) @comment
+
+(annotation) @attribute
+(annotation
+  (at_sign) @operator
+  name: (annotation_name) @attribute)
+
+(at_sign) @operator
+(eq_sign) @operator
+(lbrace) @punctuation.bracket
+(rbrace) @punctuation.bracket
+
+(annotation_name
+  (known_annotation_name) @attribute
+  (identifier) @attribute)
+
+(annotation_modifier) @property
+
+(annotation_field
+  key: (_) @property
+  value: (_) @string)
+
+(annotation_arguments
+  (annotation_modifier) @property
+  (string) @string
+  (ascii_string) @string
+  (backtick_string) @string
+  (guillemet_string) @string
+  (octeti_string) @string
+  (identifier) @variable
+  (annotation_value_type) @type.builtin
+  (keyword_declaration) @keyword
+  (keyword_other) @keyword
+  (boolean) @boolean
+  (number) @number)
+
 (keyword_control) @keyword
 (keyword_declaration) @keyword
 (keyword_other) @keyword

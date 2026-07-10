@@ -83,12 +83,26 @@ DECL_CATEGORIES = {"Declaration", "Modifier"}
 
 BOOLEAN_KEYWORDS = {"verum", "falsum"}
 
+# EBNF annotationName visibility spellings and CLI/metadata names Radix accepts
+# after `@` but does not register as global lexer keywords.
+ANNOTATION_VISIBILITY_NAMES = ("publica", "privata", "protecta", "futura", "cursor")
+
+EXTRA_ANNOTATION_NAMES = (
+    "versio",
+    "imperia",
+    "json",
+)
+
+EXTRA_ANNOTATION_MODIFIERS = ("nomen",)
+
 
 @dataclass(frozen=True)
 class KeywordSpec:
     text: str
     active: bool
     category: str
+    scope: str
+    contextual: str | None
 
 
 def radix_root(explicit: Path | None = None) -> Path:
@@ -124,12 +138,18 @@ def parse_keyword_specs(keywords_rs: Path) -> list[KeywordSpec]:
         text_match = re.search(r'text: "([^"]+)"', body)
         token_match = re.search(r"token_kind: (Some\(TokenKind::\w+\)|None)", body)
         category_match = re.search(r"category: KeywordCategory::(\w+)", body)
+        scope_match = re.search(
+            r"scope: KeywordScope::(Annotation|Global|Contextual)(?:\(([^)]+)\))?",
+            body,
+        )
         if text_match and token_match and category_match:
             specs.append(
                 KeywordSpec(
                     text=text_match.group(1),
                     active=token_match.group(1).startswith("Some"),
                     category=category_match.group(1),
+                    scope=scope_match.group(1) if scope_match else "Global",
+                    contextual=scope_match.group(2) if scope_match and scope_match.lastindex == 2 else None,
                 )
             )
         start = end + 1
@@ -153,7 +173,7 @@ def parse_builtin_types(expr_rs: Path) -> list[str]:
         for marker in WIDTH_MARKERS:
             sugars.append(f"{prefix}{marker}")
     sugars.extend(WIDTH_MARKERS)
-    extras = ["vacua", "unio", "bivalens"]  # common type-position spellings outside matches!()
+    extras = ["vacua", "unio", "bivalens"]
     merged = list(dict.fromkeys([*names, *sugars, *extras]))
     return sorted(merged, key=lambda s: (-len(s), s))
 
@@ -168,6 +188,27 @@ def classify_keyword(spec: KeywordSpec) -> str:
     return "keyword_other"
 
 
+def collect_annotation_vocab(specs: list[KeywordSpec]) -> tuple[list[str], list[str]]:
+    names: list[str] = []
+    modifiers: list[str] = []
+
+    for spec in specs:
+        if spec.category != "Annotation":
+            continue
+        if spec.contextual == "ANNOTATION_MODIFIER":
+            modifiers.append(spec.text)
+        elif spec.scope == "Annotation":
+            names.append(spec.text)
+
+    names.extend(ANNOTATION_VISIBILITY_NAMES)
+    names.extend(EXTRA_ANNOTATION_NAMES)
+    modifiers.extend(EXTRA_ANNOTATION_MODIFIERS)
+    return (
+        sorted(set(names), key=lambda s: (-len(s), s)),
+        sorted(set(modifiers), key=lambda s: (-len(s), s)),
+    )
+
+
 def load_vocabulary(radix_root_path: Path | None = None) -> dict[str, list[str]]:
     root = radix_root(radix_root_path)
     keywords_rs = root / "crates/radix/src/lexer/keywords.rs"
@@ -177,6 +218,9 @@ def load_vocabulary(radix_root_path: Path | None = None) -> dict[str, list[str]]
     if not expr_rs.is_file():
         raise FileNotFoundError(f"missing Radix parser expr module: {expr_rs}")
 
+    specs = parse_keyword_specs(keywords_rs)
+    annotation_names, annotation_modifiers = collect_annotation_vocab(specs)
+
     grouped: dict[str, list[str]] = {
         "keyword_control": [],
         "keyword_declaration": [],
@@ -184,10 +228,16 @@ def load_vocabulary(radix_root_path: Path | None = None) -> dict[str, list[str]]
         "boolean": [],
         "builtin_type": parse_builtin_types(expr_rs),
         "operator": list(SCAN_GLYPH_LITERALS),
+        "annotation_name": annotation_names,
+        "annotation_modifier": annotation_modifiers,
     }
 
-    for spec in parse_keyword_specs(keywords_rs):
+    for spec in specs:
         if not spec.active:
+            continue
+        if spec.text in grouped["annotation_modifier"]:
+            continue
+        if spec.text in grouped["annotation_name"]:
             continue
         if spec.text in grouped["builtin_type"]:
             continue
