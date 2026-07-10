@@ -1,0 +1,348 @@
+#!/usr/bin/env python3
+"""Compare Radix lex tokens with tree-sitter leaves on Faber source files."""
+
+from __future__ import annotations
+
+import argparse
+import json
+import re
+import subprocess
+import sys
+import tempfile
+import xml.etree.ElementTree as ET
+from dataclasses import dataclass
+from pathlib import Path
+
+REPO_ROOT = Path(__file__).resolve().parents[1]
+DEFAULT_RADIX_ROOT = REPO_ROOT.parent / "radix"
+DEFAULT_CORPUS_ROOT = REPO_ROOT.parent / "examples" / "corpus"
+
+IGNORE_RADIX_KINDS = {
+    "Eof",
+    "Newline",
+    "Error",
+}
+
+BOOLEAN_KINDS = {"Verum", "Falsum"}
+
+DECL_KEYWORD_KINDS = {
+    "Discretio",
+    "Fixum",
+    "Functio",
+    "Genus",
+    "Implendum",
+    "Importa",
+    "Magnitudo",
+    "Ordo",
+    "Proba",
+    "Probandum",
+    "Sit",
+    "Typus",
+    "Varia",
+    "Abstractus",
+    "Ceteri",
+    "Curata",
+    "Errata",
+    "Exitus",
+    "Generis",
+    "Iacit",
+    "Immutata",
+    "Nexum",
+    "Optiones",
+    "Prae",
+    "Privata",
+    "Protecta",
+    "Publica",
+    "Implet",
+    "Sub",
+    "Sponte",
+}
+
+CONTROL_KEYWORD_KINDS = {
+    "Casu",
+    "Ceterum",
+    "Custodi",
+    "Discerne",
+    "Dum",
+    "Elige",
+    "Ergo",
+    "Fac",
+    "Itera",
+    "Secus",
+    "Si",
+    "Sic",
+    "Sin",
+    "Perge",
+    "Redde",
+    "Rumpe",
+    "Tacet",
+    "Adfirma",
+    "Cape",
+    "Demum",
+    "Iace",
+    "Mori",
+    "Tempta",
+    "Cede",
+    "Ad",
+    "Argumenta",
+    "Cura",
+    "Emitte",
+    "Incipiet",
+    "Incipit",
+    "Meus",
+    "Tuus",
+}
+
+BUILTIN_TYPE_WORDS = set(
+    json.loads((REPO_ROOT / "scripta" / "vocabulary.json").read_text(encoding="utf-8"))["builtin_type"]
+)
+
+
+@dataclass(frozen=True)
+class Leaf:
+    start: int
+    end: int
+    kind: str
+
+
+def point_to_byte(source: str, row: int, col: int) -> int:
+    offset = 0
+    for line in source.splitlines(keepends=True)[:row]:
+        offset += len(line.encode("utf-8"))
+    line = source.splitlines(keepends=True)[row] if row < len(source.splitlines(keepends=True)) else ""
+    line_bytes = line.encode("utf-8")
+    return offset + min(col, len(line_bytes))
+
+
+def slice_bytes(source: str, start: int, end: int) -> str:
+    return source.encode("utf-8")[start:end].decode("utf-8")
+
+
+def radix_root(explicit: Path | None) -> Path:
+    if explicit is not None:
+        return explicit.resolve()
+    env = __import__("os").environ.get("RADIX_ROOT")
+    if env:
+        return Path(env).resolve()
+    return DEFAULT_RADIX_ROOT.resolve()
+
+
+def corpus_root(explicit: Path | None) -> Path:
+    if explicit is not None:
+        return explicit.resolve()
+    env = __import__("os").environ.get("FABER_CORPUS_ROOT")
+    if env:
+        return Path(env).resolve()
+    return DEFAULT_CORPUS_ROOT.resolve()
+
+
+def peel_frontmatter(source: str) -> tuple[str, int]:
+    if not source.startswith("+++"):
+        return source, 0
+    lines = source.splitlines(keepends=True)
+    if not lines or lines[0].strip("\r\n") != "+++":
+        return source, 0
+    cursor = len(lines[0])
+    for line in lines[1:]:
+        if line.strip("\r\n") == "+++":
+            return source[cursor + len(line) :], cursor + len(line)
+        cursor += len(line)
+    return source, 0
+
+
+def normalize_radix_kind(raw: str) -> tuple[str, str | None]:
+    if raw.startswith("Ident(") or raw.startswith("Underscore("):
+        return "identifier", None
+    if raw.startswith("Integer(") or raw.startswith("Float("):
+        return "number", None
+    if raw.startswith("String(") or raw.startswith("AsciiString(") or raw.startswith("BacktickString("):
+        return "string", None
+    if raw.startswith("OctetiString("):
+        return "octeti_string", None
+    if raw.startswith("LineComment("):
+        return "line_comment", None
+
+    base = raw.split("(", 1)[0]
+    if base in IGNORE_RADIX_KINDS:
+        return "ignore", None
+    if base in BOOLEAN_KINDS:
+        return "boolean", None
+    if base == "At" or raw == "At":
+        return "operator", None
+    if base in DECL_KEYWORD_KINDS:
+        return "keyword_declaration", None
+    if base in CONTROL_KEYWORD_KINDS:
+        return "keyword_control", None
+    if base.endswith("String"):
+        return "string", None
+    if base in {
+        "LParen",
+        "RParen",
+        "LBrace",
+        "RBrace",
+        "LBracket",
+        "RBracket",
+        "Comma",
+        "Colon",
+        "Semicolon",
+    }:
+        return "punctuation", None
+    if base in {"Plus", "Minus", "Star", "Slash", "Percent", "Dot", "Bang", "Question"} or base.startswith(
+        ("Eq", "Lt", "Gt", "Bang", "Question", "Bitwise", "Post", "Arrow", "Exit", "Assign", "Cup", "Conversio", "Verte", "Approx")
+    ):
+        return "operator", None
+    if base.endswith(")"):
+        base = raw.split("(", 1)[0]
+    return "keyword_other", base
+
+
+def radix_kind_for_ident(text: str, span_text: str) -> str:
+    if span_text in BUILTIN_TYPE_WORDS:
+        return "builtin_type"
+    return "identifier"
+
+
+def run_radix_lex(radix_bin: Path, body: str) -> list[Leaf]:
+    proc = subprocess.run(
+        [str(radix_bin), "lex", "-"],
+        input=body,
+        check=True,
+        capture_output=True,
+        text=True,
+    )
+    payload = json.loads(proc.stdout)
+
+    leaves: list[Leaf] = []
+    for token in payload["tokens"]:
+        kind_raw = token["kind"]
+        start = token["span"][0]
+        end = token["span"][1]
+        if start < 0 or end <= start:
+            continue
+        kind, _ = normalize_radix_kind(kind_raw)
+        if kind == "ignore":
+            continue
+        if kind == "identifier":
+            span_text = slice_bytes(body, start, end)
+            kind = radix_kind_for_ident(span_text, span_text)
+        leaves.append(Leaf(start, end, kind))
+    return leaves
+
+
+def run_tree_sitter_leaves(repo_root: Path, source: str) -> list[Leaf]:
+    with tempfile.NamedTemporaryFile("w", suffix=".fab", delete=False, encoding="utf-8") as handle:
+        handle.write(source)
+        temp_path = handle.name
+
+    proc = subprocess.run(
+        ["npx", "--yes", "tree-sitter-cli@0.24.7", "parse", "-x", temp_path],
+        cwd=repo_root,
+        check=True,
+        capture_output=True,
+        text=True,
+    )
+    xml_text = proc.stdout
+    if "<?xml" not in xml_text:
+        raise RuntimeError("tree-sitter XML output missing")
+
+    root = ET.fromstring(xml_text[xml_text.index("<?xml") :])
+    leaves: list[Leaf] = []
+    skip = {"faber_newline", "program", "frontmatter"}
+
+    for element in root.iter():
+        kind = element.tag
+        if kind in skip:
+            continue
+        if "srow" not in element.attrib:
+            continue
+        start = point_to_byte(source, int(element.attrib["srow"]), int(element.attrib["scol"]))
+        end = point_to_byte(source, int(element.attrib["erow"]), int(element.attrib["ecol"]))
+        if end <= start:
+            continue
+        leaves.append(Leaf(start, end, kind))
+
+    leaves.sort(key=lambda leaf: (leaf.start, leaf.end, leaf.kind))
+    return leaves
+
+
+def normalize_compare_kind(kind: str) -> str:
+    if kind.startswith("keyword_"):
+        return "keyword"
+    if kind in {"ascii_string", "backtick_string", "octeti_string", "guillemet_string"}:
+        return "string"
+    if kind in {"identifier", "builtin_type"}:
+        return "type_or_ident"
+    if kind == "hash":
+        return "operator"
+    return kind
+
+
+def compare_leaves(path: Path, radix_leaves: list[Leaf], ts_leaves: list[Leaf]) -> list[str]:
+    issues: list[str] = []
+    radix_kinds = [normalize_compare_kind(leaf.kind) for leaf in radix_leaves]
+    ts_kinds = [normalize_compare_kind(leaf.kind) for leaf in ts_leaves]
+
+    if radix_kinds != ts_kinds:
+        mismatch_at = next(
+            (index for index, pair in enumerate(zip(radix_kinds, ts_kinds)) if pair[0] != pair[1]),
+            min(len(radix_kinds), len(ts_kinds)),
+        )
+        issues.append(
+            f"{path}: kind sequence mismatch at index {mismatch_at}: "
+            f"radix={radix_kinds[max(0, mismatch_at - 2) : mismatch_at + 3]} "
+            f"tree-sitter={ts_kinds[max(0, mismatch_at - 2) : mismatch_at + 3]}"
+        )
+    return issues
+
+
+def main() -> int:
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--radix-root", type=Path, default=None)
+    parser.add_argument("--corpus-root", type=Path, default=None)
+    parser.add_argument("--limit", type=int, default=25, help="max corpus files to check with --corpus")
+    parser.add_argument("--corpus", action="store_true", help="check examples/corpus instead of fixtures/")
+    parser.add_argument("--file", type=Path, action="append", default=[], help="specific .fab file")
+    args = parser.parse_args()
+
+    vocab_path = REPO_ROOT / "scripta" / "vocabulary.json"
+    if not vocab_path.is_file():
+        print("error: run scripta/generate_grammar.py first", file=sys.stderr)
+        return 1
+
+    radix_bin = radix_root(args.radix_root) / "target" / "debug" / "radix"
+    if not radix_bin.is_file():
+        print(f"error: missing radix binary at {radix_bin}; build with cargo build -p radix --bin radix", file=sys.stderr)
+        return 1
+
+    files = [path.resolve() for path in args.file]
+    if not files:
+        if args.corpus:
+            corpus = corpus_root(args.corpus_root)
+            files = sorted(corpus.rglob("*.fab"))[: args.limit]
+        else:
+            files = sorted((REPO_ROOT / "fixtures").glob("*.fab"))
+
+    issues: list[str] = []
+    for path in files:
+        source = path.read_text(encoding="utf-8")
+        body, _ = peel_frontmatter(source)
+        try:
+            radix_leaves = run_radix_lex(radix_bin, body)
+            ts_leaves = run_tree_sitter_leaves(REPO_ROOT, body)
+        except (subprocess.CalledProcessError, RuntimeError) as err:
+            issues.append(f"{path}: tree-sitter/radix invocation failed: {err}")
+            continue
+        issues.extend(compare_leaves(path, radix_leaves, ts_leaves))
+
+    if issues:
+        print("highlight contract failures:")
+        for issue in issues:
+            print(f"  - {issue}")
+        return 1
+
+    print(f"highlight contract ok ({len(files)} file(s))")
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

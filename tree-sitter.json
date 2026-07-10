@@ -1,0 +1,26 @@
+{
+  "grammars": [
+    {
+      "name": "faber",
+      "camelcase": "Faber",
+      "scope": "source.faber",
+      "path": ".",
+      "file-types": ["fab"],
+      "external-files": ["src/scanner.c"]
+    }
+  ],
+  "metadata": {
+    "version": "0.1.0",
+    "license": "MIT",
+    "description": "Tree-sitter grammar for Faber syntax highlighting",
+    "authors": [
+      {
+        "name": "Ian Zepp",
+        "email": "ianzepp@gmail.com"
+      }
+    ],
+    "links": {
+      "repository": "https://github.com/faberlang/tree-sitter-faber"
+    }
+  }
+}

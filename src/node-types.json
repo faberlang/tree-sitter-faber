@@ -1,0 +1,1016 @@
+[
+  {
+    "type": "boolean",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "builtin_type",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "keyword_control",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "keyword_declaration",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "keyword_other",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "program",
+    "named": true,
+    "root": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "ascii_string",
+          "named": true
+        },
+        {
+          "type": "backtick_string",
+          "named": true
+        },
+        {
+          "type": "boolean",
+          "named": true
+        },
+        {
+          "type": "builtin_type",
+          "named": true
+        },
+        {
+          "type": "faber_newline",
+          "named": true
+        },
+        {
+          "type": "frontmatter",
+          "named": true
+        },
+        {
+          "type": "guillemet_string",
+          "named": true
+        },
+        {
+          "type": "hash",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "keyword_control",
+          "named": true
+        },
+        {
+          "type": "keyword_declaration",
+          "named": true
+        },
+        {
+          "type": "keyword_other",
+          "named": true
+        },
+        {
+          "type": "line_comment",
+          "named": true
+        },
+        {
+          "type": "number",
+          "named": true
+        },
+        {
+          "type": "octeti_string",
+          "named": true
+        },
+        {
+          "type": "operator",
+          "named": true
+        },
+        {
+          "type": "punctuation",
+          "named": true
+        },
+        {
+          "type": "string",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "punctuation",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "(",
+    "named": false
+  },
+  {
+    "type": ")",
+    "named": false
+  },
+  {
+    "type": ",",
+    "named": false
+  },
+  {
+    "type": ":",
+    "named": false
+  },
+  {
+    "type": ";",
+    "named": false
+  },
+  {
+    "type": "[",
+    "named": false
+  },
+  {
+    "type": "]",
+    "named": false
+  },
+  {
+    "type": "abstractus",
+    "named": false
+  },
+  {
+    "type": "ad",
+    "named": false
+  },
+  {
+    "type": "adfirma",
+    "named": false
+  },
+  {
+    "type": "ante",
+    "named": false
+  },
+  {
+    "type": "argumenta",
+    "named": false
+  },
+  {
+    "type": "ascii",
+    "named": false
+  },
+  {
+    "type": "ascii_string",
+    "named": true
+  },
+  {
+    "type": "aut",
+    "named": false
+  },
+  {
+    "type": "backtick_string",
+    "named": true
+  },
+  {
+    "type": "bivalens",
+    "named": false
+  },
+  {
+    "type": "cape",
+    "named": false
+  },
+  {
+    "type": "casu",
+    "named": false
+  },
+  {
+    "type": "cede",
+    "named": false
+  },
+  {
+    "type": "ceteri",
+    "named": false
+  },
+  {
+    "type": "ceterum",
+    "named": false
+  },
+  {
+    "type": "clausura",
+    "named": false
+  },
+  {
+    "type": "copia",
+    "named": false
+  },
+  {
+    "type": "cura",
+    "named": false
+  },
+  {
+    "type": "curata",
+    "named": false
+  },
+  {
+    "type": "cursor",
+    "named": false
+  },
+  {
+    "type": "custodi",
+    "named": false
+  },
+  {
+    "type": "de",
+    "named": false
+  },
+  {
+    "type": "demum",
+    "named": false
+  },
+  {
+    "type": "discerne",
+    "named": false
+  },
+  {
+    "type": "discretio",
+    "named": false
+  },
+  {
+    "type": "dum",
+    "named": false
+  },
+  {
+    "type": "ego",
+    "named": false
+  },
+  {
+    "type": "elige",
+    "named": false
+  },
+  {
+    "type": "emitte",
+    "named": false
+  },
+  {
+    "type": "ergo",
+    "named": false
+  },
+  {
+    "type": "errata",
+    "named": false
+  },
+  {
+    "type": "est",
+    "named": false
+  },
+  {
+    "type": "et",
+    "named": false
+  },
+  {
+    "type": "ex",
+    "named": false
+  },
+  {
+    "type": "exitus",
+    "named": false
+  },
+  {
+    "type": "f16",
+    "named": false
+  },
+  {
+    "type": "f32",
+    "named": false
+  },
+  {
+    "type": "f64",
+    "named": false
+  },
+  {
+    "type": "faber_newline",
+    "named": true
+  },
+  {
+    "type": "fac",
+    "named": false
+  },
+  {
+    "type": "falsum",
+    "named": false
+  },
+  {
+    "type": "finge",
+    "named": false
+  },
+  {
+    "type": "fixum",
+    "named": false
+  },
+  {
+    "type": "fractus",
+    "named": false
+  },
+  {
+    "type": "fragilis",
+    "named": false
+  },
+  {
+    "type": "frontmatter",
+    "named": true
+  },
+  {
+    "type": "functio",
+    "named": false
+  },
+  {
+    "type": "futurum",
+    "named": false
+  },
+  {
+    "type": "generis",
+    "named": false
+  },
+  {
+    "type": "genus",
+    "named": false
+  },
+  {
+    "type": "guillemet_string",
+    "named": true
+  },
+  {
+    "type": "hash",
+    "named": true
+  },
+  {
+    "type": "i16",
+    "named": false
+  },
+  {
+    "type": "i32",
+    "named": false
+  },
+  {
+    "type": "i64",
+    "named": false
+  },
+  {
+    "type": "i8",
+    "named": false
+  },
+  {
+    "type": "iace",
+    "named": false
+  },
+  {
+    "type": "iacit",
+    "named": false
+  },
+  {
+    "type": "identifier",
+    "named": true
+  },
+  {
+    "type": "ignotum",
+    "named": false
+  },
+  {
+    "type": "immutata",
+    "named": false
+  },
+  {
+    "type": "implendum",
+    "named": false
+  },
+  {
+    "type": "implet",
+    "named": false
+  },
+  {
+    "type": "importa",
+    "named": false
+  },
+  {
+    "type": "in",
+    "named": false
+  },
+  {
+    "type": "incipiet",
+    "named": false
+  },
+  {
+    "type": "incipit",
+    "named": false
+  },
+  {
+    "type": "instans",
+    "named": false
+  },
+  {
+    "type": "inter",
+    "named": false
+  },
+  {
+    "type": "intervallum",
+    "named": false
+  },
+  {
+    "type": "intra",
+    "named": false
+  },
+  {
+    "type": "itera",
+    "named": false
+  },
+  {
+    "type": "json",
+    "named": false
+  },
+  {
+    "type": "lege",
+    "named": false
+  },
+  {
+    "type": "lf16",
+    "named": false
+  },
+  {
+    "type": "lf32",
+    "named": false
+  },
+  {
+    "type": "lf64",
+    "named": false
+  },
+  {
+    "type": "li16",
+    "named": false
+  },
+  {
+    "type": "li32",
+    "named": false
+  },
+  {
+    "type": "li64",
+    "named": false
+  },
+  {
+    "type": "li8",
+    "named": false
+  },
+  {
+    "type": "line_comment",
+    "named": true
+  },
+  {
+    "type": "lineam",
+    "named": false
+  },
+  {
+    "type": "lista",
+    "named": false
+  },
+  {
+    "type": "lu16",
+    "named": false
+  },
+  {
+    "type": "lu32",
+    "named": false
+  },
+  {
+    "type": "lu64",
+    "named": false
+  },
+  {
+    "type": "lu8",
+    "named": false
+  },
+  {
+    "type": "magnitudo",
+    "named": false
+  },
+  {
+    "type": "matrix",
+    "named": false
+  },
+  {
+    "type": "metior",
+    "named": false
+  },
+  {
+    "type": "mf16",
+    "named": false
+  },
+  {
+    "type": "mf32",
+    "named": false
+  },
+  {
+    "type": "mf64",
+    "named": false
+  },
+  {
+    "type": "mi16",
+    "named": false
+  },
+  {
+    "type": "mi32",
+    "named": false
+  },
+  {
+    "type": "mi64",
+    "named": false
+  },
+  {
+    "type": "mi8",
+    "named": false
+  },
+  {
+    "type": "modulus",
+    "named": false
+  },
+  {
+    "type": "mone",
+    "named": false
+  },
+  {
+    "type": "mori",
+    "named": false
+  },
+  {
+    "type": "mu16",
+    "named": false
+  },
+  {
+    "type": "mu32",
+    "named": false
+  },
+  {
+    "type": "mu64",
+    "named": false
+  },
+  {
+    "type": "mu8",
+    "named": false
+  },
+  {
+    "type": "negativum",
+    "named": false
+  },
+  {
+    "type": "nexum",
+    "named": false
+  },
+  {
+    "type": "nihil",
+    "named": false
+  },
+  {
+    "type": "non",
+    "named": false
+  },
+  {
+    "type": "nonnihil",
+    "named": false
+  },
+  {
+    "type": "nonnulla",
+    "named": false
+  },
+  {
+    "type": "nota",
+    "named": false
+  },
+  {
+    "type": "nulla",
+    "named": false
+  },
+  {
+    "type": "number",
+    "named": true
+  },
+  {
+    "type": "numerus",
+    "named": false
+  },
+  {
+    "type": "numquam",
+    "named": false
+  },
+  {
+    "type": "octet",
+    "named": false
+  },
+  {
+    "type": "octeti",
+    "named": false
+  },
+  {
+    "type": "octeti_string",
+    "named": true
+  },
+  {
+    "type": "omitte",
+    "named": false
+  },
+  {
+    "type": "omnia",
+    "named": false
+  },
+  {
+    "type": "operator",
+    "named": true
+  },
+  {
+    "type": "optiones",
+    "named": false
+  },
+  {
+    "type": "ordo",
+    "named": false
+  },
+  {
+    "type": "per",
+    "named": false
+  },
+  {
+    "type": "perge",
+    "named": false
+  },
+  {
+    "type": "positivum",
+    "named": false
+  },
+  {
+    "type": "postpara",
+    "named": false
+  },
+  {
+    "type": "postparabit",
+    "named": false
+  },
+  {
+    "type": "prae",
+    "named": false
+  },
+  {
+    "type": "praefixum",
+    "named": false
+  },
+  {
+    "type": "praepara",
+    "named": false
+  },
+  {
+    "type": "praeparabit",
+    "named": false
+  },
+  {
+    "type": "privata",
+    "named": false
+  },
+  {
+    "type": "pro",
+    "named": false
+  },
+  {
+    "type": "proba",
+    "named": false
+  },
+  {
+    "type": "probandum",
+    "named": false
+  },
+  {
+    "type": "promissum",
+    "named": false
+  },
+  {
+    "type": "protecta",
+    "named": false
+  },
+  {
+    "type": "publica",
+    "named": false
+  },
+  {
+    "type": "redde",
+    "named": false
+  },
+  {
+    "type": "regex",
+    "named": false
+  },
+  {
+    "type": "repete",
+    "named": false
+  },
+  {
+    "type": "requirit",
+    "named": false
+  },
+  {
+    "type": "rumpe",
+    "named": false
+  },
+  {
+    "type": "scribe",
+    "named": false
+  },
+  {
+    "type": "scriptum",
+    "named": false
+  },
+  {
+    "type": "secus",
+    "named": false
+  },
+  {
+    "type": "series",
+    "named": false
+  },
+  {
+    "type": "sf16",
+    "named": false
+  },
+  {
+    "type": "sf32",
+    "named": false
+  },
+  {
+    "type": "sf64",
+    "named": false
+  },
+  {
+    "type": "si",
+    "named": false
+  },
+  {
+    "type": "si16",
+    "named": false
+  },
+  {
+    "type": "si32",
+    "named": false
+  },
+  {
+    "type": "si64",
+    "named": false
+  },
+  {
+    "type": "si8",
+    "named": false
+  },
+  {
+    "type": "sic",
+    "named": false
+  },
+  {
+    "type": "sin",
+    "named": false
+  },
+  {
+    "type": "sit",
+    "named": false
+  },
+  {
+    "type": "solum",
+    "named": false
+  },
+  {
+    "type": "solum_in",
+    "named": false
+  },
+  {
+    "type": "sparge",
+    "named": false
+  },
+  {
+    "type": "sparsa",
+    "named": false
+  },
+  {
+    "type": "sponte",
+    "named": false
+  },
+  {
+    "type": "string",
+    "named": true
+  },
+  {
+    "type": "su16",
+    "named": false
+  },
+  {
+    "type": "su32",
+    "named": false
+  },
+  {
+    "type": "su64",
+    "named": false
+  },
+  {
+    "type": "su8",
+    "named": false
+  },
+  {
+    "type": "sub",
+    "named": false
+  },
+  {
+    "type": "tabula",
+    "named": false
+  },
+  {
+    "type": "tacet",
+    "named": false
+  },
+  {
+    "type": "tag",
+    "named": false
+  },
+  {
+    "type": "temporis",
+    "named": false
+  },
+  {
+    "type": "tempta",
+    "named": false
+  },
+  {
+    "type": "tensor",
+    "named": false
+  },
+  {
+    "type": "textus",
+    "named": false
+  },
+  {
+    "type": "tf16",
+    "named": false
+  },
+  {
+    "type": "tf32",
+    "named": false
+  },
+  {
+    "type": "tf64",
+    "named": false
+  },
+  {
+    "type": "ti16",
+    "named": false
+  },
+  {
+    "type": "ti32",
+    "named": false
+  },
+  {
+    "type": "ti64",
+    "named": false
+  },
+  {
+    "type": "ti8",
+    "named": false
+  },
+  {
+    "type": "tu16",
+    "named": false
+  },
+  {
+    "type": "tu32",
+    "named": false
+  },
+  {
+    "type": "tu64",
+    "named": false
+  },
+  {
+    "type": "tu8",
+    "named": false
+  },
+  {
+    "type": "typus",
+    "named": false
+  },
+  {
+    "type": "u16",
+    "named": false
+  },
+  {
+    "type": "u32",
+    "named": false
+  },
+  {
+    "type": "u64",
+    "named": false
+  },
+  {
+    "type": "u8",
+    "named": false
+  },
+  {
+    "type": "unio",
+    "named": false
+  },
+  {
+    "type": "usque",
+    "named": false
+  },
+  {
+    "type": "ut",
+    "named": false
+  },
+  {
+    "type": "vacua",
+    "named": false
+  },
+  {
+    "type": "vacuum",
+    "named": false
+  },
+  {
+    "type": "valor",
+    "named": false
+  },
+  {
+    "type": "varia",
+    "named": false
+  },
+  {
+    "type": "vector",
+    "named": false
+  },
+  {
+    "type": "vel",
+    "named": false
+  },
+  {
+    "type": "verum",
+    "named": false
+  },
+  {
+    "type": "vf16",
+    "named": false
+  },
+  {
+    "type": "vf32",
+    "named": false
+  },
+  {
+    "type": "vf64",
+    "named": false
+  },
+  {
+    "type": "vi16",
+    "named": false
+  },
+  {
+    "type": "vi32",
+    "named": false
+  },
+  {
+    "type": "vi64",
+    "named": false
+  },
+  {
+    "type": "vi8",
+    "named": false
+  },
+  {
+    "type": "vide",
+    "named": false
+  },
+  {
+    "type": "vu16",
+    "named": false
+  },
+  {
+    "type": "vu32",
+    "named": false
+  },
+  {
+    "type": "vu64",
+    "named": false
+  },
+  {
+    "type": "vu8",
+    "named": false
+  },
+  {
+    "type": "{",
+    "named": false
+  },
+  {
+    "type": "}",
+    "named": false
+  }
+]

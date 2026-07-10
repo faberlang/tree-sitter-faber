@@ -1,0 +1,3 @@
+functio salve() → vacuum {
+    nota "Salve, Faber!"
+}

@@ -1,0 +1,1345 @@
+{
+  "$schema": "https://tree-sitter.github.io/tree-sitter/assets/schemas/grammar.schema.json",
+  "name": "faber",
+  "rules": {
+    "program": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "frontmatter"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        },
+        {
+          "type": "REPEAT",
+          "content": {
+            "type": "SYMBOL",
+            "name": "_token"
+          }
+        }
+      ]
+    },
+    "frontmatter": {
+      "type": "TOKEN",
+      "content": {
+        "type": "SEQ",
+        "members": [
+          {
+            "type": "STRING",
+            "value": "+++"
+          },
+          {
+            "type": "PATTERN",
+            "value": "[^+]*?"
+          },
+          {
+            "type": "STRING",
+            "value": "+++"
+          },
+          {
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "PATTERN",
+                "value": "\\r?\\n"
+              },
+              {
+                "type": "BLANK"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "_token": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "line_comment"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "faber_newline"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "keyword_control"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "keyword_declaration"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "keyword_other"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "builtin_type"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "boolean"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "guillemet_string"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "octeti_string"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "backtick_string"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "ascii_string"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "string"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "number"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "identifier"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "operator"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "punctuation"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "hash"
+        }
+      ]
+    },
+    "keyword_control": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "ad"
+        },
+        {
+          "type": "STRING",
+          "value": "adfirma"
+        },
+        {
+          "type": "STRING",
+          "value": "argumenta"
+        },
+        {
+          "type": "STRING",
+          "value": "cape"
+        },
+        {
+          "type": "STRING",
+          "value": "casu"
+        },
+        {
+          "type": "STRING",
+          "value": "ceterum"
+        },
+        {
+          "type": "STRING",
+          "value": "cura"
+        },
+        {
+          "type": "STRING",
+          "value": "custodi"
+        },
+        {
+          "type": "STRING",
+          "value": "demum"
+        },
+        {
+          "type": "STRING",
+          "value": "discerne"
+        },
+        {
+          "type": "STRING",
+          "value": "dum"
+        },
+        {
+          "type": "STRING",
+          "value": "elige"
+        },
+        {
+          "type": "STRING",
+          "value": "emitte"
+        },
+        {
+          "type": "STRING",
+          "value": "ergo"
+        },
+        {
+          "type": "STRING",
+          "value": "fac"
+        },
+        {
+          "type": "STRING",
+          "value": "iace"
+        },
+        {
+          "type": "STRING",
+          "value": "incipiet"
+        },
+        {
+          "type": "STRING",
+          "value": "incipit"
+        },
+        {
+          "type": "STRING",
+          "value": "itera"
+        },
+        {
+          "type": "STRING",
+          "value": "mori"
+        },
+        {
+          "type": "STRING",
+          "value": "perge"
+        },
+        {
+          "type": "STRING",
+          "value": "redde"
+        },
+        {
+          "type": "STRING",
+          "value": "rumpe"
+        },
+        {
+          "type": "STRING",
+          "value": "secus"
+        },
+        {
+          "type": "STRING",
+          "value": "si"
+        },
+        {
+          "type": "STRING",
+          "value": "sic"
+        },
+        {
+          "type": "STRING",
+          "value": "sin"
+        },
+        {
+          "type": "STRING",
+          "value": "tacet"
+        },
+        {
+          "type": "STRING",
+          "value": "tempta"
+        }
+      ]
+    },
+    "keyword_declaration": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "abstractus"
+        },
+        {
+          "type": "STRING",
+          "value": "ceteri"
+        },
+        {
+          "type": "STRING",
+          "value": "curata"
+        },
+        {
+          "type": "STRING",
+          "value": "discretio"
+        },
+        {
+          "type": "STRING",
+          "value": "errata"
+        },
+        {
+          "type": "STRING",
+          "value": "exitus"
+        },
+        {
+          "type": "STRING",
+          "value": "fixum"
+        },
+        {
+          "type": "STRING",
+          "value": "functio"
+        },
+        {
+          "type": "STRING",
+          "value": "generis"
+        },
+        {
+          "type": "STRING",
+          "value": "genus"
+        },
+        {
+          "type": "STRING",
+          "value": "iacit"
+        },
+        {
+          "type": "STRING",
+          "value": "immutata"
+        },
+        {
+          "type": "STRING",
+          "value": "implendum"
+        },
+        {
+          "type": "STRING",
+          "value": "importa"
+        },
+        {
+          "type": "STRING",
+          "value": "magnitudo"
+        },
+        {
+          "type": "STRING",
+          "value": "nexum"
+        },
+        {
+          "type": "STRING",
+          "value": "optiones"
+        },
+        {
+          "type": "STRING",
+          "value": "ordo"
+        },
+        {
+          "type": "STRING",
+          "value": "prae"
+        },
+        {
+          "type": "STRING",
+          "value": "privata"
+        },
+        {
+          "type": "STRING",
+          "value": "protecta"
+        },
+        {
+          "type": "STRING",
+          "value": "publica"
+        },
+        {
+          "type": "STRING",
+          "value": "sit"
+        },
+        {
+          "type": "STRING",
+          "value": "sponte"
+        },
+        {
+          "type": "STRING",
+          "value": "typus"
+        },
+        {
+          "type": "STRING",
+          "value": "varia"
+        }
+      ]
+    },
+    "keyword_other": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "ante"
+        },
+        {
+          "type": "STRING",
+          "value": "aut"
+        },
+        {
+          "type": "STRING",
+          "value": "cede"
+        },
+        {
+          "type": "STRING",
+          "value": "clausura"
+        },
+        {
+          "type": "STRING",
+          "value": "de"
+        },
+        {
+          "type": "STRING",
+          "value": "ego"
+        },
+        {
+          "type": "STRING",
+          "value": "est"
+        },
+        {
+          "type": "STRING",
+          "value": "et"
+        },
+        {
+          "type": "STRING",
+          "value": "ex"
+        },
+        {
+          "type": "STRING",
+          "value": "finge"
+        },
+        {
+          "type": "STRING",
+          "value": "fragilis"
+        },
+        {
+          "type": "STRING",
+          "value": "futurum"
+        },
+        {
+          "type": "STRING",
+          "value": "implet"
+        },
+        {
+          "type": "STRING",
+          "value": "in"
+        },
+        {
+          "type": "STRING",
+          "value": "inter"
+        },
+        {
+          "type": "STRING",
+          "value": "intra"
+        },
+        {
+          "type": "STRING",
+          "value": "lege"
+        },
+        {
+          "type": "STRING",
+          "value": "lineam"
+        },
+        {
+          "type": "STRING",
+          "value": "metior"
+        },
+        {
+          "type": "STRING",
+          "value": "modulus"
+        },
+        {
+          "type": "STRING",
+          "value": "mone"
+        },
+        {
+          "type": "STRING",
+          "value": "negativum"
+        },
+        {
+          "type": "STRING",
+          "value": "non"
+        },
+        {
+          "type": "STRING",
+          "value": "nonnihil"
+        },
+        {
+          "type": "STRING",
+          "value": "nonnulla"
+        },
+        {
+          "type": "STRING",
+          "value": "nota"
+        },
+        {
+          "type": "STRING",
+          "value": "nulla"
+        },
+        {
+          "type": "STRING",
+          "value": "omitte"
+        },
+        {
+          "type": "STRING",
+          "value": "omnia"
+        },
+        {
+          "type": "STRING",
+          "value": "per"
+        },
+        {
+          "type": "STRING",
+          "value": "positivum"
+        },
+        {
+          "type": "STRING",
+          "value": "postpara"
+        },
+        {
+          "type": "STRING",
+          "value": "postparabit"
+        },
+        {
+          "type": "STRING",
+          "value": "praefixum"
+        },
+        {
+          "type": "STRING",
+          "value": "praepara"
+        },
+        {
+          "type": "STRING",
+          "value": "praeparabit"
+        },
+        {
+          "type": "STRING",
+          "value": "pro"
+        },
+        {
+          "type": "STRING",
+          "value": "proba"
+        },
+        {
+          "type": "STRING",
+          "value": "probandum"
+        },
+        {
+          "type": "STRING",
+          "value": "repete"
+        },
+        {
+          "type": "STRING",
+          "value": "requirit"
+        },
+        {
+          "type": "STRING",
+          "value": "scribe"
+        },
+        {
+          "type": "STRING",
+          "value": "scriptum"
+        },
+        {
+          "type": "STRING",
+          "value": "solum"
+        },
+        {
+          "type": "STRING",
+          "value": "solum_in"
+        },
+        {
+          "type": "STRING",
+          "value": "sparge"
+        },
+        {
+          "type": "STRING",
+          "value": "sub"
+        },
+        {
+          "type": "STRING",
+          "value": "tag"
+        },
+        {
+          "type": "STRING",
+          "value": "temporis"
+        },
+        {
+          "type": "STRING",
+          "value": "usque"
+        },
+        {
+          "type": "STRING",
+          "value": "ut"
+        },
+        {
+          "type": "STRING",
+          "value": "vel"
+        },
+        {
+          "type": "STRING",
+          "value": "vide"
+        }
+      ]
+    },
+    "builtin_type": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "ascii"
+        },
+        {
+          "type": "STRING",
+          "value": "bivalens"
+        },
+        {
+          "type": "STRING",
+          "value": "copia"
+        },
+        {
+          "type": "STRING",
+          "value": "cursor"
+        },
+        {
+          "type": "STRING",
+          "value": "f16"
+        },
+        {
+          "type": "STRING",
+          "value": "f32"
+        },
+        {
+          "type": "STRING",
+          "value": "f64"
+        },
+        {
+          "type": "STRING",
+          "value": "fractus"
+        },
+        {
+          "type": "STRING",
+          "value": "i16"
+        },
+        {
+          "type": "STRING",
+          "value": "i32"
+        },
+        {
+          "type": "STRING",
+          "value": "i64"
+        },
+        {
+          "type": "STRING",
+          "value": "i8"
+        },
+        {
+          "type": "STRING",
+          "value": "ignotum"
+        },
+        {
+          "type": "STRING",
+          "value": "instans"
+        },
+        {
+          "type": "STRING",
+          "value": "intervallum"
+        },
+        {
+          "type": "STRING",
+          "value": "json"
+        },
+        {
+          "type": "STRING",
+          "value": "lf16"
+        },
+        {
+          "type": "STRING",
+          "value": "lf32"
+        },
+        {
+          "type": "STRING",
+          "value": "lf64"
+        },
+        {
+          "type": "STRING",
+          "value": "li16"
+        },
+        {
+          "type": "STRING",
+          "value": "li32"
+        },
+        {
+          "type": "STRING",
+          "value": "li64"
+        },
+        {
+          "type": "STRING",
+          "value": "li8"
+        },
+        {
+          "type": "STRING",
+          "value": "lista"
+        },
+        {
+          "type": "STRING",
+          "value": "lu16"
+        },
+        {
+          "type": "STRING",
+          "value": "lu32"
+        },
+        {
+          "type": "STRING",
+          "value": "lu64"
+        },
+        {
+          "type": "STRING",
+          "value": "lu8"
+        },
+        {
+          "type": "STRING",
+          "value": "matrix"
+        },
+        {
+          "type": "STRING",
+          "value": "mf16"
+        },
+        {
+          "type": "STRING",
+          "value": "mf32"
+        },
+        {
+          "type": "STRING",
+          "value": "mf64"
+        },
+        {
+          "type": "STRING",
+          "value": "mi16"
+        },
+        {
+          "type": "STRING",
+          "value": "mi32"
+        },
+        {
+          "type": "STRING",
+          "value": "mi64"
+        },
+        {
+          "type": "STRING",
+          "value": "mi8"
+        },
+        {
+          "type": "STRING",
+          "value": "mu16"
+        },
+        {
+          "type": "STRING",
+          "value": "mu32"
+        },
+        {
+          "type": "STRING",
+          "value": "mu64"
+        },
+        {
+          "type": "STRING",
+          "value": "mu8"
+        },
+        {
+          "type": "STRING",
+          "value": "nihil"
+        },
+        {
+          "type": "STRING",
+          "value": "numerus"
+        },
+        {
+          "type": "STRING",
+          "value": "numquam"
+        },
+        {
+          "type": "STRING",
+          "value": "octet"
+        },
+        {
+          "type": "STRING",
+          "value": "octeti"
+        },
+        {
+          "type": "STRING",
+          "value": "promissum"
+        },
+        {
+          "type": "STRING",
+          "value": "regex"
+        },
+        {
+          "type": "STRING",
+          "value": "series"
+        },
+        {
+          "type": "STRING",
+          "value": "sf16"
+        },
+        {
+          "type": "STRING",
+          "value": "sf32"
+        },
+        {
+          "type": "STRING",
+          "value": "sf64"
+        },
+        {
+          "type": "STRING",
+          "value": "si16"
+        },
+        {
+          "type": "STRING",
+          "value": "si32"
+        },
+        {
+          "type": "STRING",
+          "value": "si64"
+        },
+        {
+          "type": "STRING",
+          "value": "si8"
+        },
+        {
+          "type": "STRING",
+          "value": "sparsa"
+        },
+        {
+          "type": "STRING",
+          "value": "su16"
+        },
+        {
+          "type": "STRING",
+          "value": "su32"
+        },
+        {
+          "type": "STRING",
+          "value": "su64"
+        },
+        {
+          "type": "STRING",
+          "value": "su8"
+        },
+        {
+          "type": "STRING",
+          "value": "tabula"
+        },
+        {
+          "type": "STRING",
+          "value": "tensor"
+        },
+        {
+          "type": "STRING",
+          "value": "textus"
+        },
+        {
+          "type": "STRING",
+          "value": "tf16"
+        },
+        {
+          "type": "STRING",
+          "value": "tf32"
+        },
+        {
+          "type": "STRING",
+          "value": "tf64"
+        },
+        {
+          "type": "STRING",
+          "value": "ti16"
+        },
+        {
+          "type": "STRING",
+          "value": "ti32"
+        },
+        {
+          "type": "STRING",
+          "value": "ti64"
+        },
+        {
+          "type": "STRING",
+          "value": "ti8"
+        },
+        {
+          "type": "STRING",
+          "value": "tu16"
+        },
+        {
+          "type": "STRING",
+          "value": "tu32"
+        },
+        {
+          "type": "STRING",
+          "value": "tu64"
+        },
+        {
+          "type": "STRING",
+          "value": "tu8"
+        },
+        {
+          "type": "STRING",
+          "value": "u16"
+        },
+        {
+          "type": "STRING",
+          "value": "u32"
+        },
+        {
+          "type": "STRING",
+          "value": "u64"
+        },
+        {
+          "type": "STRING",
+          "value": "u8"
+        },
+        {
+          "type": "STRING",
+          "value": "unio"
+        },
+        {
+          "type": "STRING",
+          "value": "vacua"
+        },
+        {
+          "type": "STRING",
+          "value": "vacuum"
+        },
+        {
+          "type": "STRING",
+          "value": "valor"
+        },
+        {
+          "type": "STRING",
+          "value": "vector"
+        },
+        {
+          "type": "STRING",
+          "value": "vf16"
+        },
+        {
+          "type": "STRING",
+          "value": "vf32"
+        },
+        {
+          "type": "STRING",
+          "value": "vf64"
+        },
+        {
+          "type": "STRING",
+          "value": "vi16"
+        },
+        {
+          "type": "STRING",
+          "value": "vi32"
+        },
+        {
+          "type": "STRING",
+          "value": "vi64"
+        },
+        {
+          "type": "STRING",
+          "value": "vi8"
+        },
+        {
+          "type": "STRING",
+          "value": "vu16"
+        },
+        {
+          "type": "STRING",
+          "value": "vu32"
+        },
+        {
+          "type": "STRING",
+          "value": "vu64"
+        },
+        {
+          "type": "STRING",
+          "value": "vu8"
+        }
+      ]
+    },
+    "boolean": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "falsum"
+        },
+        {
+          "type": "STRING",
+          "value": "verum"
+        }
+      ]
+    },
+    "guillemet_string": {
+      "type": "TOKEN",
+      "content": {
+        "type": "SEQ",
+        "members": [
+          {
+            "type": "STRING",
+            "value": "«"
+          },
+          {
+            "type": "PATTERN",
+            "value": "[^»]*"
+          },
+          {
+            "type": "STRING",
+            "value": "»"
+          }
+        ]
+      }
+    },
+    "octeti_string": {
+      "type": "TOKEN",
+      "content": {
+        "type": "SEQ",
+        "members": [
+          {
+            "type": "STRING",
+            "value": "|"
+          },
+          {
+            "type": "PATTERN",
+            "value": "[^|]*"
+          },
+          {
+            "type": "STRING",
+            "value": "|"
+          }
+        ]
+      }
+    },
+    "backtick_string": {
+      "type": "TOKEN",
+      "content": {
+        "type": "SEQ",
+        "members": [
+          {
+            "type": "STRING",
+            "value": "`"
+          },
+          {
+            "type": "PATTERN",
+            "value": "[^`]*"
+          },
+          {
+            "type": "STRING",
+            "value": "`"
+          }
+        ]
+      }
+    },
+    "ascii_string": {
+      "type": "TOKEN",
+      "content": {
+        "type": "SEQ",
+        "members": [
+          {
+            "type": "STRING",
+            "value": "'"
+          },
+          {
+            "type": "PATTERN",
+            "value": "([^'\\\\\\n]|\\\\.)*"
+          },
+          {
+            "type": "STRING",
+            "value": "'"
+          }
+        ]
+      }
+    },
+    "string": {
+      "type": "TOKEN",
+      "content": {
+        "type": "SEQ",
+        "members": [
+          {
+            "type": "STRING",
+            "value": "\""
+          },
+          {
+            "type": "PATTERN",
+            "value": "([^\"\\\\\\n]|\\\\.)*"
+          },
+          {
+            "type": "STRING",
+            "value": "\""
+          }
+        ]
+      }
+    },
+    "number": {
+      "type": "TOKEN",
+      "content": {
+        "type": "CHOICE",
+        "members": [
+          {
+            "type": "PATTERN",
+            "value": "0[xX][0-9A-Fa-f_]+"
+          },
+          {
+            "type": "PATTERN",
+            "value": "0[bB][01_]+"
+          },
+          {
+            "type": "PATTERN",
+            "value": "0[oO][0-7_]+"
+          },
+          {
+            "type": "PATTERN",
+            "value": "\\d[\\d_]*(\\.\\d[\\d_]*)?([eE][+-]?\\d+)?"
+          }
+        ]
+      }
+    },
+    "identifier": {
+      "type": "PATTERN",
+      "value": "[A-Za-z_][A-Za-z0-9_]*"
+    },
+    "operator": {
+      "type": "TOKEN",
+      "content": {
+        "type": "CHOICE",
+        "members": [
+          {
+            "type": "STRING",
+            "value": "!("
+          },
+          {
+            "type": "STRING",
+            "value": "!."
+          },
+          {
+            "type": "STRING",
+            "value": "!["
+          },
+          {
+            "type": "STRING",
+            "value": "?("
+          },
+          {
+            "type": "STRING",
+            "value": "?."
+          },
+          {
+            "type": "STRING",
+            "value": "?["
+          },
+          {
+            "type": "STRING",
+            "value": "!"
+          },
+          {
+            "type": "STRING",
+            "value": "%"
+          },
+          {
+            "type": "STRING",
+            "value": "*"
+          },
+          {
+            "type": "STRING",
+            "value": "+"
+          },
+          {
+            "type": "STRING",
+            "value": "-"
+          },
+          {
+            "type": "STRING",
+            "value": "."
+          },
+          {
+            "type": "STRING",
+            "value": "/"
+          },
+          {
+            "type": "STRING",
+            "value": "<"
+          },
+          {
+            "type": "STRING",
+            "value": "="
+          },
+          {
+            "type": "STRING",
+            "value": ">"
+          },
+          {
+            "type": "STRING",
+            "value": "?"
+          },
+          {
+            "type": "STRING",
+            "value": "@"
+          },
+          {
+            "type": "STRING",
+            "value": "¬"
+          },
+          {
+            "type": "STRING",
+            "value": "‥"
+          },
+          {
+            "type": "STRING",
+            "value": "…"
+          },
+          {
+            "type": "STRING",
+            "value": "←"
+          },
+          {
+            "type": "STRING",
+            "value": "→"
+          },
+          {
+            "type": "STRING",
+            "value": "↦"
+          },
+          {
+            "type": "STRING",
+            "value": "⇐"
+          },
+          {
+            "type": "STRING",
+            "value": "⇒"
+          },
+          {
+            "type": "STRING",
+            "value": "⇥"
+          },
+          {
+            "type": "STRING",
+            "value": "∧"
+          },
+          {
+            "type": "STRING",
+            "value": "∨"
+          },
+          {
+            "type": "STRING",
+            "value": "∪"
+          },
+          {
+            "type": "STRING",
+            "value": "∴"
+          },
+          {
+            "type": "STRING",
+            "value": "∷"
+          },
+          {
+            "type": "STRING",
+            "value": "≈"
+          },
+          {
+            "type": "STRING",
+            "value": "≉"
+          },
+          {
+            "type": "STRING",
+            "value": "≠"
+          },
+          {
+            "type": "STRING",
+            "value": "≡"
+          },
+          {
+            "type": "STRING",
+            "value": "≤"
+          },
+          {
+            "type": "STRING",
+            "value": "≥"
+          },
+          {
+            "type": "STRING",
+            "value": "⊕"
+          },
+          {
+            "type": "STRING",
+            "value": "⊖"
+          },
+          {
+            "type": "STRING",
+            "value": "⊜"
+          },
+          {
+            "type": "STRING",
+            "value": "⊻"
+          }
+        ]
+      }
+    },
+    "punctuation": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "("
+        },
+        {
+          "type": "STRING",
+          "value": ")"
+        },
+        {
+          "type": "STRING",
+          "value": "{"
+        },
+        {
+          "type": "STRING",
+          "value": "}"
+        },
+        {
+          "type": "STRING",
+          "value": "["
+        },
+        {
+          "type": "STRING",
+          "value": "]"
+        },
+        {
+          "type": "STRING",
+          "value": ","
+        },
+        {
+          "type": "STRING",
+          "value": ":"
+        },
+        {
+          "type": "STRING",
+          "value": ";"
+        }
+      ]
+    },
+    "hash": {
+      "type": "STRING",
+      "value": "#"
+    }
+  },
+  "extras": [
+    {
+      "type": "PATTERN",
+      "value": "[ \\t]+"
+    }
+  ],
+  "conflicts": [],
+  "precedences": [],
+  "externals": [
+    {
+      "type": "SYMBOL",
+      "name": "line_comment"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "faber_newline"
+    }
+  ],
+  "inline": [],
+  "supertypes": []
+}

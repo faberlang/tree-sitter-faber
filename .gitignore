@@ -1,0 +1,4 @@
+node_modules/
+grammars/
+*.wasm
+.DS_Store
