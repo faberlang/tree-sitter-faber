@@ -1,0 +1,51 @@
++++
+term = "corpus-derived-tree-sitter-smoke"
+kind = "fixture"
+category = "parser-highlight-contract"
+summary = "Stable snippets derived from examples/corpus default-gate regressions."
++++
+
+# Derived from examples/corpus/abstractus/abstractus.fab.
+abstractus genus Figura {
+    textus nomen
+
+    functio titulus() → textus {
+        redde "§"(ego.nomen)
+    }
+}
+
+genus Circulus {
+    textus nomen
+    numerus radius = 1
+
+    functio area() → numerus {
+        redde ego.radius * ego.radius
+    }
+}
+
+# Derived from examples/corpus/annotation-sugar/cli-braced.fab.
+@ cli { nomen = "corpus-derived-smoke" }
+@ optio {
+    binding = verbose,
+    brevis = "v",
+    longum = "verbose",
+    typus = bivalens,
+    descriptio = "Verbose mode",
+}
+incipit argumenta args {
+}
+
+# Derived from examples/corpus/adfirma/adfirma.fab.
+incipit {
+    fixum _ x ← 10
+
+    # Indented comments must remain line comments.
+    adfirma x > 0
+    adfirma x ≡ 10, "x decem esse debet"
+
+    fixum _ nomen ← "Marcus"
+    adfirma nomen ≠ "", "nomen vacuum non sit"
+
+    fixum _ viget ← verum
+    adfirma viget ≡ verum, "vigere debet"
+}

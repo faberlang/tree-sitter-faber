@@ -71,7 +71,7 @@ Regenerate from Radix after lexer changes:
 
 ```bash
 ./scripta/regenerate          # needs ../radix or RADIX_ROOT=...
-python3 scripta/check_highlight_contract.py
+npm test
 ```
 
 Override the Radix path: `RADIX_ROOT=/path/to/radix ./scripta/regenerate`
@@ -192,12 +192,20 @@ cargo build -p radix --bin radix
 Then from this repo:
 
 ```bash
-python3 scripta/check_highlight_contract.py
-python3 scripta/check_highlight_contract.py --corpus --limit 25
+npm test
+npm run test:corpus-derived
+npm run audit:corpus
 ```
 
 Compares normalized Radix `lex` token-kind sequences with Tree-sitter leaves on
-fixtures (and optionally corpus files).
+fixtures. The default `npm test` path includes `fixtures/corpus-derived.fab`, a
+stable in-repo regression fixture distilled from `examples/corpus` snippets that
+should block releases when parser/highlight drift returns.
+
+`npm run test:corpus-derived` isolates that fixture when narrowing a regression.
+`npm run audit:corpus` runs the first sorted corpus sample from `../examples/corpus`
+or `FABER_CORPUS_ROOT`; it is broader optional validation before expanding the
+default gate.
 
 ---
 
