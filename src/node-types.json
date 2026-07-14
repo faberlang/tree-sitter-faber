@@ -215,6 +215,10 @@
           "named": true
         },
         {
+          "type": "faber_newline",
+          "named": true
+        },
+        {
           "type": "lbrace",
           "named": true
         },

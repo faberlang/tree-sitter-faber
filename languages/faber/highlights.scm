@@ -21,8 +21,22 @@
 (annotation_modifier) @property
 
 (annotation_field
-  (annotation_modifier) @property
-  (string) @string)
+  key: [(annotation_modifier) (identifier)] @property)
+
+(annotation_field
+  value: [(string) (ascii_string) (backtick_string) (guillemet_string) (octeti_string)] @string)
+
+(annotation_field
+  value: (identifier) @variable)
+
+(annotation_field
+  value: (annotation_value_type) @type.builtin)
+
+(annotation_field
+  value: (boolean) @boolean)
+
+(annotation_field
+  value: (number) @number)
 
 (annotation_arguments
   (annotation_modifier) @property

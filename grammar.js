@@ -171,11 +171,12 @@ module.exports = grammar({
 
         braced_annotation: ($) => seq(
             $.lbrace,
+            repeat(choice($.comma_sign, $.faber_newline)),
             optional(
                 seq(
                     $.annotation_field,
-                    repeat(seq($.comma_sign, $.annotation_field)),
-                    optional($.comma_sign),
+                    repeat(seq(repeat1(choice($.comma_sign, $.faber_newline)), $.annotation_field)),
+                    repeat(choice($.comma_sign, $.faber_newline)),
                 ),
             ),
             $.rbrace,

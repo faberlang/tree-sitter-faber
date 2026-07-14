@@ -601,6 +601,22 @@
           "name": "lbrace"
         },
         {
+          "type": "REPEAT",
+          "content": {
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "SYMBOL",
+                "name": "comma_sign"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "faber_newline"
+              }
+            ]
+          }
+        },
+        {
           "type": "CHOICE",
           "members": [
             {
@@ -616,8 +632,20 @@
                     "type": "SEQ",
                     "members": [
                       {
-                        "type": "SYMBOL",
-                        "name": "comma_sign"
+                        "type": "REPEAT1",
+                        "content": {
+                          "type": "CHOICE",
+                          "members": [
+                            {
+                              "type": "SYMBOL",
+                              "name": "comma_sign"
+                            },
+                            {
+                              "type": "SYMBOL",
+                              "name": "faber_newline"
+                            }
+                          ]
+                        }
                       },
                       {
                         "type": "SYMBOL",
@@ -627,16 +655,20 @@
                   }
                 },
                 {
-                  "type": "CHOICE",
-                  "members": [
-                    {
-                      "type": "SYMBOL",
-                      "name": "comma_sign"
-                    },
-                    {
-                      "type": "BLANK"
-                    }
-                  ]
+                  "type": "REPEAT",
+                  "content": {
+                    "type": "CHOICE",
+                    "members": [
+                      {
+                        "type": "SYMBOL",
+                        "name": "comma_sign"
+                      },
+                      {
+                        "type": "SYMBOL",
+                        "name": "faber_newline"
+                      }
+                    ]
+                  }
                 }
               ]
             },

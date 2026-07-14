@@ -126,6 +126,10 @@ def slice_bytes(source: str, start: int, end: int) -> str:
     return source.encode("utf-8")[start:end].decode("utf-8")
 
 
+def char_to_byte(source: str, index: int) -> int:
+    return len(source[:index].encode("utf-8"))
+
+
 def radix_root(explicit: Path | None) -> Path:
     if explicit is not None:
         return explicit.resolve()
@@ -244,6 +248,47 @@ def run_tree_sitter_leaves(
     temp_dir: Path | None = None,
     tree_sitter_cli: tuple[str, ...] = TREE_SITTER_CLI,
 ) -> list[Leaf]:
+    root = run_tree_sitter_xml(
+        repo_root,
+        source,
+        temp_dir=temp_dir,
+        tree_sitter_cli=tree_sitter_cli,
+    )
+    leaves: list[Leaf] = []
+    skip = {
+        "faber_newline",
+        "program",
+        "frontmatter",
+        "annotation",
+        "braced_annotation",
+        "annotation_field",
+        "annotation_arguments",
+        "annotation_name",
+    }
+
+    for element in root.iter():
+        kind = element.tag
+        if kind in skip:
+            continue
+        if "srow" not in element.attrib:
+            continue
+        start = point_to_byte(source, int(element.attrib["srow"]), int(element.attrib["scol"]))
+        end = point_to_byte(source, int(element.attrib["erow"]), int(element.attrib["ecol"]))
+        if end <= start:
+            continue
+        leaves.append(Leaf(start, end, kind))
+
+    leaves.sort(key=lambda leaf: (leaf.start, leaf.end, leaf.kind))
+    return leaves
+
+
+def run_tree_sitter_xml(
+    repo_root: Path,
+    source: str,
+    *,
+    temp_dir: Path | None = None,
+    tree_sitter_cli: tuple[str, ...] = TREE_SITTER_CLI,
+) -> ET.Element:
     with tempfile.NamedTemporaryFile(
         "w",
         suffix=".fab",
@@ -266,35 +311,17 @@ def run_tree_sitter_leaves(
         if "<?xml" not in xml_text:
             raise RuntimeError("tree-sitter XML output missing")
 
-        root = ET.fromstring(xml_text[xml_text.index("<?xml") :])
-        leaves: list[Leaf] = []
-        skip = {
-            "faber_newline",
-            "program",
-            "frontmatter",
-            "annotation",
-            "braced_annotation",
-            "annotation_field",
-            "annotation_arguments",
-            "annotation_name",
-        }
-
-        for element in root.iter():
-            kind = element.tag
-            if kind in skip:
-                continue
-            if "srow" not in element.attrib:
-                continue
-            start = point_to_byte(source, int(element.attrib["srow"]), int(element.attrib["scol"]))
-            end = point_to_byte(source, int(element.attrib["erow"]), int(element.attrib["ecol"]))
-            if end <= start:
-                continue
-            leaves.append(Leaf(start, end, kind))
-
-        leaves.sort(key=lambda leaf: (leaf.start, leaf.end, leaf.kind))
-        return leaves
+        return ET.fromstring(xml_text[xml_text.index("<?xml") :])
     finally:
         temp_path.unlink(missing_ok=True)
+
+
+def element_start(source: str, element: ET.Element) -> int:
+    return point_to_byte(source, int(element.attrib["srow"]), int(element.attrib["scol"]))
+
+
+def element_end(source: str, element: ET.Element) -> int:
+    return point_to_byte(source, int(element.attrib["erow"]), int(element.attrib["ecol"]))
 
 
 def summarize_process_output(stdout: str, stderr: str) -> str:
@@ -365,6 +392,8 @@ def normalize_compare_kind(kind: str, text: str | None = None) -> str:
         return "string"
     if kind == "known_annotation_name" and text in VISIBILITY_ANNOTATION_NAMES:
         return "keyword"
+    if kind in {"annotation_modifier", "identifier"} and text == "typus":
+        return "keyword"
     if kind in {
         "identifier",
         "builtin_type",
@@ -398,6 +427,57 @@ def compare_leaves(path: Path, source: str, radix_leaves: list[Leaf], ts_leaves:
             f"radix={radix_kinds[max(0, mismatch_at - 2) : mismatch_at + 3]} "
             f"tree-sitter={ts_kinds[max(0, mismatch_at - 2) : mismatch_at + 3]}"
         )
+    return issues
+
+
+def multiline_braced_annotation_ranges(source: str) -> list[tuple[int, int]]:
+    ranges: list[tuple[int, int]] = []
+    pattern = re.compile(r"@\s+[A-Za-z_][A-Za-z0-9_]*\s*\{", re.MULTILINE)
+    for match in pattern.finditer(source):
+        depth = 0
+        for index in range(match.end() - 1, len(source)):
+            char = source[index]
+            if char == "{":
+                depth += 1
+            elif char == "}":
+                depth -= 1
+                if depth == 0:
+                    end = index + 1
+                    if "\n" in source[match.start() : end]:
+                        ranges.append((match.start(), end))
+                    break
+    return ranges
+
+
+def check_structural_annotation_contract(path: Path, source: str, root: ET.Element) -> list[str]:
+    issues: list[str] = []
+    expected_ranges = multiline_braced_annotation_ranges(source)
+    if not expected_ranges:
+        return issues
+
+    braced_nodes = [element for element in root.iter("braced_annotation")]
+    for start, end in expected_ranges:
+        snippet = source[start:end].splitlines()[0].strip()
+        brace_start = source.index("{", start, end)
+        brace_start_byte = char_to_byte(source, brace_start)
+        end_byte = char_to_byte(source, end)
+        containing = [
+            element
+            for element in braced_nodes
+            if element_start(source, element) <= brace_start_byte
+            and element_end(source, element) >= end_byte
+        ]
+        if not containing:
+            issues.append(
+                f"{path}: multiline braced annotation {snippet!r} did not parse as braced_annotation"
+            )
+            continue
+        fields = list(containing[0].iter("annotation_field"))
+        expected_field_count = source[start:end].count("=")
+        if len(fields) < expected_field_count:
+            issues.append(
+                f"{path}: multiline braced annotation {snippet!r} parsed {len(fields)} annotation_field node(s), expected at least {expected_field_count}"
+            )
     return issues
 
 
@@ -643,10 +723,12 @@ def main() -> int:
         try:
             radix_leaves = run_radix_lex(radix_bin, body)
             ts_leaves = run_tree_sitter_leaves(REPO_ROOT, body)
+            ts_root = run_tree_sitter_xml(REPO_ROOT, body)
         except (subprocess.CalledProcessError, RuntimeError) as err:
             issues.append(f"{path}: tree-sitter/radix invocation failed: {err}")
             continue
         issues.extend(compare_leaves(path, body, radix_leaves, ts_leaves))
+        issues.extend(check_structural_annotation_contract(path, body, ts_root))
     issues.extend(check_highlight_queries(files))
     issues.extend(check_invalid_highlight_query_probe(files))
     issues.extend(check_textmate_annotation_scopes())
