@@ -69,7 +69,7 @@ def build_textmate_grammar(vocab: dict[str, list[str]]) -> dict:
         },
         "annotation": {
             "name": "meta.annotation.faber",
-            "match": r"@[A-Za-z_][A-Za-z0-9_]*(?:\s+[^\n]*)?",
+            "match": r"@\s*[A-Za-z_][A-Za-z0-9_]*(?:\s+[^\n]*)?",
         },
         "strings": {
             "patterns": [

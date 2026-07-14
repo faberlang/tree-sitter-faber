@@ -6,6 +6,7 @@
       "scope": "source.faber",
       "path": ".",
       "file-types": ["fab"],
+      "highlights": "queries/highlights.scm",
       "external-files": ["src/scanner.c"]
     }
   ],

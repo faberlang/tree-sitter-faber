@@ -3,7 +3,8 @@
 Tree-sitter grammar and Zed extension packaging for [Faber](https://github.com/faberlang).
 
 This repository is a **clean-break** editor surface. It provides syntax highlighting
-only — not structural parsing, diagnostics, or an LSP.
+only — not structural parsing, diagnostics, an LSP, rendering, WebGPU, or runtime
+support.
 
 Highlight vocabulary is generated from the Radix compiler (`keywords.rs`, builtin
 types, annotation spellings). Radix defines what Faber *is*; this repo defines how
