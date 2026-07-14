@@ -44,7 +44,36 @@
     },
     "annotation": {
       "name": "meta.annotation.faber",
-      "match": "@\\s*[A-Za-z_][A-Za-z0-9_]*(?:\\s+[^\\n]*)?"
+      "begin": "@",
+      "beginCaptures": {
+        "0": {
+          "name": "keyword.operator.faber"
+        }
+      },
+      "end": "$",
+      "patterns": [
+        {
+          "include": "#strings"
+        },
+        {
+          "include": "#annotation-name"
+        },
+        {
+          "include": "#annotation-modifier"
+        },
+        {
+          "include": "#numbers"
+        },
+        {
+          "include": "#keywords"
+        },
+        {
+          "include": "#operators"
+        },
+        {
+          "include": "#identifiers"
+        }
+      ]
     },
     "strings": {
       "patterns": [

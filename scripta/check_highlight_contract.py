@@ -319,6 +319,123 @@ def compare_leaves(path: Path, source: str, radix_leaves: list[Leaf], ts_leaves:
     return issues
 
 
+def textmate_annotation_tokens() -> tuple[list[tuple[str, str, tuple[str, ...]]], list[str]]:
+    grammar_path = REPO_ROOT / "grammars" / "fab.tmLanguage.json"
+    fixture_path = REPO_ROOT / "fixtures" / "annotations.fab"
+    grammar = json.loads(grammar_path.read_text(encoding="utf-8"))
+    repository = grammar["repository"]
+    annotation = repository["annotation"]
+    issues: list[str] = []
+
+    if "match" in annotation:
+        issues.append("TextMate annotation rule still uses whole-line match")
+    if "begin" not in annotation or "end" not in annotation:
+        issues.append("TextMate annotation rule must use begin/end")
+    if issues:
+        return [], issues
+
+    tokens: list[tuple[str, str, tuple[str, ...]]] = []
+    for line in fixture_path.read_text(encoding="utf-8").splitlines():
+        if not line.lstrip().startswith("@"):
+            continue
+        at_index = line.index("@")
+        scopes = ("source.faber", annotation["name"])
+        if "beginCaptures" in annotation:
+            capture = annotation["beginCaptures"].get("0", {})
+            capture_name = capture.get("name")
+            if capture_name:
+                tokens.append((line, "@", scopes + (capture_name,)))
+        tokens.extend(tokenize_textmate_patterns(repository, annotation.get("patterns", []), line, at_index + 1, scopes))
+    return tokens, issues
+
+
+def tokenize_textmate_patterns(
+    repository: dict,
+    patterns: list[dict],
+    line: str,
+    start: int,
+    scopes: tuple[str, ...],
+) -> list[tuple[str, str, tuple[str, ...]]]:
+    tokens: list[tuple[str, str, tuple[str, ...]]] = []
+    pos = start
+    while pos < len(line):
+        match = first_textmate_match(repository, patterns, line, pos, scopes)
+        if match is None:
+            pos += 1
+            continue
+        text, token_scopes, end = match
+        tokens.append((line, text, token_scopes))
+        pos = max(end, pos + 1)
+    return tokens
+
+
+def first_textmate_match(
+    repository: dict,
+    patterns: list[dict],
+    line: str,
+    pos: int,
+    scopes: tuple[str, ...],
+) -> tuple[str, tuple[str, ...], int] | None:
+    for pattern in patterns:
+        include = pattern.get("include")
+        if include:
+            if not include.startswith("#"):
+                continue
+            rule = repository[include[1:]]
+            nested = rule.get("patterns", [rule])
+            match = first_textmate_match(repository, nested, line, pos, scopes)
+            if match is not None:
+                return match
+            continue
+
+        if "match" in pattern:
+            compiled = re.compile(pattern["match"])
+            found = compiled.match(line, pos)
+            if found is None or found.end() <= pos:
+                continue
+            return found.group(0), scopes + (pattern["name"],), found.end()
+
+        if "begin" in pattern and "end" in pattern:
+            begin = re.compile(pattern["begin"])
+            found = begin.match(line, pos)
+            if found is None:
+                continue
+            end = re.compile(pattern["end"]).search(line, found.end())
+            token_end = end.end() if end is not None else len(line)
+            return line[pos:token_end], scopes + (pattern["name"],), token_end
+    return None
+
+
+def check_textmate_annotation_scopes() -> list[str]:
+    tokens, issues = textmate_annotation_tokens()
+    if issues:
+        return issues
+
+    expected = [
+        ("json", "entity.other.attribute-name.faber"),
+        ("privata", "entity.other.attribute-name.faber"),
+        ("cli", "entity.other.attribute-name.faber"),
+        ("versio", "entity.other.attribute-name.faber"),
+        ("optio", "entity.other.attribute-name.faber"),
+        ("nomen", "variable.parameter.faber"),
+        ("longum", "variable.parameter.faber"),
+        ("descriptio", "variable.parameter.faber"),
+        ('"wire"', "string.quoted.double.faber"),
+        ('"demo"', "string.quoted.double.faber"),
+        ('"0.1.0"', "string.quoted.double.faber"),
+        ('"Verbose output"', "string.quoted.double.faber"),
+    ]
+    for text, scope in expected:
+        if not any(
+            token_text == text
+            and "meta.annotation.faber" in token_scopes
+            and scope in token_scopes
+            for _, token_text, token_scopes in tokens
+        ):
+            issues.append(f"TextMate annotation scope missing for {text!r}: expected {scope}")
+    return issues
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--radix-root", type=Path, default=None)
@@ -357,6 +474,7 @@ def main() -> int:
             issues.append(f"{path}: tree-sitter/radix invocation failed: {err}")
             continue
         issues.extend(compare_leaves(path, body, radix_leaves, ts_leaves))
+    issues.extend(check_textmate_annotation_scopes())
 
     if issues:
         print("highlight contract failures:")
@@ -364,7 +482,7 @@ def main() -> int:
             print(f"  - {issue}")
         return 1
 
-    print(f"highlight contract ok ({len(files)} file(s))")
+    print(f"highlight contract ok ({len(files)} file(s); TextMate annotations ok)")
     return 0
 
 
