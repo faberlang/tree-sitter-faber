@@ -211,6 +211,10 @@
           "named": true
         },
         {
+          "type": "comma_sign",
+          "named": true
+        },
+        {
           "type": "lbrace",
           "named": true
         },
@@ -223,6 +227,11 @@
   },
   {
     "type": "builtin_type",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "comma_sign",
     "named": true,
     "fields": {}
   },
@@ -1243,6 +1252,10 @@
   },
   {
     "type": "versio",
+    "named": false
+  },
+  {
+    "type": "vertex",
     "named": false
   },
   {

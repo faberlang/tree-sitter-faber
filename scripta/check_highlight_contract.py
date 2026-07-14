@@ -16,6 +16,12 @@ from pathlib import Path
 REPO_ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_RADIX_ROOT = REPO_ROOT.parent / "radix"
 DEFAULT_CORPUS_ROOT = REPO_ROOT.parent / "examples" / "corpus"
+TREE_SITTER_CLI = ("npx", "--yes", "tree-sitter-cli@0.24.7")
+HIGHLIGHT_QUERY_PATHS = (
+    REPO_ROOT / "queries" / "highlights.scm",
+    REPO_ROOT / "languages" / "faber" / "highlights.scm",
+)
+INVALID_QUERY_NODE = "definitely_impossible_faber_node"
 
 IGNORE_RADIX_KINDS = {
     "Eof",
@@ -189,7 +195,7 @@ def normalize_radix_kind(raw: str) -> tuple[str, str | None]:
         "Semicolon",
     }:
         return "punctuation", None
-    if base in {"Plus", "Minus", "Star", "Slash", "Percent", "Dot", "Bang", "Question"} or base.startswith(
+    if base in {"Plus", "Minus", "Star", "Slash", "Percent", "Dot", "DotDot", "Bang", "Question"} or base.startswith(
         ("Eq", "Lt", "Gt", "Bang", "Question", "Bitwise", "Post", "Arrow", "Exit", "Assign", "Cup", "Conversio", "Verte", "Approx")
     ):
         return "operator", None
@@ -231,49 +237,125 @@ def run_radix_lex(radix_bin: Path, body: str) -> list[Leaf]:
     return leaves
 
 
-def run_tree_sitter_leaves(repo_root: Path, source: str) -> list[Leaf]:
-    with tempfile.NamedTemporaryFile("w", suffix=".fab", delete=False, encoding="utf-8") as handle:
+def run_tree_sitter_leaves(
+    repo_root: Path,
+    source: str,
+    *,
+    temp_dir: Path | None = None,
+    tree_sitter_cli: tuple[str, ...] = TREE_SITTER_CLI,
+) -> list[Leaf]:
+    with tempfile.NamedTemporaryFile(
+        "w",
+        suffix=".fab",
+        delete=False,
+        dir=temp_dir,
+        encoding="utf-8",
+    ) as handle:
         handle.write(source)
-        temp_path = handle.name
+        temp_path = Path(handle.name)
 
-    proc = subprocess.run(
-        ["npx", "--yes", "tree-sitter-cli@0.24.7", "parse", "-x", temp_path],
-        cwd=repo_root,
+    try:
+        proc = subprocess.run(
+            [*tree_sitter_cli, "parse", "-x", str(temp_path)],
+            cwd=repo_root,
+            check=True,
+            capture_output=True,
+            text=True,
+        )
+        xml_text = proc.stdout
+        if "<?xml" not in xml_text:
+            raise RuntimeError("tree-sitter XML output missing")
+
+        root = ET.fromstring(xml_text[xml_text.index("<?xml") :])
+        leaves: list[Leaf] = []
+        skip = {
+            "faber_newline",
+            "program",
+            "frontmatter",
+            "annotation",
+            "braced_annotation",
+            "annotation_field",
+            "annotation_arguments",
+            "annotation_name",
+        }
+
+        for element in root.iter():
+            kind = element.tag
+            if kind in skip:
+                continue
+            if "srow" not in element.attrib:
+                continue
+            start = point_to_byte(source, int(element.attrib["srow"]), int(element.attrib["scol"]))
+            end = point_to_byte(source, int(element.attrib["erow"]), int(element.attrib["ecol"]))
+            if end <= start:
+                continue
+            leaves.append(Leaf(start, end, kind))
+
+        leaves.sort(key=lambda leaf: (leaf.start, leaf.end, leaf.kind))
+        return leaves
+    finally:
+        temp_path.unlink(missing_ok=True)
+
+
+def summarize_process_output(stdout: str, stderr: str) -> str:
+    output = "\n".join(part.strip() for part in (stdout, stderr) if part.strip())
+    if not output:
+        return "no command output"
+    return output[-1200:]
+
+
+def run_highlight_query(query_path: Path, files: list[Path]) -> subprocess.CompletedProcess[str]:
+    return subprocess.run(
+        [*TREE_SITTER_CLI, "query", str(query_path), *[str(path) for path in files]],
+        cwd=REPO_ROOT,
         check=True,
         capture_output=True,
         text=True,
     )
-    xml_text = proc.stdout
-    if "<?xml" not in xml_text:
-        raise RuntimeError("tree-sitter XML output missing")
 
-    root = ET.fromstring(xml_text[xml_text.index("<?xml") :])
-    leaves: list[Leaf] = []
-    skip = {
-        "faber_newline",
-        "program",
-        "frontmatter",
-        "annotation",
-        "braced_annotation",
-        "annotation_field",
-        "annotation_arguments",
-        "annotation_name",
-    }
 
-    for element in root.iter():
-        kind = element.tag
-        if kind in skip:
-            continue
-        if "srow" not in element.attrib:
-            continue
-        start = point_to_byte(source, int(element.attrib["srow"]), int(element.attrib["scol"]))
-        end = point_to_byte(source, int(element.attrib["erow"]), int(element.attrib["ecol"]))
-        if end <= start:
-            continue
-        leaves.append(Leaf(start, end, kind))
+def check_highlight_queries(files: list[Path]) -> list[str]:
+    issues: list[str] = []
+    if not files:
+        return ["no Faber files selected for highlight query validation"]
 
-    leaves.sort(key=lambda leaf: (leaf.start, leaf.end, leaf.kind))
-    return leaves
+    for query_path in HIGHLIGHT_QUERY_PATHS:
+        if not query_path.is_file():
+            issues.append(f"missing highlight query file {query_path.relative_to(REPO_ROOT)}")
+            continue
+        try:
+            run_highlight_query(query_path, files)
+        except subprocess.CalledProcessError as err:
+            detail = summarize_process_output(err.stdout, err.stderr)
+            issues.append(f"{query_path.relative_to(REPO_ROOT)} failed tree-sitter query validation: {detail}")
+    return issues
+
+
+def check_invalid_highlight_query_probe(files: list[Path]) -> list[str]:
+    if not files:
+        return ["no Faber files selected for invalid highlight query probe"]
+
+    with tempfile.NamedTemporaryFile("w", suffix=".scm", delete=False, encoding="utf-8") as handle:
+        handle.write(f"({INVALID_QUERY_NODE}) @error\n")
+        query_path = Path(handle.name)
+
+    try:
+        proc = subprocess.run(
+            [*TREE_SITTER_CLI, "query", str(query_path), str(files[0])],
+            cwd=REPO_ROOT,
+            check=False,
+            capture_output=True,
+            text=True,
+        )
+    finally:
+        query_path.unlink(missing_ok=True)
+
+    output = f"{proc.stdout}\n{proc.stderr}"
+    if proc.returncode == 0:
+        return ["invalid highlight query probe unexpectedly passed"]
+    if f"Invalid node type {INVALID_QUERY_NODE}" not in output:
+        return [f"invalid highlight query probe failed with unexpected diagnostic: {summarize_process_output(proc.stdout, proc.stderr)}"]
+    return []
 
 
 def normalize_compare_kind(kind: str, text: str | None = None) -> str:
@@ -293,7 +375,7 @@ def normalize_compare_kind(kind: str, text: str | None = None) -> str:
         return "type_or_ident"
     if kind in {"hash", "at_sign", "eq_sign"}:
         return "operator"
-    if kind in {"lbrace", "rbrace"}:
+    if kind in {"lbrace", "rbrace", "comma_sign"}:
         return "punctuation"
     return kind
 
@@ -414,6 +496,7 @@ def check_textmate_annotation_scopes() -> list[str]:
     expected = [
         ("@ json", "@", "keyword.operator.faber"),
         ("@ json", "json", "entity.other.attribute-name.faber"),
+        ("@ vertex", "vertex", "entity.other.attribute-name.faber"),
         ("@ privata", "privata", "entity.other.attribute-name.faber"),
         ('    @ json { nomen = "wire" }', "json", "entity.other.attribute-name.faber"),
         ('    @ json { nomen = "wire" }', "nomen", "variable.parameter.faber"),
@@ -457,6 +540,60 @@ def check_textmate_annotation_scopes() -> list[str]:
     return issues
 
 
+def check_vocabulary_contract() -> list[str]:
+    vocab_path = REPO_ROOT / "scripta" / "vocabulary.json"
+    vocab = json.loads(vocab_path.read_text(encoding="utf-8"))
+    issues: list[str] = []
+
+    for word in ("privata", "protecta", "publica"):
+        if word not in vocab["keyword_declaration"]:
+            issues.append(f"vocabulary missing declaration keyword {word!r}")
+        if word not in vocab["annotation_name"]:
+            issues.append(f"vocabulary missing annotation name {word!r}")
+
+    if "nihil" not in vocab["keyword_other"]:
+        issues.append("vocabulary must classify 'nihil' as keyword_other")
+    if "nihil" in vocab["builtin_type"]:
+        issues.append("vocabulary must not classify 'nihil' as builtin_type")
+
+    return issues
+
+
+def check_tree_sitter_temp_cleanup() -> list[str]:
+    source = (REPO_ROOT / "fixtures" / "annotations.fab").read_text(encoding="utf-8")
+    issues: list[str] = []
+
+    with tempfile.TemporaryDirectory(prefix="faber-highlight-temp-") as temp_root:
+        temp_dir = Path(temp_root)
+        run_tree_sitter_leaves(REPO_ROOT, source, temp_dir=temp_dir)
+        leaked = sorted(path.name for path in temp_dir.glob("tmp*.fab"))
+        if leaked:
+            issues.append(f"tree-sitter parse helper leaked temp files on success: {leaked}")
+
+    with tempfile.TemporaryDirectory(prefix="faber-highlight-temp-") as temp_root:
+        temp_dir = Path(temp_root)
+        try:
+            run_tree_sitter_leaves(
+                REPO_ROOT,
+                source,
+                temp_dir=temp_dir,
+                tree_sitter_cli=(
+                    sys.executable,
+                    "-c",
+                    "import sys; sys.exit(7)",
+                ),
+            )
+        except subprocess.CalledProcessError:
+            pass
+        else:
+            issues.append("tree-sitter parse helper failure probe unexpectedly passed")
+        leaked = sorted(path.name for path in temp_dir.glob("tmp*.fab"))
+        if leaked:
+            issues.append(f"tree-sitter parse helper leaked temp files on failure: {leaked}")
+
+    return issues
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--radix-root", type=Path, default=None)
@@ -464,7 +601,22 @@ def main() -> int:
     parser.add_argument("--limit", type=int, default=25, help="max corpus files to check with --corpus")
     parser.add_argument("--corpus", action="store_true", help="check examples/corpus instead of fixtures/")
     parser.add_argument("--file", type=Path, action="append", default=[], help="specific .fab file")
+    parser.add_argument(
+        "--self-test-temp-cleanup",
+        action="store_true",
+        help="verify tree-sitter helper temp .fab files are cleaned on success and failure",
+    )
     args = parser.parse_args()
+
+    if args.self_test_temp_cleanup:
+        issues = check_tree_sitter_temp_cleanup()
+        if issues:
+            print("highlight contract temp cleanup failures:")
+            for issue in issues:
+                print(f"  - {issue}")
+            return 1
+        print("highlight contract temp cleanup ok")
+        return 0
 
     vocab_path = REPO_ROOT / "scripta" / "vocabulary.json"
     if not vocab_path.is_file():
@@ -495,7 +647,10 @@ def main() -> int:
             issues.append(f"{path}: tree-sitter/radix invocation failed: {err}")
             continue
         issues.extend(compare_leaves(path, body, radix_leaves, ts_leaves))
+    issues.extend(check_highlight_queries(files))
+    issues.extend(check_invalid_highlight_query_probe(files))
     issues.extend(check_textmate_annotation_scopes())
+    issues.extend(check_vocabulary_contract())
 
     if issues:
         print("highlight contract failures:")
@@ -503,7 +658,7 @@ def main() -> int:
             print(f"  - {issue}")
         return 1
 
-    print(f"highlight contract ok ({len(files)} file(s); TextMate annotations ok)")
+    print(f"highlight contract ok ({len(files)} file(s); highlight queries and TextMate annotations ok)")
     return 0
 
 

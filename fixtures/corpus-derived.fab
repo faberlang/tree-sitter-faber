@@ -6,6 +6,9 @@ summary = "Stable snippets derived from examples/corpus default-gate regressions
 +++
 
 # Derived from examples/corpus/abstractus/abstractus.fab.
+importa ex "norma:solum" privata solum
+importa ex "norma:json" publica json
+
 abstractus genus Figura {
     textus nomen
 
@@ -33,6 +36,7 @@ genus Circulus {
     descriptio = "Verbose mode",
 }
 incipit argumenta args {
+    fixum _ nothing ← nihil
 }
 
 # Derived from examples/corpus/adfirma/adfirma.fab.

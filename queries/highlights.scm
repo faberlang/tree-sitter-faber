@@ -11,6 +11,7 @@
 
 (at_sign) @operator
 (eq_sign) @operator
+(comma_sign) @punctuation.delimiter
 (lbrace) @punctuation.bracket
 (rbrace) @punctuation.bracket
 

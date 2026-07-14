@@ -91,9 +91,12 @@ EXTRA_ANNOTATION_NAMES = (
     "versio",
     "imperia",
     "json",
+    "vertex",
 )
 
 EXTRA_ANNOTATION_MODIFIERS = ("nomen",)
+
+BUILTIN_TYPE_EXCLUSIONS = {"nihil"}
 
 
 @dataclass(frozen=True)
@@ -174,7 +177,7 @@ def parse_builtin_types(expr_rs: Path) -> list[str]:
             sugars.append(f"{prefix}{marker}")
     sugars.extend(WIDTH_MARKERS)
     extras = ["vacua", "unio", "bivalens"]
-    merged = list(dict.fromkeys([*names, *sugars, *extras]))
+    merged = [name for name in dict.fromkeys([*names, *sugars, *extras]) if name not in BUILTIN_TYPE_EXCLUSIONS]
     return sorted(merged, key=lambda s: (-len(s), s))
 
 
@@ -236,8 +239,6 @@ def load_vocabulary(radix_root_path: Path | None = None) -> dict[str, list[str]]
         if not spec.active:
             continue
         if spec.text in grouped["annotation_modifier"]:
-            continue
-        if spec.text in grouped["annotation_name"]:
             continue
         if spec.text in grouped["builtin_type"]:
             continue

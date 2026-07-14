@@ -33,6 +33,8 @@ module.exports = grammar({
 
         eq_sign: ($) => '=',
 
+        comma_sign: ($) => ',',
+
         annotation: ($) =>
             prec(2, seq(
                 $.at_sign,
@@ -54,6 +56,7 @@ module.exports = grammar({
                 "protecta",
                 "publica",
                 "versio",
+                "vertex",
             ),
 
         annotation_name: ($) =>
@@ -111,7 +114,6 @@ module.exports = grammar({
                 "mu32",
                 "mu64",
                 "mu8",
-                "nihil",
                 "numerus",
                 "numquam",
                 "octet",
@@ -172,8 +174,8 @@ module.exports = grammar({
             optional(
                 seq(
                     $.annotation_field,
-                    repeat(seq(',', $.annotation_field)),
-                    optional(','),
+                    repeat(seq($.comma_sign, $.annotation_field)),
+                    optional($.comma_sign),
                 ),
             ),
             $.rbrace,
@@ -292,6 +294,9 @@ module.exports = grammar({
                 "optiones",
                 "ordo",
                 "prae",
+                "privata",
+                "protecta",
+                "publica",
                 "sit",
                 "sponte",
                 "typus",
@@ -322,6 +327,7 @@ module.exports = grammar({
                 "modulus",
                 "mone",
                 "negativum",
+                "nihil",
                 "non",
                 "nonnihil",
                 "nonnulla",
@@ -397,7 +403,6 @@ module.exports = grammar({
                 "mu32",
                 "mu64",
                 "mu8",
-                "nihil",
                 "numerus",
                 "numquam",
                 "octet",

@@ -50,6 +50,9 @@
     "optiones",
     "ordo",
     "prae",
+    "privata",
+    "protecta",
+    "publica",
     "sit",
     "sponte",
     "typus",
@@ -78,6 +81,7 @@
     "modulus",
     "mone",
     "negativum",
+    "nihil",
     "non",
     "nonnihil",
     "nonnulla",
@@ -155,7 +159,6 @@
     "mu32",
     "mu64",
     "mu8",
-    "nihil",
     "numerus",
     "numquam",
     "octet",
@@ -266,7 +269,8 @@
     "privata",
     "protecta",
     "publica",
-    "versio"
+    "versio",
+    "vertex"
   ],
   "annotation_modifier": [
     "brevis",

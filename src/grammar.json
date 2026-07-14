@@ -83,6 +83,10 @@
       "type": "STRING",
       "value": "="
     },
+    "comma_sign": {
+      "type": "STRING",
+      "value": ","
+    },
     "annotation": {
       "type": "PREC",
       "value": 2,
@@ -175,6 +179,10 @@
         {
           "type": "STRING",
           "value": "versio"
+        },
+        {
+          "type": "STRING",
+          "value": "vertex"
         }
       ]
     },
@@ -370,10 +378,6 @@
         {
           "type": "STRING",
           "value": "mu8"
-        },
-        {
-          "type": "STRING",
-          "value": "nihil"
         },
         {
           "type": "STRING",
@@ -612,8 +616,8 @@
                     "type": "SEQ",
                     "members": [
                       {
-                        "type": "STRING",
-                        "value": ","
+                        "type": "SYMBOL",
+                        "name": "comma_sign"
                       },
                       {
                         "type": "SYMBOL",
@@ -626,8 +630,8 @@
                   "type": "CHOICE",
                   "members": [
                     {
-                      "type": "STRING",
-                      "value": ","
+                      "type": "SYMBOL",
+                      "name": "comma_sign"
                     },
                     {
                       "type": "BLANK"
@@ -1053,6 +1057,18 @@
         },
         {
           "type": "STRING",
+          "value": "privata"
+        },
+        {
+          "type": "STRING",
+          "value": "protecta"
+        },
+        {
+          "type": "STRING",
+          "value": "publica"
+        },
+        {
+          "type": "STRING",
           "value": "sit"
         },
         {
@@ -1159,6 +1175,10 @@
         {
           "type": "STRING",
           "value": "negativum"
+        },
+        {
+          "type": "STRING",
+          "value": "nihil"
         },
         {
           "type": "STRING",
@@ -1448,10 +1468,6 @@
         {
           "type": "STRING",
           "value": "mu8"
-        },
-        {
-          "type": "STRING",
-          "value": "nihil"
         },
         {
           "type": "STRING",
