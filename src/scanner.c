@@ -11,6 +11,12 @@ typedef struct {
 
 static void advance(TSLexer *lexer) { lexer->advance(lexer, false); }
 
+static void skip_horizontal_whitespace(TSLexer *lexer) {
+    while (lexer->lookahead == ' ' || lexer->lookahead == '\t') {
+        advance(lexer);
+    }
+}
+
 static bool scan_newline(TSLexer *lexer, Scanner *scanner) {
     if (lexer->lookahead == '\r') {
         advance(lexer);
@@ -18,6 +24,7 @@ static bool scan_newline(TSLexer *lexer, Scanner *scanner) {
             advance(lexer);
         }
         scanner->line_has_code = false;
+        skip_horizontal_whitespace(lexer);
         lexer->mark_end(lexer);
         lexer->result_symbol = FABER_NEWLINE;
         return true;
@@ -26,6 +33,7 @@ static bool scan_newline(TSLexer *lexer, Scanner *scanner) {
     if (lexer->lookahead == '\n') {
         advance(lexer);
         scanner->line_has_code = false;
+        skip_horizontal_whitespace(lexer);
         lexer->mark_end(lexer);
         lexer->result_symbol = FABER_NEWLINE;
         return true;

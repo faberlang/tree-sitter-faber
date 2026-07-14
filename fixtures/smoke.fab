@@ -1,3 +1,4 @@
 functio salve() → vacuum {
+    # indented block comment
     nota "Salve, Faber!"
 }
