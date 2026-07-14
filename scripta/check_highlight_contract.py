@@ -412,27 +412,48 @@ def check_textmate_annotation_scopes() -> list[str]:
         return issues
 
     expected = [
-        ("json", "entity.other.attribute-name.faber"),
-        ("privata", "entity.other.attribute-name.faber"),
-        ("cli", "entity.other.attribute-name.faber"),
-        ("versio", "entity.other.attribute-name.faber"),
-        ("optio", "entity.other.attribute-name.faber"),
-        ("nomen", "variable.parameter.faber"),
-        ("longum", "variable.parameter.faber"),
-        ("descriptio", "variable.parameter.faber"),
-        ('"wire"', "string.quoted.double.faber"),
-        ('"demo"', "string.quoted.double.faber"),
-        ('"0.1.0"', "string.quoted.double.faber"),
-        ('"Verbose output"', "string.quoted.double.faber"),
+        ("@ json", "@", "keyword.operator.faber"),
+        ("@ json", "json", "entity.other.attribute-name.faber"),
+        ("@ privata", "privata", "entity.other.attribute-name.faber"),
+        ('    @ json { nomen = "wire" }', "json", "entity.other.attribute-name.faber"),
+        ('    @ json { nomen = "wire" }', "nomen", "variable.parameter.faber"),
+        ('    @ json { nomen = "wire" }', '"wire"', "string.quoted.double.faber"),
+        ('@ cli "demo"', "cli", "entity.other.attribute-name.faber"),
+        ('@ cli "demo"', '"demo"', "string.quoted.double.faber"),
+        ('@ versio "0.1.0"', "versio", "entity.other.attribute-name.faber"),
+        ('@ versio "0.1.0"', '"0.1.0"', "string.quoted.double.faber"),
+        (
+            '@ optio verbose longum "verbose" typus bivalens descriptio "Verbose output"',
+            "optio",
+            "entity.other.attribute-name.faber",
+        ),
+        (
+            '@ optio verbose longum "verbose" typus bivalens descriptio "Verbose output"',
+            "longum",
+            "variable.parameter.faber",
+        ),
+        (
+            '@ optio verbose longum "verbose" typus bivalens descriptio "Verbose output"',
+            "descriptio",
+            "variable.parameter.faber",
+        ),
+        (
+            '@ optio verbose longum "verbose" typus bivalens descriptio "Verbose output"',
+            '"Verbose output"',
+            "string.quoted.double.faber",
+        ),
     ]
-    for text, scope in expected:
+    for line, text, scope in expected:
         if not any(
-            token_text == text
+            token_line == line
+            and token_text == text
             and "meta.annotation.faber" in token_scopes
             and scope in token_scopes
-            for _, token_text, token_scopes in tokens
+            for token_line, token_text, token_scopes in tokens
         ):
-            issues.append(f"TextMate annotation scope missing for {text!r}: expected {scope}")
+            issues.append(
+                f"TextMate annotation scope missing on {line!r} for {text!r}: expected {scope}"
+            )
     return issues
 
 
