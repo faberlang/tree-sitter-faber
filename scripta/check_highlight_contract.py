@@ -720,6 +720,23 @@ def main() -> int:
     for path in files:
         source = path.read_text(encoding="utf-8")
         body, _ = peel_frontmatter(source)
+
+        # Verify Tree-sitter recognizes frontmatter before peeling.
+        # If the source starts with "+++" but Tree-sitter did not produce a
+        # frontmatter node, the leaf comparison below would silently pass on
+        # the peeled body and miss the parser failure.
+        if source.startswith("+++"):
+            try:
+                ts_full = run_tree_sitter_xml(REPO_ROOT, source)
+            except (subprocess.CalledProcessError, RuntimeError) as err:
+                issues.append(f"{path}: tree-sitter parse of full source failed: {err}")
+                continue
+            if not any(elem.tag == "frontmatter" for elem in ts_full.iter()):
+                issues.append(
+                    f"{path}: source starts with '+++' but tree-sitter did not "
+                    "produce a frontmatter node (frontmatter regex may reject characters in the body)"
+                )
+
         try:
             radix_leaves = run_radix_lex(radix_bin, body)
             ts_leaves = run_tree_sitter_leaves(REPO_ROOT, body)

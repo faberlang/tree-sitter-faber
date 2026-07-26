@@ -188,7 +188,7 @@
       "name": "keyword.control.faber"
     },
     "keyword-declaration": {
-      "match": "\\b(abstractus|discretio|implendum|magnitudo|immutata|optiones|protecta|functio|generis|importa|privata|publica|ceteri|curata|errata|exitus|sponte|fixum|genus|iacit|nexum|typus|varia|ordo|prae|sit)\\b",
+      "match": "\\b(abstractus|discretio|implendum|magnitudo|immutata|optiones|protecta|functio|generis|importa|privata|publica|ceteri|curata|errata|exitus|iuncta|sponte|fixum|genus|iacit|nexum|typus|varia|ordo|prae|sit)\\b",
       "name": "keyword.declaration.faber"
     },
     "keyword-other": {

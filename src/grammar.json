@@ -46,7 +46,7 @@
           },
           {
             "type": "PATTERN",
-            "value": "[^+]*?"
+            "value": "(.|\\r?\\n)*?"
           },
           {
             "type": "STRING",
@@ -1066,6 +1066,10 @@
         {
           "type": "STRING",
           "value": "importa"
+        },
+        {
+          "type": "STRING",
+          "value": "iuncta"
         },
         {
           "type": "STRING",

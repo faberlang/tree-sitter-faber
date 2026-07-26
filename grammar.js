@@ -19,7 +19,7 @@ module.exports = grammar({
             token(
                 seq(
                     '+++',
-                    /[^+]*?/,
+                    /(.|\r?\n)*?/,
                     '+++',
                     optional(/\r?\n/),
                 ),
@@ -290,6 +290,7 @@ module.exports = grammar({
                 "immutata",
                 "implendum",
                 "importa",
+                "iuncta",
                 "magnitudo",
                 "nexum",
                 "optiones",

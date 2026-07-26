@@ -137,7 +137,7 @@ def build_grammar_js(vocab: dict[str, list[str]]) -> str:
         + "            token(\n"
         + "                seq(\n"
         + "                    '+++',\n"
-        + "                    /[^+]*?/,\n"
+        + "                    /(.|\\r?\\n)*?/,\n"
         + "                    '+++',\n"
         + "                    optional(/\\r?\\n/),\n"
         + "                ),\n"

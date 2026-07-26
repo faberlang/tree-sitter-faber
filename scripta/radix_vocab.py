@@ -214,7 +214,7 @@ def collect_annotation_vocab(specs: list[KeywordSpec]) -> tuple[list[str], list[
 
 def load_vocabulary(radix_root_path: Path | None = None) -> dict[str, list[str]]:
     root = radix_root(radix_root_path)
-    keywords_rs = root / "crates/radix/src/lexer/keywords.rs"
+    keywords_rs = root / "crates/radix-lexer/src/keywords.rs"
     expr_rs = root / "crates/radix/src/parser/expr.rs"
     if not keywords_rs.is_file():
         raise FileNotFoundError(f"missing Radix keywords registry: {keywords_rs}")
