@@ -57,11 +57,15 @@ Grammar or highlight changes require a refresh:
 
 ```bash
 git pull
-./scripta/prepare_zed_dev
+npm run check:pin-drift     # should pass if pin matches pushed rev
+./scripta/prepare_zed_dev   # clear Zed's cached clone/WASM
 ```
 
 Then reinstall the dev extension (same steps as above). The log should show
 **compiling faber parser**, not “skipping compilation … up to date”.
+
+If `check:pin-drift` fails after pull, the pin in `extension.toml` needs to
+be advanced (see [Pin-drift check](#pin-drift-check)).
 
 ---
 
@@ -145,10 +149,14 @@ we hit most often.
 **Reliable recovery:**
 
 ```bash
-./scripta/prepare_zed_dev
+npm run check:pin-drift    # diagnose whether pin is stale
+./scripta/prepare_zed_dev  # clear Zed's cached clone/WASM
 # Command Palette → zed: install dev extension → this repo root
 # Confirm log: "compiling faber parser" (not skip)
 ```
+
+When the pin-drift check fails, advance the pin per the
+[Pin-drift check](#pin-drift-check) section before reinstalling.
 
 ### `failed to compile grammar` / directory already exists
 
@@ -167,16 +175,35 @@ Radix annotation vocabulary, separate from global keywords and builtin types. If
 new CLI annotation spelling is missing, add it in Radix / `scripta/radix_vocab.py`
 and regenerate.
 
+### Pin-drift check
+
+`npm run check:pin-drift` (or `bash scripta/check_pin_drift.sh`) validates that
+`extension.toml` `[grammars.faber].rev` is not behind HEAD while parser/query
+artifacts have changed. This prevents the **split-brain** failure mode where
+Zed builds parser WASM from the pinned rev but reads highlights from the local
+tree — producing `Invalid node type` or `Impossible pattern` query errors.
+
+The check passes when:
+- The pinned rev matches HEAD, **or**
+- Parser/query artifacts (`src/parser.c`, `src/scanner.c`, `src/grammar.json`,
+  `src/node-types.json`, `queries/highlights.scm`, `languages/faber/highlights.scm`)
+  are unchanged between the pin and HEAD.
+
+The check fails when the pin is behind HEAD **and** artifacts differ.
+
 ### Registry publishing (not dev install)
 
-Published extensions need `extension.toml` `rev` = a commit SHA on GitHub. Workflow:
+Published extensions need `extension.toml` `rev` = a commit SHA on GitHub:
 
 1. Push grammar changes.
-2. Copy the new SHA into `extension.toml`.
-3. Commit and push again (chicken-and-egg by design).
-4. PR to `zed-industries/extensions`.
+2. `npm run check:pin-drift` — should pass once `rev` matches the pushed SHA.
+3. Copy the new SHA into `extension.toml`.
+4. Commit and push again (chicken-and-egg by design).
+5. PR to `zed-industries/extensions`.
 
 For day-to-day work on your machine, dev extension + `prepare_zed_dev` is enough.
+The pin-drift check is advisory between pushes: it will warn when local HEAD
+has un-pushed parser/query changes, but this is expected mid-iteration.
 
 ---
 

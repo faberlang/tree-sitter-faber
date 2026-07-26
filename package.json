@@ -7,7 +7,8 @@
     "generate": "python3 scripta/generate_grammar.py && python3 scripta/generate_textmate.py && npx --yes tree-sitter-cli@0.24.7 generate",
     "test": "python3 scripta/check_highlight_contract.py",
     "test:corpus-derived": "python3 scripta/check_highlight_contract.py --file fixtures/corpus-derived.fab",
-    "audit:corpus": "python3 scripta/check_highlight_contract.py --corpus --limit 25"
+    "audit:corpus": "python3 scripta/check_highlight_contract.py --corpus --limit 25",
+    "check:pin-drift": "bash scripta/check_pin_drift.sh"
   },
   "keywords": [
     "tree-sitter",
