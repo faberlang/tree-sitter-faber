@@ -23,6 +23,8 @@ HIGHLIGHT_QUERY_PATHS = (
 )
 INVALID_QUERY_NODE = "definitely_impossible_faber_node"
 
+_LATIN_KEYWORD_SPELLINGS: set[str] | None = None
+
 IGNORE_RADIX_KINDS = {
     "Eof",
     "Newline",
@@ -208,7 +210,40 @@ def normalize_radix_kind(raw: str) -> tuple[str, str | None]:
     return "keyword_other", base
 
 
+def latin_keyword_spellings() -> tuple[set[str], set[str]]:
+    """Latin keyword + boolean spellings from the Radix registry.
+
+    The radix `lex` CLI (no locale pack) deliberately returns every registered
+    keyword as `Ident` — the parser claims keywords by identity. The tree-sitter
+    grammar classifies them as keywords (and `verum`/`falsum` as booleans), so
+    the contract comparison must do the same on the radix side, using the same
+    registry the grammar generator reads.
+    """
+    global _LATIN_KEYWORD_SPELLINGS
+    if _LATIN_KEYWORD_SPELLINGS is None:
+        from radix_vocab import load_vocabulary
+
+        # Mirror generate_grammar.py exactly: annotation names/modifiers are
+        # NOT keyword rules in the grammar (they lex as annotation nodes and
+        # normalize to `type_or_ident`, except visibility names).
+        vocab = load_vocabulary(DEFAULT_RADIX_ROOT)
+        _LATIN_KEYWORD_SPELLINGS = (
+            set(
+                vocab["keyword_control"]
+                + vocab["keyword_declaration"]
+                + vocab["keyword_other"]
+            ),
+            set(vocab["boolean"]),
+        )
+    return _LATIN_KEYWORD_SPELLINGS
+
+
 def radix_kind_for_ident(text: str, span_text: str) -> str:
+    _keywords, _booleans = latin_keyword_spellings()
+    if span_text in _booleans:
+        return "boolean"
+    if span_text in _keywords:
+        return "keyword"
     if span_text in BUILTIN_TYPE_WORDS:
         return "builtin_type"
     return "identifier"
@@ -225,6 +260,7 @@ def run_radix_lex(radix_bin: Path, body: str) -> list[Leaf]:
     payload = json.loads(proc.stdout)
 
     leaves: list[Leaf] = []
+    prev_was_at = False
     for token in payload["tokens"]:
         kind_raw = token["kind"]
         start = token["span"][0]
@@ -236,8 +272,16 @@ def run_radix_lex(radix_bin: Path, body: str) -> list[Leaf]:
             continue
         if kind == "identifier":
             span_text = slice_bytes(body, start, end)
-            kind = radix_kind_for_ident(span_text, span_text)
+            if prev_was_at:
+                # Annotation-name position: the grammar lexes the word after
+                # `@` as `known_annotation_name` → type_or_ident, except the
+                # visibility names (privata/publica/protecta) which stay
+                # keywords — mirror that contract on the radix side.
+                kind = "keyword" if span_text in VISIBILITY_ANNOTATION_NAMES else "type_or_ident"
+            else:
+                kind = radix_kind_for_ident(span_text, span_text)
         leaves.append(Leaf(start, end, kind))
+        prev_was_at = kind_raw == "At"
     return leaves
 
 

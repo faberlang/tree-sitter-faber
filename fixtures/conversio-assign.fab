@@ -1,0 +1,21 @@
+# CDA-U8 — `↤` (U+21A4) conversion-directed assignment: tree-sitter smoke.
+# The glyph is a token (operator), not a keyword; U+21C7 (⇇) stays distinct.
+
+functio salve() → vacuum {
+    varia numerus count ← 0
+    count ↤ "42"
+    nota count
+
+    fixum numerus typed ↤ "7"
+    nota typed
+
+    varia numerus recovered ← 0
+    recovered ↤ "x" ⇥ 0
+    nota recovered
+
+    varia numerus a ← 0
+    varia numerus b ← 0
+    a ↤ b ↤ "42"
+    nota a
+    nota b
+}

@@ -391,6 +391,10 @@
     "named": false
   },
   {
+    "type": "ab",
+    "named": false
+  },
+  {
     "type": "abstractus",
     "named": false
   },
@@ -491,10 +495,6 @@
     "named": false
   },
   {
-    "type": "demum",
-    "named": false
-  },
-  {
     "type": "descriptio",
     "named": false
   },
@@ -516,10 +516,6 @@
   },
   {
     "type": "elige",
-    "named": false
-  },
-  {
-    "type": "emitte",
     "named": false
   },
   {
@@ -575,7 +571,23 @@
     "named": false
   },
   {
+    "type": "fient",
+    "named": false
+  },
+  {
+    "type": "fiet",
+    "named": false
+  },
+  {
+    "type": "figendum",
+    "named": false
+  },
+  {
     "type": "finge",
+    "named": false
+  },
+  {
+    "type": "fiunt",
     "named": false
   },
   {
@@ -588,6 +600,10 @@
   },
   {
     "type": "fragilis",
+    "named": false
+  },
+  {
+    "type": "fragment",
     "named": false
   },
   {
@@ -783,6 +799,10 @@
     "named": false
   },
   {
+    "type": "machina",
+    "named": false
+  },
+  {
     "type": "magnitudo",
     "named": false
   },
@@ -871,6 +891,10 @@
     "named": false
   },
   {
+    "type": "nondum",
+    "named": false
+  },
+  {
     "type": "nonnihil",
     "named": false
   },
@@ -880,6 +904,10 @@
   },
   {
     "type": "nota",
+    "named": false
+  },
+  {
+    "type": "nucleum",
     "named": false
   },
   {
@@ -979,10 +1007,6 @@
     "named": false
   },
   {
-    "type": "pro",
-    "named": false
-  },
-  {
     "type": "proba",
     "named": false
   },
@@ -1003,7 +1027,15 @@
     "named": false
   },
   {
+    "type": "radix",
+    "named": false
+  },
+  {
     "type": "redde",
+    "named": false
+  },
+  {
+    "type": "reddet",
     "named": false
   },
   {
@@ -1131,6 +1163,10 @@
     "named": false
   },
   {
+    "type": "tacebit",
+    "named": false
+  },
+  {
     "type": "tacet",
     "named": false
   },
@@ -1140,10 +1176,6 @@
   },
   {
     "type": "temporis",
-    "named": false
-  },
-  {
-    "type": "tempta",
     "named": false
   },
   {
@@ -1251,6 +1283,10 @@
     "named": false
   },
   {
+    "type": "variandum",
+    "named": false
+  },
+  {
     "type": "vector",
     "named": false
   },
@@ -1260,6 +1296,10 @@
   },
   {
     "type": "versio",
+    "named": false
+  },
+  {
+    "type": "verte",
     "named": false
   },
   {

@@ -16,6 +16,7 @@ SCAN_GLYPH_LITERALS = [
     "←",
     "→",
     "↦",
+    "↤",
     "⇐",
     "⇒",
     "⇥",
@@ -215,7 +216,9 @@ def collect_annotation_vocab(specs: list[KeywordSpec]) -> tuple[list[str], list[
 def load_vocabulary(radix_root_path: Path | None = None) -> dict[str, list[str]]:
     root = radix_root(radix_root_path)
     keywords_rs = root / "crates/radix-lexer/src/keywords.rs"
-    expr_rs = root / "crates/radix/src/parser/expr.rs"
+    # The parser implementation lives in the `radix-parser` sibling crate
+    # (the `radix::parser` module is a re-export barrel).
+    expr_rs = root / "crates/radix-parser/src/expr.rs"
     if not keywords_rs.is_file():
         raise FileNotFoundError(f"missing Radix keywords registry: {keywords_rs}")
     if not expr_rs.is_file():

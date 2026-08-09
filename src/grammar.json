@@ -142,6 +142,10 @@
         },
         {
           "type": "STRING",
+          "value": "fragment"
+        },
+        {
+          "type": "STRING",
           "value": "futura"
         },
         {
@@ -155,6 +159,18 @@
         {
           "type": "STRING",
           "value": "json"
+        },
+        {
+          "type": "STRING",
+          "value": "machina"
+        },
+        {
+          "type": "STRING",
+          "value": "nondum"
+        },
+        {
+          "type": "STRING",
+          "value": "nucleum"
         },
         {
           "type": "STRING",
@@ -178,7 +194,15 @@
         },
         {
           "type": "STRING",
+          "value": "radix"
+        },
+        {
+          "type": "STRING",
           "value": "versio"
+        },
+        {
+          "type": "STRING",
+          "value": "verte"
         },
         {
           "type": "STRING",
@@ -924,10 +948,6 @@
         },
         {
           "type": "STRING",
-          "value": "demum"
-        },
-        {
-          "type": "STRING",
           "value": "discerne"
         },
         {
@@ -937,10 +957,6 @@
         {
           "type": "STRING",
           "value": "elige"
-        },
-        {
-          "type": "STRING",
-          "value": "emitte"
         },
         {
           "type": "STRING",
@@ -1001,10 +1017,6 @@
         {
           "type": "STRING",
           "value": "tacet"
-        },
-        {
-          "type": "STRING",
-          "value": "tempta"
         }
       ]
     },
@@ -1126,6 +1138,10 @@
       "members": [
         {
           "type": "STRING",
+          "value": "ab"
+        },
+        {
+          "type": "STRING",
           "value": "ante"
         },
         {
@@ -1139,6 +1155,10 @@
         {
           "type": "STRING",
           "value": "clausura"
+        },
+        {
+          "type": "STRING",
+          "value": "cli"
         },
         {
           "type": "STRING",
@@ -1162,7 +1182,23 @@
         },
         {
           "type": "STRING",
+          "value": "fient"
+        },
+        {
+          "type": "STRING",
+          "value": "fiet"
+        },
+        {
+          "type": "STRING",
+          "value": "figendum"
+        },
+        {
+          "type": "STRING",
           "value": "finge"
+        },
+        {
+          "type": "STRING",
+          "value": "fiunt"
         },
         {
           "type": "STRING",
@@ -1170,7 +1206,19 @@
         },
         {
           "type": "STRING",
+          "value": "fragment"
+        },
+        {
+          "type": "STRING",
+          "value": "futura"
+        },
+        {
+          "type": "STRING",
           "value": "futurum"
+        },
+        {
+          "type": "STRING",
+          "value": "imperium"
         },
         {
           "type": "STRING",
@@ -1198,6 +1246,10 @@
         },
         {
           "type": "STRING",
+          "value": "machina"
+        },
+        {
+          "type": "STRING",
           "value": "metior"
         },
         {
@@ -1222,6 +1274,10 @@
         },
         {
           "type": "STRING",
+          "value": "nondum"
+        },
+        {
+          "type": "STRING",
           "value": "nonnihil"
         },
         {
@@ -1234,6 +1290,10 @@
         },
         {
           "type": "STRING",
+          "value": "nucleum"
+        },
+        {
+          "type": "STRING",
           "value": "nulla"
         },
         {
@@ -1243,6 +1303,14 @@
         {
           "type": "STRING",
           "value": "omnia"
+        },
+        {
+          "type": "STRING",
+          "value": "operandus"
+        },
+        {
+          "type": "STRING",
+          "value": "optio"
         },
         {
           "type": "STRING",
@@ -1274,15 +1342,19 @@
         },
         {
           "type": "STRING",
-          "value": "pro"
-        },
-        {
-          "type": "STRING",
           "value": "proba"
         },
         {
           "type": "STRING",
           "value": "probandum"
+        },
+        {
+          "type": "STRING",
+          "value": "radix"
+        },
+        {
+          "type": "STRING",
+          "value": "reddet"
         },
         {
           "type": "STRING",
@@ -1318,6 +1390,10 @@
         },
         {
           "type": "STRING",
+          "value": "tacebit"
+        },
+        {
+          "type": "STRING",
           "value": "tag"
         },
         {
@@ -1334,7 +1410,19 @@
         },
         {
           "type": "STRING",
+          "value": "variandum"
+        },
+        {
+          "type": "STRING",
           "value": "vel"
+        },
+        {
+          "type": "STRING",
+          "value": "verte"
+        },
+        {
+          "type": "STRING",
+          "value": "vertex"
         },
         {
           "type": "STRING",
@@ -1956,6 +2044,10 @@
           {
             "type": "STRING",
             "value": "→"
+          },
+          {
+            "type": "STRING",
+            "value": "↤"
           },
           {
             "type": "STRING",
