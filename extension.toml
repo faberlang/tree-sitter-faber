@@ -8,4 +8,4 @@ repository = "https://github.com/faberlang/tree-sitter-faber"
 
 [grammars.faber]
 repository = "https://github.com/faberlang/tree-sitter-faber"
-rev = "836f199654ff711aa3265ff3994f2f8734da3a89"
+rev = "f6a38bf0003a1984f803dee12fdf1b268e5b8e8b"
