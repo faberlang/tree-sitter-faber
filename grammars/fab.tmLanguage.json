@@ -184,15 +184,15 @@
       "match": "[A-Za-z_][A-Za-z0-9_]*"
     },
     "keyword-control": {
-      "match": "\\b(argumenta|discerne|incipiet|adfirma|ceterum|custodi|incipit|elige|itera|perge|redde|rumpe|secus|tacet|cape|casu|cura|ergo|iace|mori|dum|fac|sic|sin|ad|si)\\b",
+      "match": "\\b(argumenta|discerne|incipiet|requirit|adfirma|ceterum|custodi|incipit|elige|itera|perge|redde|rumpe|secus|tacet|cape|casu|cura|ergo|iace|mori|dum|fac|sic|sin|ad|si)\\b",
       "name": "keyword.control.faber"
     },
     "keyword-declaration": {
-      "match": "\\b(abstractus|discretio|implendum|magnitudo|immutata|optiones|protecta|functio|generis|importa|privata|publica|ceteri|curata|errata|exitus|iuncta|sponte|fixum|genus|iacit|nexum|typus|varia|ordo|prae|sit)\\b",
+      "match": "\\b(abstractus|discretio|implendum|magnitudo|immutata|optiones|protecta|columna|functio|generis|importa|interna|privata|publica|ceteri|curata|errata|exitus|iuncta|schema|sponte|fixum|genus|iacit|nexum|typus|varia|ordo|prae|sit)\\b",
       "name": "keyword.declaration.faber"
     },
     "keyword-other": {
-      "match": "\\b(postparabit|praeparabit|negativum|operandus|positivum|praefixum|probandum|variandum|clausura|figendum|fragilis|fragment|imperium|nonnihil|nonnulla|postpara|praepara|requirit|scriptum|solum_in|temporis|futurum|machina|modulus|nucleum|tacebit|futura|implet|lineam|metior|nondum|omitte|reddet|repete|scribe|sparge|vertex|fient|finge|fiunt|inter|intra|nihil|nulla|omnia|optio|proba|radix|solum|usque|verte|ante|cede|fiet|lege|mone|nota|vide|aut|cli|ego|est|non|per|sub|tag|vel|ab|de|et|ex|in|ut)\\b",
+      "match": "\\b(postparabit|praeparabit|negativum|operandus|positivum|praefixum|probandum|variandum|clausura|figendum|fragilis|fragment|imperium|nonnihil|nonnulla|postpara|praepara|scriptum|solum_in|temporis|futurum|machina|modulus|nucleum|tacebit|futura|implet|lineam|metior|nondum|omitte|reddet|repete|scribe|sparge|vertex|fient|finge|fiunt|inter|intra|nihil|nulla|omnia|optio|proba|radix|solum|usque|verte|ante|cede|fiet|lege|mone|nota|vide|aut|cli|ego|est|non|per|sub|tag|vel|ab|de|et|ex|in|ut)\\b",
       "name": "keyword.other.faber"
     },
     "boolean-literal": {
@@ -212,7 +212,7 @@
       "name": "variable.parameter.faber"
     },
     "operators": {
-      "match": "(!\\(|!\\.|!\\[|\\?\\(|\\?\\.|\\?\\[|!|%|\\*|\\+|\\-|\\.|/|<|=|>|\\?|@|¬|‥|…|←|→|↤|↦|⇐|⇒|⇥|∧|∨|∪|∴|∷|≈|≉|≠|≡|≤|≥|⊕|⊖|⊜|⊻)",
+      "match": "(!\\(|!\\.|!\\[|\\?\\(|\\?\\.|\\?\\[|!|%|\\*|\\+|\\-|\\.|/|<|=|>|\\?|@|¬|‥|…|←|↑|→|↓|↤|↦|⇐|⇒|⇥|∧|∨|∪|∴|∷|≈|≉|≠|≡|≤|≥|⊜|⊻)",
       "name": "keyword.operator.faber"
     }
   }
