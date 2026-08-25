@@ -54,6 +54,11 @@ incipit {
     fixum _ viget ← verum
     adfirma viget ≡ verum secus "vigere debet"
 
+    # Equality ladder admissions must remain real operator leaves, not ERROR nodes.
+    fixum _ promoted ← x ≅ y
+    fixum _ promoted_not ← x ≇ y
+    fixum _ strict_not ← x ≢ y
+
     # Min/max infix glyphs must remain real operator leaves, not ERROR nodes.
     fixum _ max_glyph ← a ⤒ b
     fixum _ min_glyph ← a ⤓ b
