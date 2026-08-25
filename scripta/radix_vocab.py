@@ -143,7 +143,7 @@ def parse_keyword_specs(keywords_rs: Path) -> list[KeywordSpec]:
         body = text[begin : end + 1]
         text_match = re.search(r'text: "([^"]+)"', body)
         token_match = re.search(r"token_kind: (Some\(TokenKind::\w+\)|None)", body)
-        category_match = re.search(r"category: KeywordCategory::(\w+)", body)
+        category_match = re.search(r"category: Keyword(?:Category|Kind)::(\w+)", body)
         scope_match = re.search(
             r"scope: KeywordScope::(Annotation|Global|Contextual)(?:\(([^)]+)\))?",
             body,

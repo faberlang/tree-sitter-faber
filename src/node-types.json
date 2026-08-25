@@ -411,6 +411,10 @@
     "named": false
   },
   {
+    "type": "apud",
+    "named": false
+  },
+  {
     "type": "argumenta",
     "named": false
   },
@@ -475,7 +479,19 @@
     "named": false
   },
   {
+    "type": "conversio",
+    "named": false
+  },
+  {
+    "type": "conversion",
+    "named": false
+  },
+  {
     "type": "copia",
+    "named": false
+  },
+  {
+    "type": "copy",
     "named": false
   },
   {
@@ -743,6 +759,10 @@
     "named": false
   },
   {
+    "type": "lane",
+    "named": false
+  },
+  {
     "type": "lege",
     "named": false
   },
@@ -804,10 +824,6 @@
   },
   {
     "type": "lu8",
-    "named": false
-  },
-  {
-    "type": "machina",
     "named": false
   },
   {
@@ -975,6 +991,10 @@
     "named": false
   },
   {
+    "type": "own",
+    "named": false
+  },
+  {
     "type": "per",
     "named": false
   },
@@ -1035,7 +1055,15 @@
     "named": false
   },
   {
+    "type": "queue",
+    "named": false
+  },
+  {
     "type": "radix",
+    "named": false
+  },
+  {
+    "type": "ratio",
     "named": false
   },
   {
@@ -1144,6 +1172,10 @@
   },
   {
     "type": "sponte",
+    "named": false
+  },
+  {
+    "type": "stack",
     "named": false
   },
   {

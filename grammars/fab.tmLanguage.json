@@ -184,7 +184,7 @@
       "match": "[A-Za-z_][A-Za-z0-9_]*"
     },
     "keyword-control": {
-      "match": "\\b(argumenta|discerne|incipiet|requirit|adfirma|ceterum|custodi|incipit|elige|itera|perge|redde|rumpe|secus|tacet|cape|casu|cura|ergo|iace|mori|dum|fac|sic|sin|ad|si)\\b",
+      "match": "\\b(argumenta|discerne|incipiet|requirit|adfirma|ceterum|custodi|incipit|elige|itera|perge|redde|rumpe|secus|tacet|apud|cape|casu|cura|ergo|iace|mori|dum|fac|sic|sin|ad|si)\\b",
       "name": "keyword.control.faber"
     },
     "keyword-declaration": {
@@ -192,7 +192,7 @@
       "name": "keyword.declaration.faber"
     },
     "keyword-other": {
-      "match": "\\b(postparabit|praeparabit|negativum|operandus|positivum|praefixum|probandum|variandum|clausura|figendum|fragilis|fragment|imperium|nonnihil|nonnulla|postpara|praepara|scriptum|solum_in|temporis|futurum|machina|modulus|nucleum|tacebit|futura|implet|lineam|metior|nondum|omitte|reddet|repete|scribe|sparge|vertex|fient|finge|fiunt|inter|intra|nihil|nulla|omnia|optio|proba|radix|solum|usque|verte|ante|cede|fiet|lege|mone|nota|vide|aut|cli|ego|est|non|per|sub|tag|vel|ab|de|et|ex|in|ut)\\b",
+      "match": "\\b(postparabit|praeparabit|conversion|conversio|negativum|operandus|positivum|praefixum|probandum|variandum|clausura|figendum|fragilis|fragment|imperium|nonnihil|nonnulla|postpara|praepara|scriptum|solum_in|temporis|futurum|modulus|nucleum|tacebit|futura|implet|lineam|metior|nondum|omitte|reddet|repete|scribe|sparge|vertex|fient|finge|fiunt|inter|intra|nihil|nulla|omnia|optio|proba|radix|solum|usque|verte|ante|cede|copy|fiet|lege|mone|nota|vide|aut|cli|ego|est|non|own|per|sub|tag|vel|ab|de|et|ex|in|ut)\\b",
       "name": "keyword.other.faber"
     },
     "boolean-literal": {
@@ -200,19 +200,19 @@
       "name": "constant.language.boolean.faber"
     },
     "builtin-type": {
-      "match": "\\b(intervallum|promissum|bivalens|fractus|ignotum|instans|numerus|numquam|cursor|matrix|octeti|series|sparsa|tabula|tensor|textus|vacuum|vector|ascii|copia|lista|octet|regex|vacua|valor|json|lf16|lf32|lf64|li16|li32|li64|lu16|lu32|lu64|mf16|mf32|mf64|mi16|mi32|mi64|mu16|mu32|mu64|sf16|sf32|sf64|si16|si32|si64|su16|su32|su64|tf16|tf32|tf64|ti16|ti32|ti64|tu16|tu32|tu64|unio|vf16|vf32|vf64|vi16|vi32|vi64|vu16|vu32|vu64|f16|f32|f64|i16|i32|i64|li8|lu8|mi8|mu8|si8|su8|ti8|tu8|u16|u32|u64|vi8|vu8|i8|u8)\\b",
+      "match": "\\b(intervallum|promissum|bivalens|fractus|ignotum|instans|numerus|numquam|cursor|matrix|octeti|series|sparsa|tabula|tensor|textus|vacuum|vector|ascii|copia|lista|octet|queue|ratio|regex|stack|vacua|valor|json|lf16|lf32|lf64|li16|li32|li64|lu16|lu32|lu64|mf16|mf32|mf64|mi16|mi32|mi64|mu16|mu32|mu64|sf16|sf32|sf64|si16|si32|si64|su16|su32|su64|tf16|tf32|tf64|ti16|ti32|ti64|tu16|tu32|tu64|unio|vf16|vf32|vf64|vi16|vi32|vi64|vu16|vu32|vu64|f16|f32|f64|i16|i32|i64|li8|lu8|mi8|mu8|si8|su8|ti8|tu8|u16|u32|u64|vi8|vu8|i8|u8)\\b",
       "name": "support.type.builtin.faber"
     },
     "annotation-name": {
-      "match": "\\b(operandus|fragment|imperium|protecta|imperia|machina|nucleum|privata|publica|cursor|futura|nondum|versio|vertex|optio|radix|verte|json|cli)\\b",
+      "match": "\\b(conversio|operandus|fragment|imperium|protecta|imperia|nucleum|privata|publica|cursor|futura|nondum|versio|vertex|optio|radix|verte|json|cli)\\b",
       "name": "entity.other.attribute-name.faber"
     },
     "annotation-modifier": {
-      "match": "\\b(descriptio|brevis|longum|ubique|nomen)\\b",
+      "match": "\\b(descriptio|brevis|longum|ubique|nomen|lane)\\b",
       "name": "variable.parameter.faber"
     },
     "operators": {
-      "match": "(!\\(|!\\.|!\\[|\\?\\(|\\?\\.|\\?\\[|!|%|ᵀ|\\*|\\+|\\-|\\.|/|<|=|>|\\?|@|¬|‥|…|←|↑|→|↓|↤|↦|⇐|⇒|⇥|∧|∨|∪|∴|∷|≈|≉|≠|≡|≤|≥|⊜|⊻)",
+      "match": "(!\\(|!\\.|!\\[|\\?\\(|\\?\\.|\\?\\[|!|%|\\*|\\+|\\-|\\.|/|<|=|>|\\?|@|¬|ᵀ|‥|…|←|↑|→|↓|↤|↦|⇐|⇒|⇥|∧|∨|∪|∴|∷|≈|≉|≠|≡|≤|≥|⊘|⊜|⊻)",
       "name": "keyword.operator.faber"
     }
   }

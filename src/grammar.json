@@ -138,6 +138,10 @@
         },
         {
           "type": "STRING",
+          "value": "conversio"
+        },
+        {
+          "type": "STRING",
           "value": "cursor"
         },
         {
@@ -159,10 +163,6 @@
         {
           "type": "STRING",
           "value": "json"
-        },
-        {
-          "type": "STRING",
-          "value": "machina"
         },
         {
           "type": "STRING",
@@ -233,6 +233,10 @@
         {
           "type": "STRING",
           "value": "descriptio"
+        },
+        {
+          "type": "STRING",
+          "value": "lane"
         },
         {
           "type": "STRING",
@@ -425,6 +429,14 @@
         },
         {
           "type": "STRING",
+          "value": "queue"
+        },
+        {
+          "type": "STRING",
+          "value": "ratio"
+        },
+        {
+          "type": "STRING",
           "value": "regex"
         },
         {
@@ -462,6 +474,10 @@
         {
           "type": "STRING",
           "value": "sparsa"
+        },
+        {
+          "type": "STRING",
+          "value": "stack"
         },
         {
           "type": "STRING",
@@ -924,6 +940,10 @@
         },
         {
           "type": "STRING",
+          "value": "apud"
+        },
+        {
+          "type": "STRING",
           "value": "argumenta"
         },
         {
@@ -1178,6 +1198,18 @@
         },
         {
           "type": "STRING",
+          "value": "conversio"
+        },
+        {
+          "type": "STRING",
+          "value": "conversion"
+        },
+        {
+          "type": "STRING",
+          "value": "copy"
+        },
+        {
+          "type": "STRING",
           "value": "de"
         },
         {
@@ -1262,10 +1294,6 @@
         },
         {
           "type": "STRING",
-          "value": "machina"
-        },
-        {
-          "type": "STRING",
           "value": "metior"
         },
         {
@@ -1327,6 +1355,10 @@
         {
           "type": "STRING",
           "value": "optio"
+        },
+        {
+          "type": "STRING",
+          "value": "own"
         },
         {
           "type": "STRING",
@@ -1627,6 +1659,14 @@
         },
         {
           "type": "STRING",
+          "value": "queue"
+        },
+        {
+          "type": "STRING",
+          "value": "ratio"
+        },
+        {
+          "type": "STRING",
           "value": "regex"
         },
         {
@@ -1664,6 +1704,10 @@
         {
           "type": "STRING",
           "value": "sparsa"
+        },
+        {
+          "type": "STRING",
+          "value": "stack"
         },
         {
           "type": "STRING",
@@ -1999,10 +2043,6 @@
           },
           {
             "type": "STRING",
-            "value": "ᵀ"
-          },
-          {
-            "type": "STRING",
             "value": "*"
           },
           {
@@ -2044,6 +2084,10 @@
           {
             "type": "STRING",
             "value": "¬"
+          },
+          {
+            "type": "STRING",
+            "value": "ᵀ"
           },
           {
             "type": "STRING",
