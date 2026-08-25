@@ -192,7 +192,7 @@
       "name": "keyword.declaration.faber"
     },
     "keyword-other": {
-      "match": "\\b(postparabit|praeparabit|conversion|conversio|negativum|operandus|positivum|praefixum|probandum|variandum|clausura|figendum|fragilis|fragment|imperium|nonnihil|nonnulla|postpara|praepara|scriptum|solum_in|temporis|futurum|modulus|nucleum|tacebit|futura|implet|lineam|metior|nondum|omitte|reddet|repete|scribe|sparge|vertex|fient|finge|fiunt|inter|intra|nihil|nulla|omnia|optio|proba|radix|solum|usque|verte|ante|cede|copy|fiet|lege|mone|nota|vide|aut|cli|ego|est|non|own|per|sub|tag|vel|ab|de|et|ex|in|ut)\\b",
+      "match": "\\b(postparabit|praeparabit|conversion|conversio|negativum|operandus|positivum|praefixum|probandum|variandum|clausura|figendum|fragilis|fragment|imperium|nonnihil|nonnulla|postpara|praepara|scriptum|solum_in|temporis|erratur|futurum|modulus|nucleum|tacebit|futura|implet|lineam|metior|nondum|omitte|reddet|repete|scribe|sparge|vertex|fient|finge|fiunt|inter|intra|nihil|nulla|omnia|optio|proba|radix|solum|usque|verte|ante|cede|copy|fiet|lege|mone|nota|vide|aut|cli|ego|est|non|own|per|sub|tag|vel|ab|de|et|ex|in|ut)\\b",
       "name": "keyword.other.faber"
     },
     "boolean-literal": {
@@ -212,7 +212,7 @@
       "name": "variable.parameter.faber"
     },
     "operators": {
-      "match": "(!\\(|!\\.|!\\[|\\?\\(|\\?\\.|\\?\\[|!|%|\\*|\\+|\\-|\\.|/|<|=|>|\\?|@|¬|ᵀ|‥|…|←|↑|→|↓|↤|↦|⇐|⇒|⇥|∧|∨|∪|∴|∷|≅|≇|≈|≉|≠|≡|≢|≤|≥|⊘|⊜|⊻|⤒|⤓)",
+      "match": "(!\\(|!\\.|!\\[|\\?\\(|\\?\\.|\\?\\[|!|%|\\*|\\+|\\-|\\.|/|<|=|>|\\?|@|¬|ᵀ|‥|…|←|↑|→|↓|↤|↦|⇐|⇒|⇥|∧|∨|∩|∪|∴|∷|≅|≇|≈|≉|≠|≡|≢|≤|≥|⊘|⊜|⊻|⤒|⤓)",
       "name": "keyword.operator.faber"
     }
   }

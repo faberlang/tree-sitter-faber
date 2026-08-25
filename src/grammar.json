@@ -1218,6 +1218,10 @@
         },
         {
           "type": "STRING",
+          "value": "erratur"
+        },
+        {
+          "type": "STRING",
           "value": "est"
         },
         {
@@ -2140,6 +2144,10 @@
           {
             "type": "STRING",
             "value": "∨"
+          },
+          {
+            "type": "STRING",
+            "value": "∩"
           },
           {
             "type": "STRING",
