@@ -577,6 +577,8 @@ module.exports = grammar({
                 "\u2298",
                 "\u229c",
                 "\u22bb",
+                "\u2912",
+                "\u2913",
                 ),
             ),
 

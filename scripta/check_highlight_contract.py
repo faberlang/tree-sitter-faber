@@ -201,7 +201,19 @@ def normalize_radix_kind(raw: str) -> tuple[str, str | None]:
         "Semicolon",
     }:
         return "punctuation", None
-    if base in {"Plus", "Minus", "Star", "Slash", "Percent", "Dot", "DotDot", "Bang", "Question"} or base.startswith(
+    if base in {
+        "Plus",
+        "Minus",
+        "Star",
+        "Slash",
+        "Percent",
+        "Dot",
+        "DotDot",
+        "Bang",
+        "Question",
+        "Maximum",
+        "Minimum",
+    } or base.startswith(
         ("Eq", "Lt", "Gt", "Bang", "Question", "Bitwise", "Post", "Arrow", "Exit", "Assign", "Cup", "Conversio", "Verte", "Approx")
     ):
         return "operator", None

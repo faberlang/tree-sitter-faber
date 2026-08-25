@@ -2136,6 +2136,7 @@ static TSCharacterRange sym_operator_character_set_1[] = {
   {'!', '!'}, {'%', '%'}, {'*', '+'}, {'-', '/'}, {'<', '@'}, {0xac, 0xac}, {0x1d40, 0x1d40}, {0x2025, 0x2026},
   {0x2190, 0x2193}, {0x21a4, 0x21a4}, {0x21a6, 0x21a6}, {0x21d0, 0x21d0}, {0x21d2, 0x21d2}, {0x21e5, 0x21e5}, {0x2227, 0x2228}, {0x222a, 0x222a},
   {0x2234, 0x2234}, {0x2237, 0x2237}, {0x2248, 0x2249}, {0x2260, 0x2261}, {0x2264, 0x2265}, {0x2298, 0x2298}, {0x229c, 0x229c}, {0x22bb, 0x22bb},
+  {0x2912, 0x2913},
 };
 
 static bool ts_lex(TSLexer *lexer, TSStateId state) {
@@ -2192,7 +2193,7 @@ static bool ts_lex(TSLexer *lexer, TSStateId state) {
       if (('1' <= lookahead && lookahead <= '9')) ADVANCE(281);
       if (('A' <= lookahead && lookahead <= 'Z') ||
           ('_' <= lookahead && lookahead <= 'z')) ADVANCE(934);
-      if (set_contains(sym_operator_character_set_1, 24, lookahead)) ADVANCE(935);
+      if (set_contains(sym_operator_character_set_1, 25, lookahead)) ADVANCE(935);
       END_STATE();
     case 1:
       if (lookahead == '\n') ADVANCE(27);
@@ -2389,7 +2390,7 @@ static bool ts_lex(TSLexer *lexer, TSStateId state) {
       if (('1' <= lookahead && lookahead <= '9')) ADVANCE(281);
       if (('A' <= lookahead && lookahead <= 'Z') ||
           ('_' <= lookahead && lookahead <= 'z')) ADVANCE(934);
-      if (set_contains(sym_operator_character_set_1, 24, lookahead)) ADVANCE(935);
+      if (set_contains(sym_operator_character_set_1, 25, lookahead)) ADVANCE(935);
       END_STATE();
     case 23:
       if (eof) ADVANCE(25);
@@ -2439,7 +2440,7 @@ static bool ts_lex(TSLexer *lexer, TSStateId state) {
       if (('1' <= lookahead && lookahead <= '9')) ADVANCE(281);
       if (('A' <= lookahead && lookahead <= 'Z') ||
           ('_' <= lookahead && lookahead <= 'z')) ADVANCE(934);
-      if (set_contains(sym_operator_character_set_1, 24, lookahead)) ADVANCE(935);
+      if (set_contains(sym_operator_character_set_1, 25, lookahead)) ADVANCE(935);
       END_STATE();
     case 24:
       if (eof) ADVANCE(25);
@@ -2489,7 +2490,7 @@ static bool ts_lex(TSLexer *lexer, TSStateId state) {
       if (('1' <= lookahead && lookahead <= '9')) ADVANCE(281);
       if (('A' <= lookahead && lookahead <= 'Z') ||
           ('_' <= lookahead && lookahead <= 'z')) ADVANCE(934);
-      if (set_contains(sym_operator_character_set_1, 24, lookahead)) ADVANCE(935);
+      if (set_contains(sym_operator_character_set_1, 25, lookahead)) ADVANCE(935);
       END_STATE();
     case 25:
       ACCEPT_TOKEN(ts_builtin_sym_end);
