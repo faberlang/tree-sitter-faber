@@ -1999,6 +1999,10 @@
           },
           {
             "type": "STRING",
+            "value": "ᵀ"
+          },
+          {
+            "type": "STRING",
             "value": "*"
           },
           {
