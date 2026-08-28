@@ -167,7 +167,7 @@ def peel_frontmatter(source: str) -> tuple[str, int]:
 def normalize_radix_kind(raw: str) -> tuple[str, str | None]:
     if raw.startswith("Ident(") or raw.startswith("Underscore("):
         return "identifier", None
-    if raw.startswith("Integer(") or raw.startswith("Float("):
+    if raw.startswith("Integer(") or raw.startswith("Float(") or raw.startswith("FloatText"):
         return "number", None
     if raw.startswith("String(") or raw.startswith("AsciiString(") or raw.startswith("BacktickString("):
         return "string", None
@@ -213,6 +213,7 @@ def normalize_radix_kind(raw: str) -> tuple[str, str | None]:
         "Question",
         "Maximum",
         "Minimum",
+        "Therefore",
     } or base.startswith(
         ("Eq", "Lt", "Gt", "Bang", "Question", "Bitwise", "Post", "Arrow", "Exit", "Assign", "Cup", "Conversio", "Verte", "Approx")
     ):
