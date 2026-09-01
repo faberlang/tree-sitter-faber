@@ -258,6 +258,7 @@ module.exports = grammar({
                 "apud",
                 "argumenta",
                 "cape",
+                "capta",
                 "casu",
                 "ceterum",
                 "cura",
