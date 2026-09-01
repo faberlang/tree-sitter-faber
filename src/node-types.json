@@ -451,6 +451,10 @@
     "named": false
   },
   {
+    "type": "capta",
+    "named": false
+  },
+  {
     "type": "casu",
     "named": false
   },
