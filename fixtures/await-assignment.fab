@@ -1,0 +1,6 @@
+# `⇤` (U+21E4) is an operator token on declaration initializers.
+functio consume() fiet → numerus {
+    fixum promissum<numerus> pending ← fetch()
+    fixum numerus value ⇤ pending
+    redde value
+}

@@ -184,7 +184,7 @@
       "match": "[A-Za-z_][A-Za-z0-9_]*"
     },
     "keyword-control": {
-      "match": "\\b(argumenta|discerne|incipiet|requirit|adfirma|ceterum|custodi|incipit|elige|itera|perge|redde|rumpe|secus|tacet|apud|cape|casu|cura|ergo|iace|mori|dum|fac|sic|sin|ad|si)\\b",
+      "match": "\\b(argumenta|discerne|incipiet|requirit|adfirma|ceterum|custodi|incipit|capta|elige|itera|perge|redde|reice|rumpe|secus|tacet|apud|cape|casu|cura|ergo|iace|mori|dum|fac|sic|sin|ad|si)\\b",
       "name": "keyword.control.faber"
     },
     "keyword-declaration": {
@@ -212,7 +212,7 @@
       "name": "variable.parameter.faber"
     },
     "operators": {
-      "match": "(!\\(|!\\.|!\\[|\\?\\(|\\?\\.|\\?\\[|!|%|\\*|\\+|\\-|\\.|/|<|=|>|\\?|@|¬|ᵀ|‥|…|←|↑|→|↓|↤|↦|⇐|⇒|⇥|∧|∨|∩|∪|∴|∷|≅|≇|≈|≉|≠|≡|≢|≤|≥|⊘|⊜|⊻|⤒|⤓)",
+      "match": "(!\\(|!\\.|!\\[|\\?\\(|\\?\\.|\\?\\[|!|%|\\*|\\+|\\-|\\.|/|<|=|>|\\?|@|¬|ᵀ|‥|…|←|↑|→|↓|↤|↦|⇐|⇒|⇤|⇥|∧|∨|∩|∪|∴|∷|≅|≇|≈|≉|≠|≡|≢|≤|≥|⊘|⊜|⊻|⤒|⤓)",
       "name": "keyword.operator.faber"
     }
   }

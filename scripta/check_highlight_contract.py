@@ -214,6 +214,7 @@ def normalize_radix_kind(raw: str) -> tuple[str, str | None]:
         "Maximum",
         "Minimum",
         "Therefore",
+        "AwaitAssign",
     } or base.startswith(
         ("Eq", "Lt", "Gt", "Bang", "Question", "Bitwise", "Post", "Arrow", "Exit", "Assign", "Cup", "Conversio", "Verte", "Approx")
     ):
