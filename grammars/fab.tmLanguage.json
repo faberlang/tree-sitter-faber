@@ -184,31 +184,31 @@
       "match": "[A-Za-z_][A-Za-z0-9_]*"
     },
     "keyword-control": {
-      "match": "\\b(argumenta|discerne|incipiet|requirit|adfirma|ceterum|custodi|incipit|capta|elige|itera|perge|redde|reice|rumpe|secus|tacet|apud|cape|casu|ergo|iace|mori|dum|fac|sic|sin|ad|si)\\b",
+      "match": "\\b(async_main|argumenta|continue|discerne|incipiet|requirit|adfirma|ceterum|custodi|default|incipit|require|assert|reject|return|switch|yields|break|capta|catch|elige|guard|itera|match|panic|perge|redde|reice|rumpe|secus|tacet|throw|while|apud|args|call|cape|case|casu|elif|else|ergo|iace|main|mori|pass|then|trap|dum|fac|for|sic|sin|ad|at|do|if|si)\\b",
       "name": "keyword.control.faber"
     },
     "keyword-declaration": {
-      "match": "\\b(discretio|implendum|magnitudo|immutata|optiones|protecta|columna|functio|generis|importa|interna|privata|publica|ceteri|errata|exitus|iuncta|schema|sponte|fixum|genus|iacit|typus|varia|ordo|prae|sit)\\b",
+      "match": "\\b(discretio|implendum|interface|magnitudo|protected|immutata|internal|optional|optiones|protecta|readonly|columna|functio|generis|importa|interna|options|privata|private|publica|ceteri|column|errata|errors|exitus|import|iuncta|public|schema|sponte|static|throws|class|const|fixum|genus|iacit|tuple|typus|union|varia|enum|exit|ordo|prae|rest|size|type|let|sit|var|fn)\\b",
       "name": "keyword.declaration.faber"
     },
     "keyword-other": {
-      "match": "\\b(postparabit|praeparabit|conversion|conversio|negativum|operandus|positivum|praefixum|probandum|variandum|clausura|figendum|fragilis|fragment|imperium|nonnihil|nonnulla|postpara|praepara|scriptum|solum_in|temporis|erratur|futurum|modulus|nucleum|tacebit|futura|implet|insere|lineam|metior|nondum|omitte|reddet|repete|scribe|sparge|vertex|fient|finge|fiunt|inter|intra|nihil|nulla|omnia|optio|proba|radix|solum|usque|verte|ante|cede|copy|fiet|lege|mone|nota|vide|aut|cli|ego|est|non|own|per|tag|vel|ab|de|et|ex|in|ut)\\b",
+      "match": "\\b(async_generator|async_teardown|expect_failure|return_await|async_setup|await_const|postparabit|praeparabit|conversion|implements|await_var|conversio|generator|negativum|operandus|positivum|praefixum|probandum|variandum|clausura|coalesce|comptime|describe|exemplum|figendum|fragilis|fragment|imperium|negative|nonnihil|nonnulla|positive|postpara|praepara|scriptum|solum_in|teardown|temporis|wrapping|between|erratur|futurum|modulus|nucleum|only_in|tacebit|timeout|variant|before|format|futura|implet|insere|lambda|lineam|metior|nondum|omitte|reddet|repeat|repete|scribe|sparge|spread|vertex|within|async|await|bench|debug|embed|fient|finge|fiunt|flaky|inter|intra|nihil|nulla|omnia|optio|penes|print|proba|radix|range|setup|solum|until|usque|verte|write|yield|ante|cede|copy|fiet|from|lege|line|mone|none|nota|null|only|read|self|skip|some|step|test|todo|vide|warn|all|and|aut|cli|ego|est|mut|non|not|own|per|ref|tag|vel|ab|as|de|et|ex|in|is|or|ut)\\b",
       "name": "keyword.other.faber"
     },
     "boolean-literal": {
-      "match": "\\b(falsum|verum)\\b",
+      "match": "\\b(falsum|false|verum|true)\\b",
       "name": "constant.language.boolean.faber"
     },
     "builtin-type": {
-      "match": "\\b(intervallum|promissum|saturatus|bivalens|exactus|fractus|ignotum|instans|littera|numerus|numquam|octetus|cursor|matrix|octeti|series|sparsa|tabula|tensor|textus|vacuum|vector|ascii|copia|lista|queue|ratio|regex|stack|vacua|valor|json|lf16|lf32|lf64|li16|li32|li64|lu16|lu32|lu64|mf16|mf32|mf64|mi16|mi32|mi64|mu16|mu32|mu64|sf16|sf32|sf64|si16|si32|si64|su16|su32|su64|tf16|tf32|tf64|ti16|ti32|ti64|tu16|tu32|tu64|unio|vf16|vf32|vf64|vi16|vi32|vi64|vu16|vu32|vu64|f16|f32|f64|i16|i32|i64|li8|lu8|mi8|mu8|si8|su8|ti8|tu8|u16|u32|u64|vi8|vu8|i8|u8)\\b",
+      "match": "\\b(intervallum|saturating|promissum|saturatus|bivalens|cursor_t|iterator|trapping|exactus|fractus|ignotum|instans|instant|littera|numerus|numquam|octetus|promise|unknown|cursor|matrix|octeti|record|series|sparsa|string|tabula|tensor|textus|vacuum|vector|ascii|bytes|copia|float|lista|never|queue|ratio|regex|stack|vacua|valor|bool|byte|char|json|lf16|lf32|lf64|li16|li32|li64|list|lu16|lu32|lu64|mf16|mf32|mf64|mi16|mi32|mi64|mu16|mu32|mu64|sf16|sf32|sf64|si16|si32|si64|su16|su32|su64|tf16|tf32|tf64|ti16|ti32|ti64|tu16|tu32|tu64|unio|vf16|vf32|vf64|vi16|vi32|vi64|void|vu16|vu32|vu64|f16|f32|f64|i16|i32|i64|int|li8|lu8|map|mi8|mu8|set|si8|su8|ti8|tu8|u16|u32|u64|vi8|vu8|i8|u8)\\b",
       "name": "support.type.builtin.faber"
     },
     "annotation-name": {
-      "match": "\\b(conversio|operandus|fragment|imperium|protecta|imperia|nucleum|privata|publica|cursor|futura|nondum|versio|vertex|optio|radix|verte|json|cli)\\b",
+      "match": "\\b(conversion|conversio|operandus|protected|fragment|imperium|protecta|unstable|command|imperia|nucleum|operand|privata|private|publica|cursor|futura|future|kernel|nondum|option|public|rename|versio|vertex|optio|radix|verte|json|cli)\\b",
       "name": "entity.other.attribute-name.faber"
     },
     "annotation-modifier": {
-      "match": "\\b(descriptio|brevis|longum|ubique|nomen|lane)\\b",
+      "match": "\\b(description|descriptio|brevis|global|longum|ubique|nomen|short|lane|long|name)\\b",
       "name": "variable.parameter.faber"
     },
     "operators": {

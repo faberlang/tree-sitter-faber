@@ -265,6 +265,34 @@
     "fields": {}
   },
   {
+    "type": "member_access",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "number",
+          "named": true
+        },
+        {
+          "type": "operator",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "operator",
+    "named": true,
+    "fields": {}
+  },
+  {
     "type": "program",
     "named": true,
     "root": true,
@@ -330,6 +358,10 @@
           "named": true
         },
         {
+          "type": "member_access",
+          "named": true
+        },
+        {
           "type": "number",
           "named": true
         },
@@ -363,6 +395,10 @@
     "fields": {}
   },
   {
+    "type": "!.",
+    "named": false
+  },
+  {
     "type": "(",
     "named": false
   },
@@ -375,11 +411,19 @@
     "named": false
   },
   {
+    "type": ".",
+    "named": false
+  },
+  {
     "type": ":",
     "named": false
   },
   {
     "type": ";",
+    "named": false
+  },
+  {
+    "type": "?.",
     "named": false
   },
   {
@@ -403,6 +447,14 @@
     "named": false
   },
   {
+    "type": "all",
+    "named": false
+  },
+  {
+    "type": "and",
+    "named": false
+  },
+  {
     "type": "ante",
     "named": false
   },
@@ -411,7 +463,15 @@
     "named": false
   },
   {
+    "type": "args",
+    "named": false
+  },
+  {
     "type": "argumenta",
+    "named": false
+  },
+  {
+    "type": "as",
     "named": false
   },
   {
@@ -423,6 +483,34 @@
     "named": true
   },
   {
+    "type": "assert",
+    "named": false
+  },
+  {
+    "type": "async",
+    "named": false
+  },
+  {
+    "type": "async_generator",
+    "named": false
+  },
+  {
+    "type": "async_main",
+    "named": false
+  },
+  {
+    "type": "async_setup",
+    "named": false
+  },
+  {
+    "type": "async_teardown",
+    "named": false
+  },
+  {
+    "type": "at",
+    "named": false
+  },
+  {
     "type": "at_sign",
     "named": true
   },
@@ -431,15 +519,59 @@
     "named": false
   },
   {
+    "type": "await",
+    "named": false
+  },
+  {
+    "type": "await_const",
+    "named": false
+  },
+  {
+    "type": "await_var",
+    "named": false
+  },
+  {
     "type": "backtick_string",
     "named": true
+  },
+  {
+    "type": "before",
+    "named": false
+  },
+  {
+    "type": "bench",
+    "named": false
+  },
+  {
+    "type": "between",
+    "named": false
   },
   {
     "type": "bivalens",
     "named": false
   },
   {
+    "type": "bool",
+    "named": false
+  },
+  {
+    "type": "break",
+    "named": false
+  },
+  {
     "type": "brevis",
+    "named": false
+  },
+  {
+    "type": "byte",
+    "named": false
+  },
+  {
+    "type": "bytes",
+    "named": false
+  },
+  {
+    "type": "call",
     "named": false
   },
   {
@@ -451,7 +583,15 @@
     "named": false
   },
   {
+    "type": "case",
+    "named": false
+  },
+  {
     "type": "casu",
+    "named": false
+  },
+  {
+    "type": "catch",
     "named": false
   },
   {
@@ -467,6 +607,14 @@
     "named": false
   },
   {
+    "type": "char",
+    "named": false
+  },
+  {
+    "type": "class",
+    "named": false
+  },
+  {
     "type": "clausura",
     "named": false
   },
@@ -475,7 +623,31 @@
     "named": false
   },
   {
+    "type": "coalesce",
+    "named": false
+  },
+  {
+    "type": "column",
+    "named": false
+  },
+  {
     "type": "columna",
+    "named": false
+  },
+  {
+    "type": "command",
+    "named": false
+  },
+  {
+    "type": "comptime",
+    "named": false
+  },
+  {
+    "type": "const",
+    "named": false
+  },
+  {
+    "type": "continue",
     "named": false
   },
   {
@@ -499,6 +671,10 @@
     "named": false
   },
   {
+    "type": "cursor_t",
+    "named": false
+  },
+  {
     "type": "custodi",
     "named": false
   },
@@ -507,7 +683,23 @@
     "named": false
   },
   {
+    "type": "debug",
+    "named": false
+  },
+  {
+    "type": "default",
+    "named": false
+  },
+  {
+    "type": "describe",
+    "named": false
+  },
+  {
     "type": "descriptio",
+    "named": false
+  },
+  {
+    "type": "description",
     "named": false
   },
   {
@@ -519,6 +711,10 @@
     "named": false
   },
   {
+    "type": "do",
+    "named": false
+  },
+  {
     "type": "dum",
     "named": false
   },
@@ -527,7 +723,23 @@
     "named": false
   },
   {
+    "type": "elif",
+    "named": false
+  },
+  {
     "type": "elige",
+    "named": false
+  },
+  {
+    "type": "else",
+    "named": false
+  },
+  {
+    "type": "embed",
+    "named": false
+  },
+  {
+    "type": "enum",
     "named": false
   },
   {
@@ -547,6 +759,10 @@
     "named": false
   },
   {
+    "type": "errors",
+    "named": false
+  },
+  {
     "type": "est",
     "named": false
   },
@@ -563,7 +779,19 @@
     "named": false
   },
   {
+    "type": "exemplum",
+    "named": false
+  },
+  {
+    "type": "exit",
+    "named": false
+  },
+  {
     "type": "exitus",
+    "named": false
+  },
+  {
+    "type": "expect_failure",
     "named": false
   },
   {
@@ -584,6 +812,10 @@
   },
   {
     "type": "fac",
+    "named": false
+  },
+  {
+    "type": "false",
     "named": false
   },
   {
@@ -615,6 +847,26 @@
     "named": false
   },
   {
+    "type": "flaky",
+    "named": false
+  },
+  {
+    "type": "float",
+    "named": false
+  },
+  {
+    "type": "fn",
+    "named": false
+  },
+  {
+    "type": "for",
+    "named": false
+  },
+  {
+    "type": "format",
+    "named": false
+  },
+  {
     "type": "fractus",
     "named": false
   },
@@ -624,6 +876,10 @@
   },
   {
     "type": "fragment",
+    "named": false
+  },
+  {
+    "type": "from",
     "named": false
   },
   {
@@ -639,7 +895,15 @@
     "named": false
   },
   {
+    "type": "future",
+    "named": false
+  },
+  {
     "type": "futurum",
+    "named": false
+  },
+  {
+    "type": "generator",
     "named": false
   },
   {
@@ -648,6 +912,14 @@
   },
   {
     "type": "genus",
+    "named": false
+  },
+  {
+    "type": "global",
+    "named": false
+  },
+  {
+    "type": "guard",
     "named": false
   },
   {
@@ -687,6 +959,10 @@
     "named": true
   },
   {
+    "type": "if",
+    "named": false
+  },
+  {
     "type": "ignotum",
     "named": false
   },
@@ -703,11 +979,19 @@
     "named": false
   },
   {
+    "type": "implements",
+    "named": false
+  },
+  {
     "type": "implendum",
     "named": false
   },
   {
     "type": "implet",
+    "named": false
+  },
+  {
+    "type": "import",
     "named": false
   },
   {
@@ -735,11 +1019,27 @@
     "named": false
   },
   {
+    "type": "instant",
+    "named": false
+  },
+  {
+    "type": "int",
+    "named": false
+  },
+  {
     "type": "inter",
     "named": false
   },
   {
+    "type": "interface",
+    "named": false
+  },
+  {
     "type": "interna",
+    "named": false
+  },
+  {
+    "type": "internal",
     "named": false
   },
   {
@@ -751,7 +1051,15 @@
     "named": false
   },
   {
+    "type": "is",
+    "named": false
+  },
+  {
     "type": "itera",
+    "named": false
+  },
+  {
+    "type": "iterator",
     "named": false
   },
   {
@@ -763,11 +1071,23 @@
     "named": false
   },
   {
+    "type": "kernel",
+    "named": false
+  },
+  {
+    "type": "lambda",
+    "named": false
+  },
+  {
     "type": "lane",
     "named": false
   },
   {
     "type": "lege",
+    "named": false
+  },
+  {
+    "type": "let",
     "named": false
   },
   {
@@ -799,6 +1119,10 @@
     "named": false
   },
   {
+    "type": "line",
+    "named": false
+  },
+  {
     "type": "line_comment",
     "named": true
   },
@@ -807,11 +1131,19 @@
     "named": false
   },
   {
+    "type": "list",
+    "named": false
+  },
+  {
     "type": "lista",
     "named": false
   },
   {
     "type": "littera",
+    "named": false
+  },
+  {
+    "type": "long",
     "named": false
   },
   {
@@ -836,6 +1168,18 @@
   },
   {
     "type": "magnitudo",
+    "named": false
+  },
+  {
+    "type": "main",
+    "named": false
+  },
+  {
+    "type": "map",
+    "named": false
+  },
+  {
+    "type": "match",
     "named": false
   },
   {
@@ -903,7 +1247,23 @@
     "named": false
   },
   {
+    "type": "mut",
+    "named": false
+  },
+  {
+    "type": "name",
+    "named": false
+  },
+  {
+    "type": "negative",
+    "named": false
+  },
+  {
     "type": "negativum",
+    "named": false
+  },
+  {
+    "type": "never",
     "named": false
   },
   {
@@ -923,6 +1283,10 @@
     "named": false
   },
   {
+    "type": "none",
+    "named": false
+  },
+  {
     "type": "nonnihil",
     "named": false
   },
@@ -931,11 +1295,19 @@
     "named": false
   },
   {
+    "type": "not",
+    "named": false
+  },
+  {
     "type": "nota",
     "named": false
   },
   {
     "type": "nucleum",
+    "named": false
+  },
+  {
+    "type": "null",
     "named": false
   },
   {
@@ -975,19 +1347,43 @@
     "named": false
   },
   {
-    "type": "operandus",
+    "type": "only",
     "named": false
   },
   {
-    "type": "operator",
-    "named": true
+    "type": "only_in",
+    "named": false
+  },
+  {
+    "type": "operand",
+    "named": false
+  },
+  {
+    "type": "operandus",
+    "named": false
   },
   {
     "type": "optio",
     "named": false
   },
   {
+    "type": "option",
+    "named": false
+  },
+  {
+    "type": "optional",
+    "named": false
+  },
+  {
     "type": "optiones",
+    "named": false
+  },
+  {
+    "type": "options",
+    "named": false
+  },
+  {
+    "type": "or",
     "named": false
   },
   {
@@ -999,11 +1395,27 @@
     "named": false
   },
   {
+    "type": "panic",
+    "named": false
+  },
+  {
+    "type": "pass",
+    "named": false
+  },
+  {
+    "type": "penes",
+    "named": false
+  },
+  {
     "type": "per",
     "named": false
   },
   {
     "type": "perge",
+    "named": false
+  },
+  {
+    "type": "positive",
     "named": false
   },
   {
@@ -1035,7 +1447,15 @@
     "named": false
   },
   {
+    "type": "print",
+    "named": false
+  },
+  {
     "type": "privata",
+    "named": false
+  },
+  {
+    "type": "private",
     "named": false
   },
   {
@@ -1047,11 +1467,23 @@
     "named": false
   },
   {
+    "type": "promise",
+    "named": false
+  },
+  {
     "type": "promissum",
     "named": false
   },
   {
     "type": "protecta",
+    "named": false
+  },
+  {
+    "type": "protected",
+    "named": false
+  },
+  {
+    "type": "public",
     "named": false
   },
   {
@@ -1067,7 +1499,23 @@
     "named": false
   },
   {
+    "type": "range",
+    "named": false
+  },
+  {
     "type": "ratio",
+    "named": false
+  },
+  {
+    "type": "read",
+    "named": false
+  },
+  {
+    "type": "readonly",
+    "named": false
+  },
+  {
+    "type": "record",
     "named": false
   },
   {
@@ -1079,6 +1527,10 @@
     "named": false
   },
   {
+    "type": "ref",
+    "named": false
+  },
+  {
     "type": "regex",
     "named": false
   },
@@ -1087,7 +1539,23 @@
     "named": false
   },
   {
+    "type": "reject",
+    "named": false
+  },
+  {
+    "type": "rename",
+    "named": false
+  },
+  {
+    "type": "repeat",
+    "named": false
+  },
+  {
     "type": "repete",
+    "named": false
+  },
+  {
+    "type": "require",
     "named": false
   },
   {
@@ -1095,7 +1563,23 @@
     "named": false
   },
   {
+    "type": "rest",
+    "named": false
+  },
+  {
+    "type": "return",
+    "named": false
+  },
+  {
+    "type": "return_await",
+    "named": false
+  },
+  {
     "type": "rumpe",
+    "named": false
+  },
+  {
+    "type": "saturating",
     "named": false
   },
   {
@@ -1119,7 +1603,19 @@
     "named": false
   },
   {
+    "type": "self",
+    "named": false
+  },
+  {
     "type": "series",
+    "named": false
+  },
+  {
+    "type": "set",
+    "named": false
+  },
+  {
+    "type": "setup",
     "named": false
   },
   {
@@ -1132,6 +1628,10 @@
   },
   {
     "type": "sf64",
+    "named": false
+  },
+  {
+    "type": "short",
     "named": false
   },
   {
@@ -1167,11 +1667,23 @@
     "named": false
   },
   {
+    "type": "size",
+    "named": false
+  },
+  {
+    "type": "skip",
+    "named": false
+  },
+  {
     "type": "solum",
     "named": false
   },
   {
     "type": "solum_in",
+    "named": false
+  },
+  {
+    "type": "some",
     "named": false
   },
   {
@@ -1187,7 +1699,23 @@
     "named": false
   },
   {
+    "type": "spread",
+    "named": false
+  },
+  {
     "type": "stack",
+    "named": false
+  },
+  {
+    "type": "static",
+    "named": false
+  },
+  {
+    "type": "step",
+    "named": false
+  },
+  {
+    "type": "string",
     "named": false
   },
   {
@@ -1211,6 +1739,10 @@
     "named": false
   },
   {
+    "type": "switch",
+    "named": false
+  },
+  {
     "type": "tabula",
     "named": false
   },
@@ -1227,11 +1759,19 @@
     "named": false
   },
   {
+    "type": "teardown",
+    "named": false
+  },
+  {
     "type": "temporis",
     "named": false
   },
   {
     "type": "tensor",
+    "named": false
+  },
+  {
+    "type": "test",
     "named": false
   },
   {
@@ -1251,6 +1791,18 @@
     "named": false
   },
   {
+    "type": "then",
+    "named": false
+  },
+  {
+    "type": "throw",
+    "named": false
+  },
+  {
+    "type": "throws",
+    "named": false
+  },
+  {
     "type": "ti16",
     "named": false
   },
@@ -1267,6 +1819,26 @@
     "named": false
   },
   {
+    "type": "timeout",
+    "named": false
+  },
+  {
+    "type": "todo",
+    "named": false
+  },
+  {
+    "type": "trap",
+    "named": false
+  },
+  {
+    "type": "trapping",
+    "named": false
+  },
+  {
+    "type": "true",
+    "named": false
+  },
+  {
     "type": "tu16",
     "named": false
   },
@@ -1280,6 +1852,14 @@
   },
   {
     "type": "tu8",
+    "named": false
+  },
+  {
+    "type": "tuple",
+    "named": false
+  },
+  {
+    "type": "type",
     "named": false
   },
   {
@@ -1311,6 +1891,22 @@
     "named": false
   },
   {
+    "type": "union",
+    "named": false
+  },
+  {
+    "type": "unknown",
+    "named": false
+  },
+  {
+    "type": "unstable",
+    "named": false
+  },
+  {
+    "type": "until",
+    "named": false
+  },
+  {
     "type": "usque",
     "named": false
   },
@@ -1331,11 +1927,19 @@
     "named": false
   },
   {
+    "type": "var",
+    "named": false
+  },
+  {
     "type": "varia",
     "named": false
   },
   {
     "type": "variandum",
+    "named": false
+  },
+  {
+    "type": "variant",
     "named": false
   },
   {
@@ -1395,6 +1999,10 @@
     "named": false
   },
   {
+    "type": "void",
+    "named": false
+  },
+  {
     "type": "vu16",
     "named": false
   },
@@ -1408,6 +2016,34 @@
   },
   {
     "type": "vu8",
+    "named": false
+  },
+  {
+    "type": "warn",
+    "named": false
+  },
+  {
+    "type": "while",
+    "named": false
+  },
+  {
+    "type": "within",
+    "named": false
+  },
+  {
+    "type": "wrapping",
+    "named": false
+  },
+  {
+    "type": "write",
+    "named": false
+  },
+  {
+    "type": "yield",
+    "named": false
+  },
+  {
+    "type": "yields",
     "named": false
   },
   {

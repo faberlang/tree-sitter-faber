@@ -7,8 +7,8 @@ only — not structural parsing, diagnostics, an LSP, rendering, WebGPU, or runt
 support.
 
 Highlight vocabulary is generated from the Radix compiler (`keywords.rs`, builtin
-types, annotation spellings). Radix defines what Faber *is*; this repo defines how
-editors *display* it.
+types, annotation spellings) and its reader-locale packs (`locale/<id>/pack.toml`).
+Radix defines what Faber *is*; this repo defines how editors *display* it.
 
 ## What you get
 
@@ -69,6 +69,60 @@ be advanced (see [Pin-drift check](#pin-drift-check)).
 
 ---
 
+## Locale-aware vocabulary
+
+Faber has sealed reader locales: `en` is the default code surface (`fn`, `const`,
+`if`, `print`, `main`, `int`, ...) and `la` is the explicit Latin surface
+(`functio`, `fixum`, `si`, `nota`, `incipit`, `numerus`, ...). A file declares its
+locale in `+++ locale = "..." +++` frontmatter; when absent, Radix falls back to
+the package/CLI locale, which defaults to `en`.
+
+A tree-sitter grammar is context-free, so it cannot seal locales per file.
+Instead the generated grammar recognizes the **union** of the `en` and `la`
+spellings: a word is a keyword token whichever locale the file uses. Mixing never
+occurs in valid code, so the union only matters for the few words that are
+keywords in one locale and ordinary identifiers in another (measured below).
+
+How the vocabulary is built (`scripta/radix_vocab.py`):
+
+- The active keyword registry in Radix (`keywords.rs`) supplies the Latin
+  canonical names and their category (control, declaration, other, boolean).
+- For each supported locale (`HIGHLIGHT_LOCALES`), `pack.toml` `[keywords]` maps a
+  canonical name to its surface spelling; the surface inherits the canonical's
+  category. `[types]` maps builtin type names the same way (`numerus` -> `int`).
+  Annotation names and modifiers map through the same tables.
+- Generation **fails** if a supported pack has no row for an active registry
+  keyword or builtin type, or if a pack spelling is not an ASCII identifier, so a
+  keyword added to Radix without its pack rows cannot drift silently.
+- Contextual keywords (words Radix claims by grammar position rather than as a
+  global token, such as `free`, `sum`, `max`, `name`, `empty`) are deliberately
+  not keyword tokens: as ordinary identifiers they are too common to repaint.
+
+Two mechanisms keep the union from repainting real code:
+
+- **Member names.** The word after `.`, `?.`, or `!.` is always an identifier
+  (`grid.set(...)`, `r.value`, `xs.map(...)`, `n.valor`), through the
+  `member_access` rule.
+- **Ambiguous type spellings.** `value` (the `en` spelling of `valor`) is not
+  highlighted as a builtin type: it is overwhelmingly a binding name.
+
+Known limits (not handled; tree-sitter here is token highlighting, not a parser):
+
+- A keyword spelling used as a binding or parameter name (`fn print(string print)`,
+  `int valor`, `const f64 negative`) is highlighted as the keyword. Radix accepts
+  these; telling them apart needs type-first declaration parsing.
+- Latin type spellings used as identifiers in `en` files (`valor`, `numerus`,
+  `ratio`, `lista`) highlight as types.
+- The six translated packs (`ar`, `hi`, `th-TH`, `vi`, `zh-Hans`, `zh-Hant`) are not
+  included: their spellings are non-ASCII and need a Unicode `identifier` token
+  and word-boundary handling. Adding one is a `HIGHLIGHT_LOCALES` change plus that
+  grammar work.
+- Builtin types that only exist as `[types]` rows without a Radix conversion-type
+  entry (`any`, `object`, `filter`, `send`, `recv`, `channel`, `frame`, ...) are
+  not highlighted.
+
+---
+
 ## Maintainer workflow
 
 Regenerate from Radix after lexer changes:
@@ -102,8 +156,10 @@ tree-sitter-faber/
   src/scanner.c              # line-start `#` comment policy
   scripta/
     regenerate               # generate grammar + parser + TextMate
+    radix_vocab.py           # Radix registry + locale packs -> vocabulary
     prepare_zed_dev          # clear Zed's cached grammar clone before reinstall
     check_highlight_contract.py
+  fixtures/                  # contract inputs (locale-en.fab, locale-la.fab, ...)
 ```
 
 `grammars/faber/` (Zed's git clone of the grammar at `extension.toml` `rev`) and
@@ -171,8 +227,9 @@ Do not commit `grammars/faber/`; it is Zed's working copy.
 
 The grammar uses a thin `annotation` subtree (`@ cli`, `@ json`, `@ optio`, …).
 Annotation **names** and **modifiers** (`descriptio`, `longum`, `nomen`) come from
-Radix annotation vocabulary, separate from global keywords and builtin types. If a
-new CLI annotation spelling is missing, add it in Radix / `scripta/radix_vocab.py`
+Radix annotation vocabulary (and the `en`/`la` pack spellings of it, e.g. `option`,
+`long`, `description`), separate from global keywords and builtin types. If a new
+CLI annotation spelling is missing, add it in Radix / `scripta/radix_vocab.py`
 and regenerate.
 
 ### Pin-drift check
@@ -231,6 +288,12 @@ query probe that must fail. The default `npm test` path includes
 `fixtures/corpus-derived.fab`, a stable in-repo regression fixture distilled from
 `radix/corpus` snippets that should block releases when parser/highlight drift
 returns.
+
+`fixtures/locale-en.fab` and `fixtures/locale-la.fab` cover one file per reader
+locale; the contract also pins real keyword, type, null, and boolean spellings in
+each (and member names after `.`) to their expected node kinds, because the Radix
+side of the comparison is classified from the same vocabulary the grammar is
+generated from and cannot detect a spelling that silently stopped being a keyword.
 
 `npm run test:corpus-derived` isolates that fixture when narrowing a regression.
 `npm run audit:corpus` runs the first sorted corpus sample from `../radix/corpus`

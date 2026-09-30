@@ -30,8 +30,17 @@ def longest_first(words: list[str]) -> list[str]:
     return sorted(words, key=lambda s: (-len(s), s))
 
 
+# Member-access glyphs. The word after one is always an identifier (EBNF
+# member/optional/non-null suffix: `'.' IDENTIFIER`), never a keyword, so the
+# grammar lexes them as their own rule (`member_access`) instead of as free
+# operators. tree-sitter lexes contextually: after a member glyph only
+# identifier (or a tuple-index number) is valid, so `x.map`, `r.value`, or
+# `s.set(...)` keep their member name as a plain identifier in every locale.
+MEMBER_GLYPHS = (".", "?.", "!.")
+
+
 def js_operator_rule(operators: list[str]) -> str:
-    ordered = longest_first(operators)
+    ordered = longest_first([op for op in operators if op not in MEMBER_GLYPHS])
     parts = ",\n".join(f"                {js_string(op)}" for op in ordered)
     return (
         "        operator: $ =>\n"
@@ -166,9 +175,16 @@ def build_grammar_js(vocab: dict[str, list[str]]) -> str:
         + "                $.number,\n"
         + "                $.identifier,\n"
         + "                $.operator,\n"
+        + "                $.member_access,\n"
         + "                $.punctuation,\n"
         + "                $.hash,\n"
         + "            ),\n\n"
+        + "        member_access: ($) =>\n"
+        + "            seq(\n"
+        + "                alias($.member_glyph, $.operator),\n"
+        + "                choice($.identifier, $.number),\n"
+        + "            ),\n\n"
+        + f"        member_glyph: ($) => choice({', '.join(js_string(g) for g in MEMBER_GLYPHS)}),\n\n"
         + js_keyword_rule("keyword_control", vocab["keyword_control"])
         + js_keyword_rule("keyword_declaration", vocab["keyword_declaration"])
         + js_keyword_rule("keyword_other", vocab["keyword_other"])

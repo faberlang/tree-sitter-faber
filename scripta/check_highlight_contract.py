@@ -207,6 +207,7 @@ def normalize_radix_kind(raw: str) -> tuple[str, str | None]:
         "Percent",
         "Dot",
         "DotDot",
+        "Ellipsis",
         "Bang",
         "Question",
         "Maximum",
@@ -228,7 +229,7 @@ def normalize_radix_kind(raw: str) -> tuple[str, str | None]:
         "Ballot",
         "Pilcrow",
     } or base.startswith(
-        ("Eq", "Lt", "Gt", "Bang", "Question", "Bitwise", "Post", "Arrow", "Exit", "Assign", "Cup", "Conversio", "Verte", "Approx")
+        ("Eq", "Lt", "Gt", "Bang", "Question", "Bitwise", "Post", "Arrow", "Exit", "Assign", "Cup", "Conversio", "Verte", "Approx", "Fuzzy")
     ):
         return "operator", None
     if base.endswith(")"):
@@ -237,13 +238,14 @@ def normalize_radix_kind(raw: str) -> tuple[str, str | None]:
 
 
 def latin_keyword_spellings() -> tuple[set[str], set[str]]:
-    """Latin keyword + boolean spellings from the Radix registry.
+    """Keyword + boolean spellings: Latin registry plus the en/la locale packs.
 
     The radix `lex` CLI (no locale pack) deliberately returns every registered
     keyword as `Ident` — the parser claims keywords by identity. The tree-sitter
     grammar classifies them as keywords (and `verum`/`falsum` as booleans), so
     the contract comparison must do the same on the radix side, using the same
-    registry the grammar generator reads.
+    registry and locale packs the grammar generator reads (the union vocabulary;
+    locale surfaces are sealed in Radix but not in a context-free grammar).
     """
     global _LATIN_KEYWORD_SPELLINGS
     if _LATIN_KEYWORD_SPELLINGS is None:
@@ -285,20 +287,38 @@ def run_radix_lex(radix_bin: Path, body: str) -> list[Leaf]:
     )
     payload = json.loads(proc.stdout)
 
+    tokens = [
+        token
+        for token in payload["tokens"]
+        if token["span"][0] >= 0 and token["span"][1] > token["span"][0]
+        and normalize_radix_kind(token["kind"])[0] != "ignore"
+    ]
     leaves: list[Leaf] = []
     prev_was_at = False
-    for token in payload["tokens"]:
+    in_braced_annotation = False
+    prev_raw = ""
+    for index, token in enumerate(tokens):
         kind_raw = token["kind"]
         start = token["span"][0]
         end = token["span"][1]
-        if start < 0 or end <= start:
-            continue
         kind, _ = normalize_radix_kind(kind_raw)
-        if kind == "ignore":
-            continue
         if kind == "identifier":
             span_text = slice_bytes(body, start, end)
-            if prev_was_at:
+            next_text = (
+                slice_bytes(body, tokens[index + 1]["span"][0], tokens[index + 1]["span"][1])
+                if index + 1 < len(tokens)
+                else ""
+            )
+            if in_braced_annotation and prev_raw in {"LBrace", "Comma"} and next_text == "=":
+                # Braced-annotation field key (`@ cli { type = bool }`): the
+                # grammar lexes it as annotation_modifier/identifier even when
+                # the word is a keyword spelling in some locale (type, fragment).
+                kind = "type_or_ident"
+            elif prev_raw in {"Dot", "QuestionDot", "BangDot"}:
+                # Member name: the grammar's `member_access` rule lexes the word
+                # after `.`/`?.`/`!.` as an identifier, never a keyword.
+                kind = "type_or_ident"
+            elif prev_was_at:
                 # Annotation-name position: the grammar lexes the word after
                 # `@` as `known_annotation_name` → type_or_ident, except the
                 # visibility names (privata/publica/protecta) which stay
@@ -307,7 +327,12 @@ def run_radix_lex(radix_bin: Path, body: str) -> list[Leaf]:
             else:
                 kind = radix_kind_for_ident(span_text, span_text)
         leaves.append(Leaf(start, end, kind))
+        if kind_raw == "LBrace" and index >= 2 and tokens[index - 2]["kind"] == "At":
+            in_braced_annotation = True
+        elif kind_raw == "RBrace":
+            in_braced_annotation = False
         prev_was_at = kind_raw == "At"
+        prev_raw = kind_raw
     return leaves
 
 
@@ -334,6 +359,7 @@ def run_tree_sitter_leaves(
         "annotation_field",
         "annotation_arguments",
         "annotation_name",
+        "member_access",
     }
 
     for element in root.iter():
@@ -461,8 +487,6 @@ def normalize_compare_kind(kind: str, text: str | None = None) -> str:
     if kind in {"ascii_string", "backtick_string", "octeti_string", "guillemet_string"}:
         return "string"
     if kind == "known_annotation_name" and text in VISIBILITY_ANNOTATION_NAMES:
-        return "keyword"
-    if kind in {"annotation_modifier", "identifier"} and text == "typus":
         return "keyword"
     if kind in {
         "identifier",
@@ -709,6 +733,83 @@ def check_vocabulary_contract() -> list[str]:
     return issues
 
 
+# Fixture -> {word: tree-sitter node kind}. The radix side of the leaf comparison
+# classifies words by the same vocabulary the grammar is generated from, so it
+# cannot catch a locale spelling that silently stopped being a keyword; these
+# expectations pin real spellings (from radix/locale/<id>/pack.toml) to node kinds.
+LOCALE_FIXTURE_EXPECTATIONS = {
+    "locale-en.fab": {
+        "fn": "keyword_declaration",
+        "const": "keyword_declaration",
+        "var": "keyword_declaration",
+        "return": "keyword_control",
+        "if": "keyword_control",
+        "else": "keyword_control",
+        "do": "keyword_control",
+        "catch": "keyword_control",
+        "throw": "keyword_control",
+        "main": "keyword_control",
+        "print": "keyword_other",
+        "null": "keyword_other",
+        "none": "keyword_other",
+        "true": "boolean",
+        "int": "builtin_type",
+        "string": "builtin_type",
+        "bool": "builtin_type",
+        "void": "builtin_type",
+    },
+    "locale-la.fab": {
+        "functio": "keyword_declaration",
+        "fixum": "keyword_declaration",
+        "varia": "keyword_declaration",
+        "redde": "keyword_control",
+        "si": "keyword_control",
+        "secus": "keyword_control",
+        "fac": "keyword_control",
+        "cape": "keyword_control",
+        "iace": "keyword_control",
+        "incipit": "keyword_control",
+        "nota": "keyword_other",
+        "nulla": "keyword_other",
+        "nihil": "keyword_other",
+        "verum": "boolean",
+        "numerus": "builtin_type",
+        "textus": "builtin_type",
+        "bivalens": "builtin_type",
+        "vacuum": "builtin_type",
+    },
+}
+
+# (fixture, member word): the word after `.` must stay a plain identifier even
+# when it is a type spelling in that locale (`.set` in en, `.valor` in la).
+LOCALE_MEMBER_EXPECTATIONS = {
+    "locale-en.fab": ("map", "set"),
+    "locale-la.fab": ("map", "valor"),
+}
+
+
+def check_locale_fixtures() -> list[str]:
+    issues: list[str] = []
+    for name, expected in LOCALE_FIXTURE_EXPECTATIONS.items():
+        path = REPO_ROOT / "fixtures" / name
+        if not path.is_file():
+            issues.append(f"missing locale fixture {name}")
+            continue
+        body, _ = peel_frontmatter(path.read_text(encoding="utf-8"))
+        leaves = run_tree_sitter_leaves(REPO_ROOT, body)
+        seen: dict[str, set[str]] = {}
+        for index, leaf in enumerate(leaves):
+            text = slice_bytes(body, leaf.start, leaf.end)
+            seen.setdefault(text, set()).add(leaf.kind)
+            if index and slice_bytes(body, leaves[index - 1].start, leaves[index - 1].end) == ".":
+                if text in LOCALE_MEMBER_EXPECTATIONS[name] and leaf.kind != "identifier":
+                    issues.append(f"{name}: member name {text!r} after '.' lexed as {leaf.kind}, expected identifier")
+        for word, kind in expected.items():
+            if kind not in seen.get(word, set()):
+                issues.append(f"{name}: {word!r} expected as {kind}, got {sorted(seen.get(word, set())) or 'absent'}")
+    return issues
+
+
 def check_tree_sitter_temp_cleanup() -> list[str]:
     source = (REPO_ROOT / "fixtures" / "annotations.fab").read_text(encoding="utf-8")
     issues: list[str] = []
@@ -820,6 +921,7 @@ def main() -> int:
     issues.extend(check_invalid_highlight_query_probe(files))
     issues.extend(check_textmate_annotation_scopes())
     issues.extend(check_vocabulary_contract())
+    issues.extend(check_locale_fixtures())
 
     if issues:
         print("highlight contract failures:")

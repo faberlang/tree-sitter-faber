@@ -1,0 +1,39 @@
++++
+locale = "en"
++++
+# English reader surface (locale = "en"): keywords, types, and null/boolean
+# spellings come from radix/locale/en/pack.toml. Derived from radix/corpus
+# functio/functio.fab and cape/cape.fab.
+
+fn greet(string name) → void {
+    print name
+}
+
+fn double(int n) → int {
+    return n * 2
+}
+
+fn describe(int n) → string {
+    if n ≻ 1 {
+        return "big"
+    } else {
+        return "small"
+    }
+}
+
+main {
+    greet("Hello!")
+    const string label ← describe(double(21))
+    print label
+    var int attempt ← 0
+    do {
+        attempt ← attempt + 1
+        throw "simulated failure"
+    }
+    catch err {
+        print "caught"
+    }
+    const bool flag ← true
+    const int ∪ none missing ← null
+    const int items ← [1, 2, 3].map(int x ∴ x * 2).set
+}

@@ -176,7 +176,15 @@
         },
         {
           "type": "STRING",
+          "value": "command"
+        },
+        {
+          "type": "STRING",
           "value": "conversio"
+        },
+        {
+          "type": "STRING",
+          "value": "conversion"
         },
         {
           "type": "STRING",
@@ -192,6 +200,10 @@
         },
         {
           "type": "STRING",
+          "value": "future"
+        },
+        {
+          "type": "STRING",
           "value": "imperia"
         },
         {
@@ -204,11 +216,19 @@
         },
         {
           "type": "STRING",
+          "value": "kernel"
+        },
+        {
+          "type": "STRING",
           "value": "nondum"
         },
         {
           "type": "STRING",
           "value": "nucleum"
+        },
+        {
+          "type": "STRING",
+          "value": "operand"
         },
         {
           "type": "STRING",
@@ -220,11 +240,27 @@
         },
         {
           "type": "STRING",
+          "value": "option"
+        },
+        {
+          "type": "STRING",
           "value": "privata"
         },
         {
           "type": "STRING",
+          "value": "private"
+        },
+        {
+          "type": "STRING",
           "value": "protecta"
+        },
+        {
+          "type": "STRING",
+          "value": "protected"
+        },
+        {
+          "type": "STRING",
+          "value": "public"
         },
         {
           "type": "STRING",
@@ -233,6 +269,14 @@
         {
           "type": "STRING",
           "value": "radix"
+        },
+        {
+          "type": "STRING",
+          "value": "rename"
+        },
+        {
+          "type": "STRING",
+          "value": "unstable"
         },
         {
           "type": "STRING",
@@ -274,7 +318,19 @@
         },
         {
           "type": "STRING",
+          "value": "description"
+        },
+        {
+          "type": "STRING",
+          "value": "global"
+        },
+        {
+          "type": "STRING",
           "value": "lane"
+        },
+        {
+          "type": "STRING",
+          "value": "long"
         },
         {
           "type": "STRING",
@@ -282,7 +338,15 @@
         },
         {
           "type": "STRING",
+          "value": "name"
+        },
+        {
+          "type": "STRING",
           "value": "nomen"
+        },
+        {
+          "type": "STRING",
+          "value": "short"
         },
         {
           "type": "STRING",
@@ -303,7 +367,27 @@
         },
         {
           "type": "STRING",
+          "value": "bool"
+        },
+        {
+          "type": "STRING",
+          "value": "byte"
+        },
+        {
+          "type": "STRING",
+          "value": "bytes"
+        },
+        {
+          "type": "STRING",
+          "value": "char"
+        },
+        {
+          "type": "STRING",
           "value": "copia"
+        },
+        {
+          "type": "STRING",
+          "value": "cursor_t"
         },
         {
           "type": "STRING",
@@ -320,6 +404,10 @@
         {
           "type": "STRING",
           "value": "f64"
+        },
+        {
+          "type": "STRING",
+          "value": "float"
         },
         {
           "type": "STRING",
@@ -351,7 +439,19 @@
         },
         {
           "type": "STRING",
+          "value": "instant"
+        },
+        {
+          "type": "STRING",
+          "value": "int"
+        },
+        {
+          "type": "STRING",
           "value": "intervallum"
+        },
+        {
+          "type": "STRING",
+          "value": "iterator"
         },
         {
           "type": "STRING",
@@ -383,6 +483,10 @@
         },
         {
           "type": "STRING",
+          "value": "list"
+        },
+        {
+          "type": "STRING",
           "value": "lista"
         },
         {
@@ -404,6 +508,10 @@
         {
           "type": "STRING",
           "value": "lu8"
+        },
+        {
+          "type": "STRING",
+          "value": "map"
         },
         {
           "type": "STRING",
@@ -455,6 +563,10 @@
         },
         {
           "type": "STRING",
+          "value": "never"
+        },
+        {
+          "type": "STRING",
           "value": "numerus"
         },
         {
@@ -471,6 +583,10 @@
         },
         {
           "type": "STRING",
+          "value": "promise"
+        },
+        {
+          "type": "STRING",
           "value": "promissum"
         },
         {
@@ -483,7 +599,15 @@
         },
         {
           "type": "STRING",
+          "value": "record"
+        },
+        {
+          "type": "STRING",
           "value": "regex"
+        },
+        {
+          "type": "STRING",
+          "value": "saturating"
         },
         {
           "type": "STRING",
@@ -492,6 +616,10 @@
         {
           "type": "STRING",
           "value": "series"
+        },
+        {
+          "type": "STRING",
+          "value": "set"
         },
         {
           "type": "STRING",
@@ -528,6 +656,10 @@
         {
           "type": "STRING",
           "value": "stack"
+        },
+        {
+          "type": "STRING",
+          "value": "string"
         },
         {
           "type": "STRING",
@@ -587,6 +719,10 @@
         },
         {
           "type": "STRING",
+          "value": "trapping"
+        },
+        {
+          "type": "STRING",
           "value": "tu16"
         },
         {
@@ -620,6 +756,10 @@
         {
           "type": "STRING",
           "value": "unio"
+        },
+        {
+          "type": "STRING",
+          "value": "unknown"
         },
         {
           "type": "STRING",
@@ -664,6 +804,10 @@
         {
           "type": "STRING",
           "value": "vi8"
+        },
+        {
+          "type": "STRING",
+          "value": "void"
         },
         {
           "type": "STRING",
@@ -969,11 +1113,59 @@
         },
         {
           "type": "SYMBOL",
+          "name": "member_access"
+        },
+        {
+          "type": "SYMBOL",
           "name": "punctuation"
         },
         {
           "type": "SYMBOL",
           "name": "hash"
+        }
+      ]
+    },
+    "member_access": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "SYMBOL",
+            "name": "member_glyph"
+          },
+          "named": true,
+          "value": "operator"
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "identifier"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "number"
+            }
+          ]
+        }
+      ]
+    },
+    "member_glyph": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "."
+        },
+        {
+          "type": "STRING",
+          "value": "?."
+        },
+        {
+          "type": "STRING",
+          "value": "!."
         }
       ]
     },
@@ -994,7 +1186,31 @@
         },
         {
           "type": "STRING",
+          "value": "args"
+        },
+        {
+          "type": "STRING",
           "value": "argumenta"
+        },
+        {
+          "type": "STRING",
+          "value": "assert"
+        },
+        {
+          "type": "STRING",
+          "value": "async_main"
+        },
+        {
+          "type": "STRING",
+          "value": "at"
+        },
+        {
+          "type": "STRING",
+          "value": "break"
+        },
+        {
+          "type": "STRING",
+          "value": "call"
         },
         {
           "type": "STRING",
@@ -1006,7 +1222,15 @@
         },
         {
           "type": "STRING",
+          "value": "case"
+        },
+        {
+          "type": "STRING",
           "value": "casu"
+        },
+        {
+          "type": "STRING",
+          "value": "catch"
         },
         {
           "type": "STRING",
@@ -1014,7 +1238,15 @@
         },
         {
           "type": "STRING",
+          "value": "continue"
+        },
+        {
+          "type": "STRING",
           "value": "custodi"
+        },
+        {
+          "type": "STRING",
+          "value": "default"
         },
         {
           "type": "STRING",
@@ -1022,11 +1254,23 @@
         },
         {
           "type": "STRING",
+          "value": "do"
+        },
+        {
+          "type": "STRING",
           "value": "dum"
         },
         {
           "type": "STRING",
+          "value": "elif"
+        },
+        {
+          "type": "STRING",
           "value": "elige"
+        },
+        {
+          "type": "STRING",
+          "value": "else"
         },
         {
           "type": "STRING",
@@ -1038,7 +1282,19 @@
         },
         {
           "type": "STRING",
+          "value": "for"
+        },
+        {
+          "type": "STRING",
+          "value": "guard"
+        },
+        {
+          "type": "STRING",
           "value": "iace"
+        },
+        {
+          "type": "STRING",
+          "value": "if"
         },
         {
           "type": "STRING",
@@ -1054,7 +1310,23 @@
         },
         {
           "type": "STRING",
+          "value": "main"
+        },
+        {
+          "type": "STRING",
+          "value": "match"
+        },
+        {
+          "type": "STRING",
           "value": "mori"
+        },
+        {
+          "type": "STRING",
+          "value": "panic"
+        },
+        {
+          "type": "STRING",
+          "value": "pass"
         },
         {
           "type": "STRING",
@@ -1070,7 +1342,19 @@
         },
         {
           "type": "STRING",
+          "value": "reject"
+        },
+        {
+          "type": "STRING",
+          "value": "require"
+        },
+        {
+          "type": "STRING",
           "value": "requirit"
+        },
+        {
+          "type": "STRING",
+          "value": "return"
         },
         {
           "type": "STRING",
@@ -1094,7 +1378,31 @@
         },
         {
           "type": "STRING",
+          "value": "switch"
+        },
+        {
+          "type": "STRING",
           "value": "tacet"
+        },
+        {
+          "type": "STRING",
+          "value": "then"
+        },
+        {
+          "type": "STRING",
+          "value": "throw"
+        },
+        {
+          "type": "STRING",
+          "value": "trap"
+        },
+        {
+          "type": "STRING",
+          "value": "while"
+        },
+        {
+          "type": "STRING",
+          "value": "yields"
         }
       ]
     },
@@ -1107,7 +1415,19 @@
         },
         {
           "type": "STRING",
+          "value": "class"
+        },
+        {
+          "type": "STRING",
+          "value": "column"
+        },
+        {
+          "type": "STRING",
           "value": "columna"
+        },
+        {
+          "type": "STRING",
+          "value": "const"
         },
         {
           "type": "STRING",
@@ -1115,7 +1435,19 @@
         },
         {
           "type": "STRING",
+          "value": "enum"
+        },
+        {
+          "type": "STRING",
           "value": "errata"
+        },
+        {
+          "type": "STRING",
+          "value": "errors"
+        },
+        {
+          "type": "STRING",
+          "value": "exit"
         },
         {
           "type": "STRING",
@@ -1124,6 +1456,10 @@
         {
           "type": "STRING",
           "value": "fixum"
+        },
+        {
+          "type": "STRING",
+          "value": "fn"
         },
         {
           "type": "STRING",
@@ -1151,7 +1487,15 @@
         },
         {
           "type": "STRING",
+          "value": "import"
+        },
+        {
+          "type": "STRING",
           "value": "importa"
+        },
+        {
+          "type": "STRING",
+          "value": "interface"
         },
         {
           "type": "STRING",
@@ -1159,7 +1503,15 @@
         },
         {
           "type": "STRING",
+          "value": "internal"
+        },
+        {
+          "type": "STRING",
           "value": "iuncta"
+        },
+        {
+          "type": "STRING",
+          "value": "let"
         },
         {
           "type": "STRING",
@@ -1167,7 +1519,15 @@
         },
         {
           "type": "STRING",
+          "value": "optional"
+        },
+        {
+          "type": "STRING",
           "value": "optiones"
+        },
+        {
+          "type": "STRING",
+          "value": "options"
         },
         {
           "type": "STRING",
@@ -1183,11 +1543,31 @@
         },
         {
           "type": "STRING",
+          "value": "private"
+        },
+        {
+          "type": "STRING",
           "value": "protecta"
         },
         {
           "type": "STRING",
+          "value": "protected"
+        },
+        {
+          "type": "STRING",
+          "value": "public"
+        },
+        {
+          "type": "STRING",
           "value": "publica"
+        },
+        {
+          "type": "STRING",
+          "value": "readonly"
+        },
+        {
+          "type": "STRING",
+          "value": "rest"
         },
         {
           "type": "STRING",
@@ -1199,11 +1579,39 @@
         },
         {
           "type": "STRING",
+          "value": "size"
+        },
+        {
+          "type": "STRING",
           "value": "sponte"
         },
         {
           "type": "STRING",
+          "value": "static"
+        },
+        {
+          "type": "STRING",
+          "value": "throws"
+        },
+        {
+          "type": "STRING",
+          "value": "tuple"
+        },
+        {
+          "type": "STRING",
+          "value": "type"
+        },
+        {
+          "type": "STRING",
           "value": "typus"
+        },
+        {
+          "type": "STRING",
+          "value": "union"
+        },
+        {
+          "type": "STRING",
+          "value": "var"
         },
         {
           "type": "STRING",
@@ -1220,11 +1628,63 @@
         },
         {
           "type": "STRING",
+          "value": "all"
+        },
+        {
+          "type": "STRING",
+          "value": "and"
+        },
+        {
+          "type": "STRING",
           "value": "ante"
         },
         {
           "type": "STRING",
+          "value": "as"
+        },
+        {
+          "type": "STRING",
+          "value": "async"
+        },
+        {
+          "type": "STRING",
+          "value": "async_generator"
+        },
+        {
+          "type": "STRING",
+          "value": "async_setup"
+        },
+        {
+          "type": "STRING",
+          "value": "async_teardown"
+        },
+        {
+          "type": "STRING",
           "value": "aut"
+        },
+        {
+          "type": "STRING",
+          "value": "await"
+        },
+        {
+          "type": "STRING",
+          "value": "await_const"
+        },
+        {
+          "type": "STRING",
+          "value": "await_var"
+        },
+        {
+          "type": "STRING",
+          "value": "before"
+        },
+        {
+          "type": "STRING",
+          "value": "bench"
+        },
+        {
+          "type": "STRING",
+          "value": "between"
         },
         {
           "type": "STRING",
@@ -1237,6 +1697,14 @@
         {
           "type": "STRING",
           "value": "cli"
+        },
+        {
+          "type": "STRING",
+          "value": "coalesce"
+        },
+        {
+          "type": "STRING",
+          "value": "comptime"
         },
         {
           "type": "STRING",
@@ -1256,7 +1724,19 @@
         },
         {
           "type": "STRING",
+          "value": "debug"
+        },
+        {
+          "type": "STRING",
+          "value": "describe"
+        },
+        {
+          "type": "STRING",
           "value": "ego"
+        },
+        {
+          "type": "STRING",
+          "value": "embed"
         },
         {
           "type": "STRING",
@@ -1273,6 +1753,14 @@
         {
           "type": "STRING",
           "value": "ex"
+        },
+        {
+          "type": "STRING",
+          "value": "exemplum"
+        },
+        {
+          "type": "STRING",
+          "value": "expect_failure"
         },
         {
           "type": "STRING",
@@ -1296,11 +1784,23 @@
         },
         {
           "type": "STRING",
+          "value": "flaky"
+        },
+        {
+          "type": "STRING",
+          "value": "format"
+        },
+        {
+          "type": "STRING",
           "value": "fragilis"
         },
         {
           "type": "STRING",
           "value": "fragment"
+        },
+        {
+          "type": "STRING",
+          "value": "from"
         },
         {
           "type": "STRING",
@@ -1312,7 +1812,15 @@
         },
         {
           "type": "STRING",
+          "value": "generator"
+        },
+        {
+          "type": "STRING",
           "value": "imperium"
+        },
+        {
+          "type": "STRING",
+          "value": "implements"
         },
         {
           "type": "STRING",
@@ -1336,7 +1844,19 @@
         },
         {
           "type": "STRING",
+          "value": "is"
+        },
+        {
+          "type": "STRING",
+          "value": "lambda"
+        },
+        {
+          "type": "STRING",
           "value": "lege"
+        },
+        {
+          "type": "STRING",
+          "value": "line"
         },
         {
           "type": "STRING",
@@ -1356,6 +1876,14 @@
         },
         {
           "type": "STRING",
+          "value": "mut"
+        },
+        {
+          "type": "STRING",
+          "value": "negative"
+        },
+        {
+          "type": "STRING",
           "value": "negativum"
         },
         {
@@ -1372,6 +1900,10 @@
         },
         {
           "type": "STRING",
+          "value": "none"
+        },
+        {
+          "type": "STRING",
           "value": "nonnihil"
         },
         {
@@ -1380,11 +1912,19 @@
         },
         {
           "type": "STRING",
+          "value": "not"
+        },
+        {
+          "type": "STRING",
           "value": "nota"
         },
         {
           "type": "STRING",
           "value": "nucleum"
+        },
+        {
+          "type": "STRING",
+          "value": "null"
         },
         {
           "type": "STRING",
@@ -1400,6 +1940,14 @@
         },
         {
           "type": "STRING",
+          "value": "only"
+        },
+        {
+          "type": "STRING",
+          "value": "only_in"
+        },
+        {
+          "type": "STRING",
           "value": "operandus"
         },
         {
@@ -1408,11 +1956,23 @@
         },
         {
           "type": "STRING",
+          "value": "or"
+        },
+        {
+          "type": "STRING",
           "value": "own"
         },
         {
           "type": "STRING",
+          "value": "penes"
+        },
+        {
+          "type": "STRING",
           "value": "per"
+        },
+        {
+          "type": "STRING",
+          "value": "positive"
         },
         {
           "type": "STRING",
@@ -1440,6 +2000,10 @@
         },
         {
           "type": "STRING",
+          "value": "print"
+        },
+        {
+          "type": "STRING",
           "value": "proba"
         },
         {
@@ -1452,11 +2016,31 @@
         },
         {
           "type": "STRING",
+          "value": "range"
+        },
+        {
+          "type": "STRING",
+          "value": "read"
+        },
+        {
+          "type": "STRING",
           "value": "reddet"
         },
         {
           "type": "STRING",
+          "value": "ref"
+        },
+        {
+          "type": "STRING",
+          "value": "repeat"
+        },
+        {
+          "type": "STRING",
           "value": "repete"
+        },
+        {
+          "type": "STRING",
+          "value": "return_await"
         },
         {
           "type": "STRING",
@@ -1468,6 +2052,18 @@
         },
         {
           "type": "STRING",
+          "value": "self"
+        },
+        {
+          "type": "STRING",
+          "value": "setup"
+        },
+        {
+          "type": "STRING",
+          "value": "skip"
+        },
+        {
+          "type": "STRING",
           "value": "solum"
         },
         {
@@ -1476,7 +2072,19 @@
         },
         {
           "type": "STRING",
+          "value": "some"
+        },
+        {
+          "type": "STRING",
           "value": "sparge"
+        },
+        {
+          "type": "STRING",
+          "value": "spread"
+        },
+        {
+          "type": "STRING",
+          "value": "step"
         },
         {
           "type": "STRING",
@@ -1488,7 +2096,27 @@
         },
         {
           "type": "STRING",
+          "value": "teardown"
+        },
+        {
+          "type": "STRING",
           "value": "temporis"
+        },
+        {
+          "type": "STRING",
+          "value": "test"
+        },
+        {
+          "type": "STRING",
+          "value": "timeout"
+        },
+        {
+          "type": "STRING",
+          "value": "todo"
+        },
+        {
+          "type": "STRING",
+          "value": "until"
         },
         {
           "type": "STRING",
@@ -1501,6 +2129,10 @@
         {
           "type": "STRING",
           "value": "variandum"
+        },
+        {
+          "type": "STRING",
+          "value": "variant"
         },
         {
           "type": "STRING",
@@ -1517,6 +2149,26 @@
         {
           "type": "STRING",
           "value": "vide"
+        },
+        {
+          "type": "STRING",
+          "value": "warn"
+        },
+        {
+          "type": "STRING",
+          "value": "within"
+        },
+        {
+          "type": "STRING",
+          "value": "wrapping"
+        },
+        {
+          "type": "STRING",
+          "value": "write"
+        },
+        {
+          "type": "STRING",
+          "value": "yield"
         }
       ]
     },
@@ -1533,11 +2185,31 @@
         },
         {
           "type": "STRING",
+          "value": "bool"
+        },
+        {
+          "type": "STRING",
+          "value": "byte"
+        },
+        {
+          "type": "STRING",
+          "value": "bytes"
+        },
+        {
+          "type": "STRING",
+          "value": "char"
+        },
+        {
+          "type": "STRING",
           "value": "copia"
         },
         {
           "type": "STRING",
           "value": "cursor"
+        },
+        {
+          "type": "STRING",
+          "value": "cursor_t"
         },
         {
           "type": "STRING",
@@ -1554,6 +2226,10 @@
         {
           "type": "STRING",
           "value": "f64"
+        },
+        {
+          "type": "STRING",
+          "value": "float"
         },
         {
           "type": "STRING",
@@ -1585,7 +2261,19 @@
         },
         {
           "type": "STRING",
+          "value": "instant"
+        },
+        {
+          "type": "STRING",
+          "value": "int"
+        },
+        {
+          "type": "STRING",
           "value": "intervallum"
+        },
+        {
+          "type": "STRING",
+          "value": "iterator"
         },
         {
           "type": "STRING",
@@ -1621,6 +2309,10 @@
         },
         {
           "type": "STRING",
+          "value": "list"
+        },
+        {
+          "type": "STRING",
           "value": "lista"
         },
         {
@@ -1642,6 +2334,10 @@
         {
           "type": "STRING",
           "value": "lu8"
+        },
+        {
+          "type": "STRING",
+          "value": "map"
         },
         {
           "type": "STRING",
@@ -1693,6 +2389,10 @@
         },
         {
           "type": "STRING",
+          "value": "never"
+        },
+        {
+          "type": "STRING",
           "value": "numerus"
         },
         {
@@ -1709,6 +2409,10 @@
         },
         {
           "type": "STRING",
+          "value": "promise"
+        },
+        {
+          "type": "STRING",
           "value": "promissum"
         },
         {
@@ -1721,7 +2425,15 @@
         },
         {
           "type": "STRING",
+          "value": "record"
+        },
+        {
+          "type": "STRING",
           "value": "regex"
+        },
+        {
+          "type": "STRING",
+          "value": "saturating"
         },
         {
           "type": "STRING",
@@ -1730,6 +2442,10 @@
         {
           "type": "STRING",
           "value": "series"
+        },
+        {
+          "type": "STRING",
+          "value": "set"
         },
         {
           "type": "STRING",
@@ -1766,6 +2482,10 @@
         {
           "type": "STRING",
           "value": "stack"
+        },
+        {
+          "type": "STRING",
+          "value": "string"
         },
         {
           "type": "STRING",
@@ -1825,6 +2545,10 @@
         },
         {
           "type": "STRING",
+          "value": "trapping"
+        },
+        {
+          "type": "STRING",
           "value": "tu16"
         },
         {
@@ -1858,6 +2582,10 @@
         {
           "type": "STRING",
           "value": "unio"
+        },
+        {
+          "type": "STRING",
+          "value": "unknown"
         },
         {
           "type": "STRING",
@@ -1905,6 +2633,10 @@
         },
         {
           "type": "STRING",
+          "value": "void"
+        },
+        {
+          "type": "STRING",
           "value": "vu16"
         },
         {
@@ -1926,7 +2658,15 @@
       "members": [
         {
           "type": "STRING",
+          "value": "false"
+        },
+        {
+          "type": "STRING",
           "value": "falsum"
+        },
+        {
+          "type": "STRING",
+          "value": "true"
         },
         {
           "type": "STRING",
@@ -2077,19 +2817,11 @@
           },
           {
             "type": "STRING",
-            "value": "!."
-          },
-          {
-            "type": "STRING",
             "value": "!["
           },
           {
             "type": "STRING",
             "value": "?("
-          },
-          {
-            "type": "STRING",
-            "value": "?."
           },
           {
             "type": "STRING",
@@ -2114,10 +2846,6 @@
           {
             "type": "STRING",
             "value": "-"
-          },
-          {
-            "type": "STRING",
-            "value": "."
           },
           {
             "type": "STRING",

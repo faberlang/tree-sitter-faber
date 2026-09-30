@@ -1,0 +1,38 @@
++++
+locale = "la"
++++
+# Latin reader surface (locale = "la"): the canonical registry spellings.
+# Derived from radix/corpus functio/functio.fab and cape/cape.fab.
+
+functio saluta(textus nomen) → vacuum {
+    nota nomen
+}
+
+functio duplica(numerus n) → numerus {
+    redde n * 2
+}
+
+functio describe(numerus n) → textus {
+    si n ≻ 1 {
+        redde "magnus"
+    } secus {
+        redde "parvus"
+    }
+}
+
+incipit {
+    saluta("Salve!")
+    fixum textus titulus ← describe(duplica(21))
+    nota titulus
+    varia numerus conatus ← 0
+    fac {
+        conatus ← conatus + 1
+        iace "simulated failure"
+    }
+    cape err {
+        nota "caught"
+    }
+    fixum bivalens signum ← verum
+    fixum numerus ∪ nihil lacuna ← nulla
+    fixum numerus res ← [1, 2, 3].map(numerus x ∴ x * 2).valor
+}
