@@ -55,7 +55,20 @@ SCAN_GLYPH_LITERALS = [
     "*",
     "/",
     "%",
+    "÷",
     "⊘",
+    "·",
+    "×",
+    "⊗",
+    "⊙",
+    "⇇",
+    "≺",
+    "≻",
+    "⊥",
+    "✓",
+    "✗",
+    "¶",
+    "∇",
     "⤒",
     "⤓",
     "ᵀ",
@@ -63,6 +76,9 @@ SCAN_GLYPH_LITERALS = [
     ".",
     "@",
 ]
+
+# Glyphs the Radix lexer scans as literals (a float token), not operators.
+NUMBER_GLYPH_LITERALS = ["∞"]
 
 WIDTH_MARKERS = [
     "i8",
@@ -222,6 +238,27 @@ def collect_annotation_vocab(specs: list[KeywordSpec]) -> tuple[list[str], list[
     )
 
 
+def check_glyph_coverage(scan_rs: Path) -> None:
+    """Fail generation when Radix's lexer scans a glyph missing from SCAN_GLYPH_LITERALS."""
+    text = scan_rs.read_text(encoding="utf-8")
+    begin = text.find("fn scan_operator")
+    if begin < 0:
+        raise RuntimeError(f"could not find scan_operator in {scan_rs}")
+    end = text.find("\n    fn ", begin + 1)
+    body = text[begin : end if end > 0 else len(text)]
+    scanned = {
+        ch
+        for lit in re.findall(r"'(.)'(?:\s*\|\s*'(.)')?\s*=>", body)
+        for ch in lit
+        if ch and ord(ch) > 127
+    }
+    missing = sorted(scanned - set(SCAN_GLYPH_LITERALS) - set(NUMBER_GLYPH_LITERALS))
+    if missing:
+        raise RuntimeError(
+            f"Radix scan_operator glyphs missing from SCAN_GLYPH_LITERALS: {' '.join(missing)}"
+        )
+
+
 def load_vocabulary(radix_root_path: Path | None = None) -> dict[str, list[str]]:
     root = radix_root(radix_root_path)
     keywords_rs = root / "crates/radix-lexer/src/keywords.rs"
@@ -232,6 +269,8 @@ def load_vocabulary(radix_root_path: Path | None = None) -> dict[str, list[str]]
         raise FileNotFoundError(f"missing Radix keywords registry: {keywords_rs}")
     if not expr_rs.is_file():
         raise FileNotFoundError(f"missing Radix parser expr module: {expr_rs}")
+
+    check_glyph_coverage(root / "crates/radix-lexer/src/scan.rs")
 
     specs = parse_keyword_specs(keywords_rs)
     annotation_names, annotation_modifiers = collect_annotation_vocab(specs)

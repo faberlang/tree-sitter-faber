@@ -395,10 +395,6 @@
     "named": false
   },
   {
-    "type": "abstractus",
-    "named": false
-  },
-  {
     "type": "ad",
     "named": false
   },
@@ -499,14 +495,6 @@
     "named": false
   },
   {
-    "type": "cura",
-    "named": false
-  },
-  {
-    "type": "curata",
-    "named": false
-  },
-  {
     "type": "cursor",
     "named": false
   },
@@ -568,6 +556,10 @@
   },
   {
     "type": "ex",
+    "named": false
+  },
+  {
+    "type": "exactus",
     "named": false
   },
   {
@@ -735,6 +727,10 @@
     "named": false
   },
   {
+    "type": "insere",
+    "named": false
+  },
+  {
     "type": "instans",
     "named": false
   },
@@ -812,6 +808,10 @@
   },
   {
     "type": "lista",
+    "named": false
+  },
+  {
+    "type": "littera",
     "named": false
   },
   {
@@ -907,10 +907,6 @@
     "named": false
   },
   {
-    "type": "nexum",
-    "named": false
-  },
-  {
     "type": "nihil",
     "named": false
   },
@@ -959,16 +955,16 @@
     "named": false
   },
   {
-    "type": "octet",
-    "named": false
-  },
-  {
     "type": "octeti",
     "named": false
   },
   {
     "type": "octeti_string",
     "named": true
+  },
+  {
+    "type": "octetus",
+    "named": false
   },
   {
     "type": "omitte",
@@ -1103,6 +1099,10 @@
     "named": false
   },
   {
+    "type": "saturatus",
+    "named": false
+  },
+  {
     "type": "schema",
     "named": false
   },
@@ -1208,10 +1208,6 @@
   },
   {
     "type": "su8",
-    "named": false
-  },
-  {
-    "type": "sub",
     "named": false
   },
   {

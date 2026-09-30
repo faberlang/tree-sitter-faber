@@ -15,7 +15,7 @@ from pathlib import Path
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_RADIX_ROOT = REPO_ROOT.parent / "radix"
-DEFAULT_CORPUS_ROOT = REPO_ROOT.parent / "examples" / "corpus"
+DEFAULT_CORPUS_ROOT = REPO_ROOT.parent / "radix" / "corpus"
 TREE_SITTER_CLI = ("npx", "--yes", "tree-sitter-cli@0.24.7")
 HIGHLIGHT_QUERY_PATHS = (
     REPO_ROOT / "queries" / "highlights.scm",
@@ -213,6 +213,20 @@ def normalize_radix_kind(raw: str) -> tuple[str, str | None]:
         "Minimum",
         "Therefore",
         "AwaitAssign",
+        "Transfer",
+        "MiddleDot",
+        "Cross",
+        "CircledTimes",
+        "CircledDot",
+        "CircledDivide",
+        "Obelus",
+        "Transpose",
+        "Nabla",
+        "Cap",
+        "UpTack",
+        "Check",
+        "Ballot",
+        "Pilcrow",
     } or base.startswith(
         ("Eq", "Lt", "Gt", "Bang", "Question", "Bitwise", "Post", "Arrow", "Exit", "Assign", "Cup", "Conversio", "Verte", "Approx")
     ):
@@ -735,7 +749,7 @@ def main() -> int:
     parser.add_argument("--radix-root", type=Path, default=None)
     parser.add_argument("--corpus-root", type=Path, default=None)
     parser.add_argument("--limit", type=int, default=25, help="max corpus files to check with --corpus")
-    parser.add_argument("--corpus", action="store_true", help="check examples/corpus instead of fixtures/")
+    parser.add_argument("--corpus", action="store_true", help="check radix/corpus instead of fixtures/")
     parser.add_argument("--file", type=Path, action="append", default=[], help="specific .fab file")
     parser.add_argument(
         "--self-test-temp-cleanup",

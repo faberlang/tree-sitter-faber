@@ -229,11 +229,11 @@ fixtures, validates both highlight query surfaces (`queries/highlights.scm` and
 `languages/faber/highlights.scm`) against the same files, and runs an invalid-node
 query probe that must fail. The default `npm test` path includes
 `fixtures/corpus-derived.fab`, a stable in-repo regression fixture distilled from
-`examples/corpus` snippets that should block releases when parser/highlight drift
+`radix/corpus` snippets that should block releases when parser/highlight drift
 returns.
 
 `npm run test:corpus-derived` isolates that fixture when narrowing a regression.
-`npm run audit:corpus` runs the first sorted corpus sample from `../examples/corpus`
+`npm run audit:corpus` runs the first sorted corpus sample from `../radix/corpus`
 or `FABER_CORPUS_ROOT`; it is broader optional validation before expanding the
 default gate.
 
