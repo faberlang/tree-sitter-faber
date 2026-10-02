@@ -224,6 +224,8 @@ def normalize_radix_kind(raw: str) -> tuple[str, str | None]:
         "Transpose",
         "Nabla",
         "Cap",
+        "ElementOf",
+        "NotElementOf",
         "UpTack",
         "Check",
         "Ballot",

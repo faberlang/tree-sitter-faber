@@ -192,7 +192,7 @@
       "name": "keyword.declaration.faber"
     },
     "keyword-other": {
-      "match": "\\b(async_generator|async_teardown|expect_failure|return_await|async_setup|await_const|postparabit|praeparabit|conversion|implements|await_var|conversio|generator|negativum|operandus|positivum|praefixum|probandum|variandum|clausura|coalesce|comptime|describe|exemplum|figendum|fragilis|fragment|imperium|negative|nonnihil|nonnulla|positive|postpara|praepara|scriptum|solum_in|teardown|temporis|wrapping|between|erratur|futurum|modulus|nucleum|only_in|tacebit|timeout|variant|before|format|futura|implet|insere|lambda|lineam|metior|nondum|omitte|reddet|repeat|repete|scribe|sparge|spread|vertex|within|async|await|bench|debug|embed|fient|finge|fiunt|flaky|inter|intra|nihil|nulla|omnia|optio|penes|print|proba|radix|range|setup|solum|until|usque|verte|write|yield|ante|cede|copy|fiet|from|lege|line|mone|none|nota|null|only|read|self|skip|some|step|test|todo|vide|warn|all|and|aut|cli|ego|est|mut|non|not|own|per|ref|tag|vel|ab|as|de|et|ex|in|is|or|ut)\\b",
+      "match": "\\b(async_generator|async_teardown|expect_failure|return_await|async_setup|await_const|postparabit|praeparabit|conversion|implements|await_var|conversio|generator|negativum|operandus|positivum|praefixum|probandum|variandum|clausura|coalesce|comptime|describe|exemplum|figendum|fragilis|fragment|imperium|negative|nonnihil|nonnulla|positive|postpara|praepara|scriptum|solum_in|teardown|temporis|wrapping|erratur|futurum|modulus|nucleum|only_in|tacebit|timeout|variant|before|format|futura|implet|insere|lambda|lineam|metior|nondum|omitte|reddet|repeat|repete|scribe|sparge|spread|vertex|async|await|bench|debug|embed|fient|finge|fiunt|flaky|nihil|nulla|omnia|optio|penes|print|proba|radix|range|setup|solum|until|usque|verte|write|yield|ante|cede|copy|fiet|from|lege|line|mone|none|nota|null|only|read|self|skip|some|step|test|todo|vide|warn|all|and|aut|cli|ego|est|mut|non|not|own|per|ref|tag|vel|via|ab|as|de|et|ex|in|is|or|ut)\\b",
       "name": "keyword.other.faber"
     },
     "boolean-literal": {
@@ -212,7 +212,7 @@
       "name": "variable.parameter.faber"
     },
     "operators": {
-      "match": "(!\\(|!\\.|!\\[|\\?\\(|\\?\\.|\\?\\[|!|%|\\*|\\+|\\-|\\.|/|<|=|>|\\?|@|¬|¶|·|×|÷|ᵀ|‥|…|←|↑|→|↓|↢|↤|↦|⇇|⇐|⇒|⇥|∇|∧|∨|∩|∪|∴|∷|≅|≇|≈|≉|≠|≡|≢|≤|≥|≺|≻|⊗|⊘|⊙|⊜|⊥|⊻|✓|✗|⤒|⤓)",
+      "match": "(!\\(|!\\.|!\\[|\\?\\(|\\?\\.|\\?\\[|!|%|\\*|\\+|\\-|\\.|/|<|=|>|\\?|@|¬|¶|·|×|÷|ᵀ|‥|…|←|↑|→|↓|↢|↤|↦|⇇|⇐|⇒|⇥|∇|∈|∉|∧|∨|∩|∪|∴|∷|≅|≇|≈|≉|≠|≡|≢|≤|≥|≺|≻|⊗|⊘|⊙|⊜|⊥|⊻|✓|✗|⤒|⤓)",
       "name": "keyword.operator.faber"
     }
   }

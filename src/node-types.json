@@ -543,10 +543,6 @@
     "named": false
   },
   {
-    "type": "between",
-    "named": false
-  },
-  {
     "type": "bivalens",
     "named": false
   },
@@ -1027,10 +1023,6 @@
     "named": false
   },
   {
-    "type": "inter",
-    "named": false
-  },
-  {
     "type": "interface",
     "named": false
   },
@@ -1044,10 +1036,6 @@
   },
   {
     "type": "intervallum",
-    "named": false
-  },
-  {
-    "type": "intra",
     "named": false
   },
   {
@@ -1995,6 +1983,10 @@
     "named": false
   },
   {
+    "type": "via",
+    "named": false
+  },
+  {
     "type": "vide",
     "named": false
   },
@@ -2024,10 +2016,6 @@
   },
   {
     "type": "while",
-    "named": false
-  },
-  {
-    "type": "within",
     "named": false
   },
   {

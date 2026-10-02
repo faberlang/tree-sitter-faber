@@ -35,5 +35,7 @@ main {
     }
     const bool flag ← true
     const int ∪ none missing ← null
+    const bool inside ← 2 ∈ [1, 2, 3]
+    const bool outside ← 5 ∉ [1, 2, 3]
     const int items ← [1, 2, 3].map(int x ∴ x * 2).set
 }

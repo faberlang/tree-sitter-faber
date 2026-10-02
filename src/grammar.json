@@ -1684,10 +1684,6 @@
         },
         {
           "type": "STRING",
-          "value": "between"
-        },
-        {
-          "type": "STRING",
           "value": "cede"
         },
         {
@@ -1833,14 +1829,6 @@
         {
           "type": "STRING",
           "value": "insere"
-        },
-        {
-          "type": "STRING",
-          "value": "inter"
-        },
-        {
-          "type": "STRING",
-          "value": "intra"
         },
         {
           "type": "STRING",
@@ -2148,15 +2136,15 @@
         },
         {
           "type": "STRING",
+          "value": "via"
+        },
+        {
+          "type": "STRING",
           "value": "vide"
         },
         {
           "type": "STRING",
           "value": "warn"
-        },
-        {
-          "type": "STRING",
-          "value": "within"
         },
         {
           "type": "STRING",
@@ -2950,6 +2938,14 @@
           {
             "type": "STRING",
             "value": "∇"
+          },
+          {
+            "type": "STRING",
+            "value": "∈"
+          },
+          {
+            "type": "STRING",
+            "value": "∉"
           },
           {
             "type": "STRING",
