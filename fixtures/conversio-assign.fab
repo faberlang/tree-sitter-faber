@@ -1,3 +1,6 @@
++++
+locale = "la"
++++
 # CDA-U8 — `↤` (U+21A4) conversion-directed assignment: tree-sitter smoke.
 # The glyph is a token (operator), not a keyword; U+21C7 (⇇) stays distinct.
 

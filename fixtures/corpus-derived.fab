@@ -4,6 +4,7 @@ kind = "fixture"
 category = "parser-highlight-contract"
 summary = "Stable snippets derived from examples/corpus default-gate regressions; a+b frontmatter test."
 version = "0.1.0+build42"
+locale = "la"
 +++
 
 # Derived from examples/corpus/abstractus/abstractus.fab.

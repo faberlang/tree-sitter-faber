@@ -1,3 +1,6 @@
++++
+locale = "la"
++++
 # `↢` (U+21A2) is an operator token on declaration initializers.
 functio consume() fiet → numerus {
     fixum promissum<numerus> pending ← fetch()
