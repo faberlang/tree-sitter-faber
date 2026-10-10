@@ -29,7 +29,6 @@ SCAN_GLYPH_LITERALS = [
     "≡",
     "≈",
     "≉",
-    "≠",
     "≅",
     "≇",
     "≢",
@@ -81,6 +80,10 @@ SCAN_GLYPH_LITERALS = [
 
 # Glyphs the Radix lexer scans as literals (a float token), not operators.
 NUMBER_GLYPH_LITERALS = ["∞"]
+# Glyphs the Radix lexer still scans only to report a retirement diagnostic
+# (PARSE030 neq_glyph_retired names `≢`). They are not accepted operators and
+# must never appear in the highlight vocabulary.
+RETIRED_GLYPH_LITERALS = ["≠"]
 
 WIDTH_MARKERS = [
     "i8",
@@ -292,7 +295,12 @@ def check_glyph_coverage(scan_rs: Path) -> None:
         for ch in lit
         if ch and ord(ch) > 127
     }
-    missing = sorted(scanned - set(SCAN_GLYPH_LITERALS) - set(NUMBER_GLYPH_LITERALS))
+    missing = sorted(
+        scanned
+        - set(SCAN_GLYPH_LITERALS)
+        - set(NUMBER_GLYPH_LITERALS)
+        - set(RETIRED_GLYPH_LITERALS)
+    )
     if missing:
         raise RuntimeError(
             f"Radix scan_operator glyphs missing from SCAN_GLYPH_LITERALS: {' '.join(missing)}"

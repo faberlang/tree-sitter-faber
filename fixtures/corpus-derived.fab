@@ -50,7 +50,7 @@ incipit {
     adfirma x ≡ 10 secus "x decem esse debet"
 
     fixum _ nomen ← "Marcus"
-    adfirma nomen ≠ "" secus "nomen vacuum non sit"
+    adfirma nomen ≢ "" secus "nomen vacuum non sit"
 
     fixum _ viget ← verum
     adfirma viget ≡ verum secus "vigere debet"
