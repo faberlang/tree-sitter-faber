@@ -1370,10 +1370,6 @@
         },
         {
           "type": "STRING",
-          "value": "sic"
-        },
-        {
-          "type": "STRING",
           "value": "sin"
         },
         {
@@ -1399,10 +1395,6 @@
         {
           "type": "STRING",
           "value": "while"
-        },
-        {
-          "type": "STRING",
-          "value": "yields"
         }
       ]
     },
@@ -1532,10 +1524,6 @@
         {
           "type": "STRING",
           "value": "ordo"
-        },
-        {
-          "type": "STRING",
-          "value": "prae"
         },
         {
           "type": "STRING",
@@ -1868,14 +1856,6 @@
         },
         {
           "type": "STRING",
-          "value": "negative"
-        },
-        {
-          "type": "STRING",
-          "value": "negativum"
-        },
-        {
-          "type": "STRING",
           "value": "nihil"
         },
         {
@@ -1889,14 +1869,6 @@
         {
           "type": "STRING",
           "value": "none"
-        },
-        {
-          "type": "STRING",
-          "value": "nonnihil"
-        },
-        {
-          "type": "STRING",
-          "value": "nonnulla"
         },
         {
           "type": "STRING",
@@ -1957,14 +1929,6 @@
         {
           "type": "STRING",
           "value": "per"
-        },
-        {
-          "type": "STRING",
-          "value": "positive"
-        },
-        {
-          "type": "STRING",
-          "value": "positivum"
         },
         {
           "type": "STRING",
@@ -2057,10 +2021,6 @@
         {
           "type": "STRING",
           "value": "solum_in"
-        },
-        {
-          "type": "STRING",
-          "value": "some"
         },
         {
           "type": "STRING",

@@ -1243,14 +1243,6 @@
     "named": false
   },
   {
-    "type": "negative",
-    "named": false
-  },
-  {
-    "type": "negativum",
-    "named": false
-  },
-  {
     "type": "never",
     "named": false
   },
@@ -1272,14 +1264,6 @@
   },
   {
     "type": "none",
-    "named": false
-  },
-  {
-    "type": "nonnihil",
-    "named": false
-  },
-  {
-    "type": "nonnulla",
     "named": false
   },
   {
@@ -1403,23 +1387,11 @@
     "named": false
   },
   {
-    "type": "positive",
-    "named": false
-  },
-  {
-    "type": "positivum",
-    "named": false
-  },
-  {
     "type": "postpara",
     "named": false
   },
   {
     "type": "postparabit",
-    "named": false
-  },
-  {
-    "type": "prae",
     "named": false
   },
   {
@@ -1643,10 +1615,6 @@
     "named": false
   },
   {
-    "type": "sic",
-    "named": false
-  },
-  {
     "type": "sin",
     "named": false
   },
@@ -1668,10 +1636,6 @@
   },
   {
     "type": "solum_in",
-    "named": false
-  },
-  {
-    "type": "some",
     "named": false
   },
   {
@@ -1704,11 +1668,11 @@
   },
   {
     "type": "string",
-    "named": false
+    "named": true
   },
   {
     "type": "string",
-    "named": true
+    "named": false
   },
   {
     "type": "su16",
@@ -2028,10 +1992,6 @@
   },
   {
     "type": "yield",
-    "named": false
-  },
-  {
-    "type": "yields",
     "named": false
   },
   {

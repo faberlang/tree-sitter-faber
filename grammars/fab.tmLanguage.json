@@ -184,15 +184,15 @@
       "match": "[A-Za-z_][A-Za-z0-9_]*"
     },
     "keyword-control": {
-      "match": "\\b(async_main|argumenta|continue|discerne|incipiet|requirit|adfirma|ceterum|custodi|default|incipit|require|assert|reject|return|switch|yields|break|capta|catch|elige|guard|itera|match|panic|perge|redde|reice|rumpe|secus|tacet|throw|while|apud|args|call|cape|case|casu|elif|else|ergo|iace|main|mori|pass|then|trap|dum|fac|for|sic|sin|ad|at|do|if|si)\\b",
+      "match": "\\b(async_main|argumenta|continue|discerne|incipiet|requirit|adfirma|ceterum|custodi|default|incipit|require|assert|reject|return|switch|break|capta|catch|elige|guard|itera|match|panic|perge|redde|reice|rumpe|secus|tacet|throw|while|apud|args|call|cape|case|casu|elif|else|ergo|iace|main|mori|pass|then|trap|dum|fac|for|sin|ad|at|do|if|si)\\b",
       "name": "keyword.control.faber"
     },
     "keyword-declaration": {
-      "match": "\\b(discretio|implendum|interface|magnitudo|protected|immutata|internal|optional|optiones|protecta|readonly|columna|functio|generis|importa|interna|options|privata|private|publica|ceteri|column|errata|errors|exitus|import|iuncta|public|schema|sponte|static|throws|class|const|fixum|genus|iacit|tuple|typus|union|varia|enum|exit|ordo|prae|rest|size|type|let|sit|var|fn)\\b",
+      "match": "\\b(discretio|implendum|interface|magnitudo|protected|immutata|internal|optional|optiones|protecta|readonly|columna|functio|generis|importa|interna|options|privata|private|publica|ceteri|column|errata|errors|exitus|import|iuncta|public|schema|sponte|static|throws|class|const|fixum|genus|iacit|tuple|typus|union|varia|enum|exit|ordo|rest|size|type|let|sit|var|fn)\\b",
       "name": "keyword.declaration.faber"
     },
     "keyword-other": {
-      "match": "\\b(async_generator|async_teardown|expect_failure|return_await|async_setup|await_const|postparabit|praeparabit|conversion|implements|await_var|conversio|generator|negativum|operandus|positivum|praefixum|probandum|variandum|clausura|coalesce|comptime|describe|exemplum|figendum|fragilis|fragment|imperium|negative|nonnihil|nonnulla|positive|postpara|praepara|scriptum|solum_in|teardown|temporis|wrapping|erratur|futurum|modulus|nucleum|only_in|tacebit|timeout|variant|before|format|futura|implet|insere|lambda|lineam|metior|nondum|omitte|reddet|repeat|repete|scribe|sparge|spread|vertex|async|await|bench|debug|embed|fient|finge|fiunt|flaky|nihil|nulla|omnia|optio|penes|print|proba|radix|range|setup|solum|until|usque|verte|write|yield|ante|cede|copy|fiet|from|lege|line|mone|none|nota|null|only|read|self|skip|some|step|test|todo|vide|warn|all|and|aut|cli|ego|est|mut|non|not|own|per|ref|tag|vel|via|ab|as|de|et|ex|in|is|or|ut)\\b",
+      "match": "\\b(async_generator|async_teardown|expect_failure|return_await|async_setup|await_const|postparabit|praeparabit|conversion|implements|await_var|conversio|generator|operandus|praefixum|probandum|variandum|clausura|coalesce|comptime|describe|exemplum|figendum|fragilis|fragment|imperium|postpara|praepara|scriptum|solum_in|teardown|temporis|wrapping|erratur|futurum|modulus|nucleum|only_in|tacebit|timeout|variant|before|format|futura|implet|insere|lambda|lineam|metior|nondum|omitte|reddet|repeat|repete|scribe|sparge|spread|vertex|async|await|bench|debug|embed|fient|finge|fiunt|flaky|nihil|nulla|omnia|optio|penes|print|proba|radix|range|setup|solum|until|usque|verte|write|yield|ante|cede|copy|fiet|from|lege|line|mone|none|nota|null|only|read|self|skip|step|test|todo|vide|warn|all|and|aut|cli|ego|est|mut|non|not|own|per|ref|tag|vel|via|ab|as|de|et|ex|in|is|or|ut)\\b",
       "name": "keyword.other.faber"
     },
     "boolean-literal": {
