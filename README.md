@@ -2,13 +2,20 @@
 
 Tree-sitter grammar and Zed extension packaging for [Faber](https://github.com/faberlang).
 
+> **Experimental.** Like Faber itself, this grammar is experimental until
+> Faber 2. It follows Faber 1.x and changes with it; highlighting may be wrong
+> or change without notice.
+
 This repository is a **clean-break** editor surface. It provides syntax highlighting
 only — not structural parsing, diagnostics, an LSP, rendering, WebGPU, or runtime
 support.
 
 Highlight vocabulary is generated from the Radix compiler (`keywords.rs`, builtin
 types, annotation spellings) and its reader-locale packs (`locale/<id>/pack.toml`).
-Radix defines what Faber *is*; this repo defines how editors *display* it.
+Radix is the compiler component of the public
+[faberlang/faber](https://github.com/faberlang/faber) repository, which also holds
+the grammar (`grammar/EBNF.md`) and the example corpus (`corpus/`). Faber defines
+what the language *is*; this repo defines how editors *display* it.
 
 ## What you get
 
@@ -125,14 +132,16 @@ Known limits (not handled; tree-sitter here is token highlighting, not a parser)
 
 ## Maintainer workflow
 
-Regenerate from Radix after lexer changes:
+This section is maintainer tooling, not needed to use the grammar. Regenerate
+after lexer changes in the compiler. The scripts read the compiler sources
+(`crates/radix-lexer/src/keywords.rs`, `locale/<id>/pack.toml`), so they need a
+checkout of [faberlang/faber](https://github.com/faberlang/faber), found at
+`../radix` by default:
 
 ```bash
-./scripta/regenerate          # needs ../radix or RADIX_ROOT=...
+RADIX_ROOT=/path/to/faber-checkout ./scripta/regenerate
 npm test
 ```
-
-Override the Radix path: `RADIX_ROOT=/path/to/radix ./scripta/regenerate`
 
 Publishing to the Zed extension registry (optional, for other users) requires a PR
 to [zed-industries/extensions](https://github.com/zed-industries/extensions) and
@@ -266,10 +275,12 @@ has un-pushed parser/query changes, but this is expected mid-iteration.
 
 ## Contract test
 
-Build Radix once:
+Maintainer tooling: it needs a checkout of
+[faberlang/faber](https://github.com/faberlang/faber) (`../radix` by default, or
+`RADIX_ROOT`). Build the `radix` binary there once:
 
 ```bash
-cd ../radix
+cd /path/to/faber-checkout
 cargo build -p radix --bin radix
 ```
 
@@ -286,7 +297,7 @@ fixtures, validates both highlight query surfaces (`queries/highlights.scm` and
 `languages/faber/highlights.scm`) against the same files, and runs an invalid-node
 query probe that must fail. The default `npm test` path includes
 `fixtures/corpus-derived.fab`, a stable in-repo regression fixture distilled from
-`radix/corpus` snippets that should block releases when parser/highlight drift
+snippets of the compiler repository's `corpus/` that should block releases when parser/highlight drift
 returns.
 
 `fixtures/locale-en.fab` and `fixtures/locale-la.fab` cover one file per reader
@@ -296,8 +307,8 @@ side of the comparison is classified from the same vocabulary the grammar is
 generated from and cannot detect a spelling that silently stopped being a keyword.
 
 `npm run test:corpus-derived` isolates that fixture when narrowing a regression.
-`npm run audit:corpus` runs the first sorted corpus sample from `../radix/corpus`
-or `FABER_CORPUS_ROOT`; it is broader optional validation before expanding the
+`npm run audit:corpus` runs the first sorted corpus sample from the checkout's `corpus/`
+(`../radix/corpus` by default) or `FABER_CORPUS_ROOT`; it is broader optional validation before expanding the
 default gate.
 
 ---
