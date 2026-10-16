@@ -318,3 +318,8 @@ default gate.
 - `+++` frontmatter is highlighted as metadata, not Faber tokens.
 - `#` comments are line-start only, matching Radix `scan.rs`.
 - Mid-line `#` is a bare `hash` token (Radix reports a lex error).
+
+## License
+
+Licensed under either of [Apache License, Version 2.0](LICENSE-APACHE) or
+[MIT license](LICENSE-MIT) at your option.
