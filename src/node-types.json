@@ -531,6 +531,10 @@
     "named": false
   },
   {
+    "type": "axis",
+    "named": false
+  },
+  {
     "type": "backtick_string",
     "named": true
   },
@@ -556,14 +560,6 @@
   },
   {
     "type": "brevis",
-    "named": false
-  },
-  {
-    "type": "byte",
-    "named": false
-  },
-  {
-    "type": "bytes",
     "named": false
   },
   {
@@ -632,6 +628,10 @@
   },
   {
     "type": "command",
+    "named": false
+  },
+  {
+    "type": "commands",
     "named": false
   },
   {
@@ -1071,6 +1071,10 @@
     "named": false
   },
   {
+    "type": "ledger",
+    "named": false
+  },
+  {
     "type": "lege",
     "named": false
   },
@@ -1299,16 +1303,8 @@
     "named": false
   },
   {
-    "type": "octeti",
-    "named": false
-  },
-  {
     "type": "octeti_string",
     "named": true
-  },
-  {
-    "type": "octetus",
-    "named": false
   },
   {
     "type": "omitte",
@@ -1647,6 +1643,10 @@
     "named": false
   },
   {
+    "type": "sparse",
+    "named": false
+  },
+  {
     "type": "sponte",
     "named": false
   },
@@ -1668,11 +1668,11 @@
   },
   {
     "type": "string",
-    "named": true
+    "named": false
   },
   {
     "type": "string",
-    "named": false
+    "named": true
   },
   {
     "type": "su16",
@@ -1696,6 +1696,10 @@
   },
   {
     "type": "tabula",
+    "named": false
+  },
+  {
+    "type": "tabulae",
     "named": false
   },
   {
@@ -1879,10 +1883,6 @@
     "named": false
   },
   {
-    "type": "var",
-    "named": false
-  },
-  {
     "type": "varia",
     "named": false
   },
@@ -1904,6 +1904,10 @@
   },
   {
     "type": "versio",
+    "named": false
+  },
+  {
+    "type": "version",
     "named": false
   },
   {

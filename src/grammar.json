@@ -180,6 +180,10 @@
         },
         {
           "type": "STRING",
+          "value": "commands"
+        },
+        {
+          "type": "STRING",
           "value": "conversio"
         },
         {
@@ -284,6 +288,10 @@
         },
         {
           "type": "STRING",
+          "value": "version"
+        },
+        {
+          "type": "STRING",
           "value": "verte"
         },
         {
@@ -371,14 +379,6 @@
         },
         {
           "type": "STRING",
-          "value": "byte"
-        },
-        {
-          "type": "STRING",
-          "value": "bytes"
-        },
-        {
-          "type": "STRING",
           "value": "char"
         },
         {
@@ -452,6 +452,10 @@
         {
           "type": "STRING",
           "value": "iterator"
+        },
+        {
+          "type": "STRING",
+          "value": "ledger"
         },
         {
           "type": "STRING",
@@ -575,14 +579,6 @@
         },
         {
           "type": "STRING",
-          "value": "octeti"
-        },
-        {
-          "type": "STRING",
-          "value": "octetus"
-        },
-        {
-          "type": "STRING",
           "value": "promise"
         },
         {
@@ -655,6 +651,10 @@
         },
         {
           "type": "STRING",
+          "value": "sparse"
+        },
+        {
+          "type": "STRING",
           "value": "stack"
         },
         {
@@ -680,6 +680,10 @@
         {
           "type": "STRING",
           "value": "tabula"
+        },
+        {
+          "type": "STRING",
+          "value": "tabulae"
         },
         {
           "type": "STRING",
@@ -1511,6 +1515,10 @@
         },
         {
           "type": "STRING",
+          "value": "mut"
+        },
+        {
+          "type": "STRING",
           "value": "optional"
         },
         {
@@ -1599,10 +1607,6 @@
         },
         {
           "type": "STRING",
-          "value": "var"
-        },
-        {
-          "type": "STRING",
           "value": "varia"
         }
       ]
@@ -1661,6 +1665,10 @@
         {
           "type": "STRING",
           "value": "await_var"
+        },
+        {
+          "type": "STRING",
+          "value": "axis"
         },
         {
           "type": "STRING",
@@ -1849,10 +1857,6 @@
         {
           "type": "STRING",
           "value": "mone"
-        },
-        {
-          "type": "STRING",
-          "value": "mut"
         },
         {
           "type": "STRING",
@@ -2137,14 +2141,6 @@
         },
         {
           "type": "STRING",
-          "value": "byte"
-        },
-        {
-          "type": "STRING",
-          "value": "bytes"
-        },
-        {
-          "type": "STRING",
           "value": "char"
         },
         {
@@ -2226,6 +2222,10 @@
         {
           "type": "STRING",
           "value": "json"
+        },
+        {
+          "type": "STRING",
+          "value": "ledger"
         },
         {
           "type": "STRING",
@@ -2349,14 +2349,6 @@
         },
         {
           "type": "STRING",
-          "value": "octeti"
-        },
-        {
-          "type": "STRING",
-          "value": "octetus"
-        },
-        {
-          "type": "STRING",
           "value": "promise"
         },
         {
@@ -2429,6 +2421,10 @@
         },
         {
           "type": "STRING",
+          "value": "sparse"
+        },
+        {
+          "type": "STRING",
           "value": "stack"
         },
         {
@@ -2454,6 +2450,10 @@
         {
           "type": "STRING",
           "value": "tabula"
+        },
+        {
+          "type": "STRING",
+          "value": "tabulae"
         },
         {
           "type": "STRING",
@@ -2893,6 +2893,10 @@
           },
           {
             "type": "STRING",
+            "value": "⇜"
+          },
+          {
+            "type": "STRING",
             "value": "⇥"
           },
           {
@@ -2906,6 +2910,18 @@
           {
             "type": "STRING",
             "value": "∉"
+          },
+          {
+            "type": "STRING",
+            "value": "√"
+          },
+          {
+            "type": "STRING",
+            "value": "∛"
+          },
+          {
+            "type": "STRING",
+            "value": "∜"
           },
           {
             "type": "STRING",
@@ -2994,6 +3010,22 @@
           {
             "type": "STRING",
             "value": "⊻"
+          },
+          {
+            "type": "STRING",
+            "value": "⌈"
+          },
+          {
+            "type": "STRING",
+            "value": "⌉"
+          },
+          {
+            "type": "STRING",
+            "value": "⌊"
+          },
+          {
+            "type": "STRING",
+            "value": "⌋"
           },
           {
             "type": "STRING",
