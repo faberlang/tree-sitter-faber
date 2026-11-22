@@ -1,0 +1,66 @@
++++
+locale = "en"
++++
+# Settled async, channel and device surface (English): posture words follow the
+# signature, awaited bindings use `↢`, and the async entry is `main async`.
+fn fetch(int n) async → int {
+    return n * 2
+}
+
+fn stream() async generator → int {
+    let int first ↢ fetch(1)
+    yield first
+    yield 2
+}
+
+fn plain(int n) generator → int {
+    yield n
+}
+
+fn exterior() async → int {
+    let int v ↢ fetch(9)
+    return v
+}
+
+# Nested await: bindings inside conditional blocks; the initializer is a full
+# expression whose multiplicative operand groups first.
+fn caller(bool flag) async → int {
+    if flag {
+        let int a ↢ fetch(1)
+        if a ≻ 0 {
+            mut int b ↢ fetch(a + 2 * 3)
+            await fetch(b)
+            b ← b + 1
+        }
+    }
+    return 0
+}
+
+# Handler identity: `@ call` names the route the handler serves.
+@ call 'numeri:bis'
+fn bis(int n) → int {
+    return n * 2
+}
+
+# Device modifiers after `do`.
+fn regions() → int {
+    mut int i ← 0
+    do device {
+        i ↑
+    }
+    do eligible {
+        i ↑
+    }
+    do batch {
+        i ↑
+    }
+    return i
+}
+
+main async {
+    mut map<int, channel> pool ← empty
+    let channel long ← call 'numeri:bis' (5)
+    let int v ↢ exterior()
+    print v
+    print regions()
+}

@@ -256,7 +256,7 @@ def latin_keyword_spellings() -> tuple[set[str], set[str]]:
         # Mirror generate_grammar.py exactly: annotation names/modifiers are
         # NOT keyword rules in the grammar (they lex as annotation nodes and
         # normalize to `type_or_ident`, except visibility names).
-        vocab = load_vocabulary(DEFAULT_RADIX_ROOT)
+        vocab = load_vocabulary(radix_root(None))
         _LATIN_KEYWORD_SPELLINGS = (
             set(
                 vocab["keyword_control"]
@@ -743,7 +743,7 @@ LOCALE_FIXTURE_EXPECTATIONS = {
     "locale-en.fab": {
         "fn": "keyword_declaration",
         "const": "keyword_declaration",
-        "var": "keyword_declaration",
+        "mut": "keyword_declaration",
         "return": "keyword_control",
         "if": "keyword_control",
         "else": "keyword_control",
@@ -759,6 +759,31 @@ LOCALE_FIXTURE_EXPECTATIONS = {
         "string": "builtin_type",
         "bool": "builtin_type",
         "void": "builtin_type",
+    },
+    "async-channel-device.fab": {
+        "fiet": "keyword_other",
+        "fiunt": "keyword_other",
+        "fient": "keyword_other",
+        "figendum": "keyword_other",
+        "variandum": "keyword_other",
+        "reddet": "keyword_other",
+        "tacebit": "keyword_other",
+        "incipiet": "keyword_control",
+        "machina": "keyword_other",
+        "idonea": "keyword_other",
+        "gregatim": "keyword_other",
+        "sermo": "builtin_type",
+    },
+    "async-channel-device-en.fab": {
+        "async": "keyword_other",
+        "generator": "keyword_other",
+        "await": "keyword_other",
+        "main": "keyword_control",
+        "call": "keyword_control",
+        "device": "keyword_other",
+        "eligible": "keyword_other",
+        "batch": "keyword_other",
+        "channel": "builtin_type",
     },
     "locale-la.fab": {
         "functio": "keyword_declaration",
@@ -785,6 +810,8 @@ LOCALE_FIXTURE_EXPECTATIONS = {
 # (fixture, member word): the word after `.` must stay a plain identifier even
 # when it is a type spelling in that locale (`.set` in en, `.valor` in la).
 LOCALE_MEMBER_EXPECTATIONS = {
+    "async-channel-device.fab": (),
+    "async-channel-device-en.fab": (),
     "locale-en.fab": ("map", "set"),
     "locale-la.fab": ("map", "valor"),
 }

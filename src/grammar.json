@@ -196,10 +196,6 @@
         },
         {
           "type": "STRING",
-          "value": "fragment"
-        },
-        {
-          "type": "STRING",
           "value": "futura"
         },
         {
@@ -220,15 +216,7 @@
         },
         {
           "type": "STRING",
-          "value": "kernel"
-        },
-        {
-          "type": "STRING",
           "value": "nondum"
-        },
-        {
-          "type": "STRING",
-          "value": "nucleum"
         },
         {
           "type": "STRING",
@@ -376,6 +364,10 @@
         {
           "type": "STRING",
           "value": "bool"
+        },
+        {
+          "type": "STRING",
+          "value": "channel"
         },
         {
           "type": "STRING",
@@ -612,6 +604,10 @@
         {
           "type": "STRING",
           "value": "series"
+        },
+        {
+          "type": "STRING",
+          "value": "sermo"
         },
         {
           "type": "STRING",
@@ -1202,10 +1198,6 @@
         },
         {
           "type": "STRING",
-          "value": "async_main"
-        },
-        {
-          "type": "STRING",
           "value": "at"
         },
         {
@@ -1640,10 +1632,6 @@
         },
         {
           "type": "STRING",
-          "value": "async_generator"
-        },
-        {
-          "type": "STRING",
           "value": "async_setup"
         },
         {
@@ -1660,15 +1648,11 @@
         },
         {
           "type": "STRING",
-          "value": "await_const"
-        },
-        {
-          "type": "STRING",
-          "value": "await_var"
-        },
-        {
-          "type": "STRING",
           "value": "axis"
+        },
+        {
+          "type": "STRING",
+          "value": "batch"
         },
         {
           "type": "STRING",
@@ -1724,7 +1708,15 @@
         },
         {
           "type": "STRING",
+          "value": "device"
+        },
+        {
+          "type": "STRING",
           "value": "ego"
+        },
+        {
+          "type": "STRING",
+          "value": "eligible"
         },
         {
           "type": "STRING",
@@ -1808,6 +1800,14 @@
         },
         {
           "type": "STRING",
+          "value": "gregatim"
+        },
+        {
+          "type": "STRING",
+          "value": "idonea"
+        },
+        {
+          "type": "STRING",
           "value": "imperium"
         },
         {
@@ -1828,11 +1828,19 @@
         },
         {
           "type": "STRING",
+          "value": "intutus"
+        },
+        {
+          "type": "STRING",
           "value": "is"
         },
         {
           "type": "STRING",
           "value": "lambda"
+        },
+        {
+          "type": "STRING",
+          "value": "laxus"
         },
         {
           "type": "STRING",
@@ -1845,6 +1853,10 @@
         {
           "type": "STRING",
           "value": "lineam"
+        },
+        {
+          "type": "STRING",
+          "value": "machina"
         },
         {
           "type": "STRING",
@@ -1996,10 +2008,6 @@
         },
         {
           "type": "STRING",
-          "value": "return_await"
-        },
-        {
-          "type": "STRING",
           "value": "scribe"
         },
         {
@@ -2138,6 +2146,10 @@
         {
           "type": "STRING",
           "value": "bool"
+        },
+        {
+          "type": "STRING",
+          "value": "channel"
         },
         {
           "type": "STRING",
@@ -2382,6 +2394,10 @@
         {
           "type": "STRING",
           "value": "series"
+        },
+        {
+          "type": "STRING",
+          "value": "sermo"
         },
         {
           "type": "STRING",

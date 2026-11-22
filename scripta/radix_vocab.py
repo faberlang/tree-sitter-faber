@@ -124,7 +124,7 @@ BOOLEAN_KEYWORDS = {"verum", "falsum"}
 
 # EBNF annotationName visibility spellings and CLI/metadata names Radix accepts
 # after `@` but does not register as global lexer keywords.
-ANNOTATION_VISIBILITY_NAMES = ("publica", "privata", "protecta", "futura", "cursor")
+ANNOTATION_VISIBILITY_NAMES = ("publica", "privata", "protecta")
 
 EXTRA_ANNOTATION_NAMES = (
     "versio",
@@ -149,6 +149,14 @@ HIGHLIGHT_LOCALES = ("la", "en")
 # Registry keyword specs that are aliases of another canonical (the pack row
 # lives on the canonical name, not the alias), so a missing pack row is expected.
 PACK_ROW_EXEMPT_KEYWORDS = {"conversion", "nihil"}
+
+# Keywords a locale deliberately has no spelling for: the glued English async
+# words were retired (en writes `async generator`, `let T x ↢ e`, `main async`),
+# so the en pack carries no row for their Latin canonicals. The words stay
+# keywords through the la pack, which still spells them.
+PACK_LOCALE_ABSENT_KEYWORDS = {
+    "en": {"fient", "figendum", "incipiet", "reddet", "variandum"},
+}
 
 # Builtin-type spellings that are the same in every locale (no [types] row):
 # numeric width markers and their sugar prefixes, plus these Latin loan names.
@@ -238,9 +246,9 @@ def parse_keyword_specs(keywords_rs: Path) -> list[KeywordSpec]:
 
 def parse_builtin_types(expr_rs: Path) -> list[str]:
     text = expr_rs.read_text(encoding="utf-8")
-    anchor = text.find("fn is_conversio_type_keyword")
+    anchor = text.find("fn is_conversion_type_keyword")
     if anchor < 0:
-        raise RuntimeError(f"could not find is_conversio_type_keyword in {expr_rs}")
+        raise RuntimeError(f"could not find is_conversion_type_keyword in {expr_rs}")
     window = text[anchor : anchor + 2500]
     matches_idx = window.find("matches!(")
     if matches_idx < 0:
@@ -253,7 +261,9 @@ def parse_builtin_types(expr_rs: Path) -> list[str]:
         for marker in WIDTH_MARKERS:
             sugars.append(f"{prefix}{marker}")
     sugars.extend(WIDTH_MARKERS)
-    extras = ["vacua", "unio", "bivalens"]
+    # `sermo` (en `channel`) is a runtime-registered conversation type, not in the
+    # parser's fixed conversion set, but it is a type word in every type slot.
+    extras = ["vacua", "unio", "bivalens", "sermo"]
     merged = [name for name in dict.fromkeys([*names, *sugars, *extras]) if name not in BUILTIN_TYPE_EXCLUSIONS]
     return sorted(merged, key=lambda s: (-len(s), s))
 
@@ -379,6 +389,8 @@ def add_locale_vocabulary(
             if spec.text in annotation_modifier_names or spec.text in registry_types:
                 continue
             surface = keywords.get(spec.text)
+            if surface is None and spec.text in PACK_LOCALE_ABSENT_KEYWORDS.get(locale, ()):
+                continue
             if surface is None:
                 problems.append(f"{locale}: no [keywords] row for registry keyword {spec.text!r}")
                 continue

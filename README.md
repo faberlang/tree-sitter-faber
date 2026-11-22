@@ -125,7 +125,7 @@ Known limits (not handled; tree-sitter here is token highlighting, not a parser)
   and word-boundary handling. Adding one is a `HIGHLIGHT_LOCALES` change plus that
   grammar work.
 - Builtin types that only exist as `[types]` rows without a Radix conversion-type
-  entry (`any`, `object`, `filter`, `send`, `recv`, `channel`, `frame`, ...) are
+  entry (`any`, `object`, `filter`, `send`, `recv`, `frame`, ...) are
   not highlighted.
 
 ---
