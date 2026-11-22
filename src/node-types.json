@@ -491,14 +491,6 @@
     "named": false
   },
   {
-    "type": "async_generator",
-    "named": false
-  },
-  {
-    "type": "async_main",
-    "named": false
-  },
-  {
     "type": "async_setup",
     "named": false
   },
@@ -523,20 +515,16 @@
     "named": false
   },
   {
-    "type": "await_const",
-    "named": false
-  },
-  {
-    "type": "await_var",
-    "named": false
-  },
-  {
     "type": "axis",
     "named": false
   },
   {
     "type": "backtick_string",
     "named": true
+  },
+  {
+    "type": "batch",
+    "named": false
   },
   {
     "type": "before",
@@ -596,6 +584,10 @@
   },
   {
     "type": "ceterum",
+    "named": false
+  },
+  {
+    "type": "channel",
     "named": false
   },
   {
@@ -699,6 +691,10 @@
     "named": false
   },
   {
+    "type": "device",
+    "named": false
+  },
+  {
     "type": "discerne",
     "named": false
   },
@@ -724,6 +720,10 @@
   },
   {
     "type": "elige",
+    "named": false
+  },
+  {
+    "type": "eligible",
     "named": false
   },
   {
@@ -915,6 +915,10 @@
     "named": false
   },
   {
+    "type": "gregatim",
+    "named": false
+  },
+  {
     "type": "guard",
     "named": false
   },
@@ -953,6 +957,10 @@
   {
     "type": "identifier",
     "named": true
+  },
+  {
+    "type": "idonea",
+    "named": false
   },
   {
     "type": "if",
@@ -1039,6 +1047,10 @@
     "named": false
   },
   {
+    "type": "intutus",
+    "named": false
+  },
+  {
     "type": "is",
     "named": false
   },
@@ -1059,15 +1071,15 @@
     "named": false
   },
   {
-    "type": "kernel",
-    "named": false
-  },
-  {
     "type": "lambda",
     "named": false
   },
   {
     "type": "lane",
+    "named": false
+  },
+  {
+    "type": "laxus",
     "named": false
   },
   {
@@ -1156,6 +1168,10 @@
   },
   {
     "type": "lu8",
+    "named": false
+  },
+  {
+    "type": "machina",
     "named": false
   },
   {
@@ -1527,10 +1543,6 @@
     "named": false
   },
   {
-    "type": "return_await",
-    "named": false
-  },
-  {
     "type": "rumpe",
     "named": false
   },
@@ -1564,6 +1576,10 @@
   },
   {
     "type": "series",
+    "named": false
+  },
+  {
+    "type": "sermo",
     "named": false
   },
   {
@@ -1668,11 +1684,11 @@
   },
   {
     "type": "string",
-    "named": false
+    "named": true
   },
   {
     "type": "string",
-    "named": true
+    "named": false
   },
   {
     "type": "su16",

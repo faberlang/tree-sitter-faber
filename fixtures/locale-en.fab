@@ -25,7 +25,7 @@ main {
     greet("Hello!")
     const string label ← describe(double(21))
     print label
-    var int attempt ← 0
+    mut int attempt ← 0
     do {
         attempt ← attempt + 1
         throw "simulated failure"

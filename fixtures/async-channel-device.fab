@@ -1,0 +1,80 @@
++++
+locale = "la"
++++
+# Settled async, channel and device surface (Latin). Snippets derive from
+# radix corpus/reference/keyword/{fient,reddet,machina} and
+# corpus/behavior/figendum/accepts-nested-await-binding-in-conditional-block.
+functio fetch(numerus n) fiet → numerus {
+    redde n * 2
+}
+
+# Posture order: `fiet` then `fiunt` composes as async-then-stream.
+functio responde() fiet → numerus {
+    redde 1
+}
+
+functio stream() fient → numerus {
+    figendum numerus first ← responde()
+    cede first
+    cede 2
+}
+
+functio fluit(numerus n) fiet fiunt → numerus {
+    cede n
+}
+
+functio interior() fiet → numerus {
+    redde 9
+}
+
+functio exterior() fiet → numerus {
+    reddet interior()
+}
+
+# Nested await: bindings inside conditional blocks; the initializer is a full
+# expression whose multiplicative operand groups first.
+functio caller(bivalens flag) fiet → numerus {
+    si flag {
+        figendum numerus a ← fetch(1)
+        si a ≻ 0 {
+            variandum numerus b ← fetch(a + 2 * 3)
+            tacebit fetch(b)
+            reddet fetch(b)
+        }
+    }
+    redde 0
+}
+
+# Handler identity: `@ ad` names the route the handler serves.
+@ ad 'numeri:bis'
+functio bis(numerus n) → numerus {
+    redde n * 2
+}
+
+# Channel spelling: `sermo` is the conversation type.
+incipiet {
+    varia tabula<numerus, sermo> piscina ← vacua
+    sit sermo longus ← ad 'numeri:bis' (5)
+    figendum numerus v ← exterior()
+    sit numerus w ↢ fetch(3)
+    nota v
+    nota w
+    itera ex stream() sit n {
+        nota n
+    }
+}
+
+# Device modifiers after `fac`.
+incipit {
+    varia numerus i ← 0
+    fac machina {
+        i ↑
+    }
+    fac idonea {
+        i ↑
+    }
+    fac gregatim {
+        i ↑
+    }
+    nota i
+}
